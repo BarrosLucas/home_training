@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hometraining/HomePageBody.dart';
+import 'dart:developer' as developer;
 
-void main() => runApp(MyApp());
+void main() {
+  developer.log("VEIO");
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
 
@@ -54,9 +58,9 @@ class _MyHomePageState extends State<MyHomePage> {
           SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                new HomePageBody(),
-                new HomePageBody(),
-                new HomePageBody(),
+                new HomePageBody("Treino Padrão","Treino para definição muscular"),
+                new HomePageBody("Treino Emagreça","Treino para emagrecimento"),
+                new HomePageBody("Treino Engorde","Treino para ganho de massa"),
               ],
           ),
           ),

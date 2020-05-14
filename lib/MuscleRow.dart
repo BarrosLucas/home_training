@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
+import 'dart:developer' as developer;
 
 class MuscleRow extends StatelessWidget {
+  static List<String> titles = List<String>();
+  static List<String> descrs = List<String>();
+  static int count = 0;
+  MuscleRow(String title,String descr){
+    titles.add(title);
+    descrs.add(descr);
+    count++;
+  }
+
   final muscleCard =
   Material(
     child:InkWell(
@@ -27,15 +37,19 @@ class MuscleRow extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                new Text('TREINO PADRÃO',
-                    style: new TextStyle(
-                      fontSize: 25.0,
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.bold,
-                      color: new Color(0xFF26C6DA),
-                    )),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10),
+                  child: new Text(titles[count],
+                      style: new TextStyle(
+                        fontSize: 25.0,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.bold,
+                        color: new Color(0xFF26C6DA),
+                      )),
+                ),
+
                 new Text(
-                  'Para definição muscular',
+                  descrs[count],
                   style: new TextStyle(
                       fontSize: 15.5,
                       fontFamily: 'Roboto',
@@ -58,6 +72,8 @@ class MuscleRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    developer.log("VEIO");
+    debugPrint(titles[count]);
     return new Container(
         margin: const EdgeInsets.symmetric(
           vertical: 16.0,
