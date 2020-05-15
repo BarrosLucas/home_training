@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:hometraining/HomePageBody.dart';
-import 'dart:developer' as developer;
+import 'package:hometraining/Home.dart';
 
 void main() {
-  developer.log("VEIO");
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -31,14 +28,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
   int _selectedIndex = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -48,23 +38,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
       body:
-
-          SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                new HomePageBody("Treino Padrão","Treino para definição muscular"),
-                new HomePageBody("Treino Emagreça","Treino para emagrecimento"),
-                new HomePageBody("Treino Engorde","Treino para ganho de massa"),
-              ],
-          ),
-          ),
-
+      Home(),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
