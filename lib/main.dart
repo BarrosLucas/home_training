@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hometraining/Challenge.dart';
 import 'package:hometraining/Home.dart';
 
 void main() {
@@ -14,7 +15,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: MyHomePage(title: 'Home Training'),
+      home: MyHomePage(
+        title: "Treinos",
+      ),
     );
   }
 }
@@ -36,11 +39,35 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  Widget setPage(int index) {
+    switch (index) {
+      case 0:
+        return Home();
+      case 1:
+        return Challenge();
+      default:
+        return Home();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[200],
       body:
-      Home(),
+
+          /*setPage(_selectedIndex)*/
+      Stack(
+        alignment: Alignment(1, -1),
+        children: <Widget>[
+          Image.asset(
+            "assets/images/Imagem2.png",
+            width: 220,
+            height: 220,
+          ),
+          setPage(_selectedIndex)
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
