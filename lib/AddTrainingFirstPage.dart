@@ -1,35 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:hometraining/AddTraining.dart';
-import 'dart:convert';
-import 'dart:io';
-import 'package:path_provider/path_provider.dart';
 
-class Home extends StatefulWidget {
+class AddTrainingFirstPage extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _AddTrainingFirstPageState createState() => _AddTrainingFirstPageState();
 }
 
-class _HomeState extends State<Home> {
-  List _treining = [];
+class _AddTrainingFirstPageState extends State<AddTrainingFirstPage> {
+  List treining = [];
+
+
 
   @override
   void initState() {
     super.initState();
-    _readData().then((data) {
-      setState(() {
-        if(data != null){
-          _treining = json.decode(data);
-        }else{
-          _addToDo("TREINO PADRÃO", "Treino moderado para definição muscular");
-        }
-      });
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: <Widget>[
+    return
+      Expanded(
+        child:
+      Column(children: <Widget>[
       Align(
           alignment: Alignment.topRight,
           child: Padding(
@@ -44,14 +35,14 @@ class _HomeState extends State<Home> {
       Expanded(
         child: Container(
           child: ListView.builder(
-              itemCount: _treining.length+1, itemBuilder: generateRow),
+              itemCount: treining.length + 1, itemBuilder: generateRow),
         ),
       ),
-    ]);
+    ]));
   }
 
   Widget generateRow(context, index) {
-    if(index < _treining.length) {
+    if(index < treining.length) {
       return Container(
           margin: const EdgeInsets.symmetric(
             vertical: 16.0,
@@ -84,7 +75,7 @@ class _HomeState extends State<Home> {
                         },
                         title: Container(
                           padding: EdgeInsets.all(5),
-                          child: new Text(_treining[index]['title'],
+                          child: new Text(treining[index]['title'],
                               style: new TextStyle(
                                 fontSize: 20.0,
                                 fontFamily: 'Roboto',
@@ -95,7 +86,7 @@ class _HomeState extends State<Home> {
                         subtitle: Container(
                             padding: EdgeInsets.all(5),
                             child: Text(
-                              _treining[index]['desc'],
+                              treining[index]['desc'],
                               style: new TextStyle(
                                   fontSize: 13,
                                   fontFamily: 'Roboto',
@@ -106,7 +97,7 @@ class _HomeState extends State<Home> {
                 margin: new EdgeInsets.symmetric(vertical: 16.0),
                 alignment: FractionalOffset.centerLeft,
                 child: new Image(
-                  image: new AssetImage("assets/images/Imagem3.png"),
+                  image: new AssetImage("assets/images/Imagem5.png"),
                   height: 92.0,
                   width: 92.0,
                 ),
@@ -137,21 +128,18 @@ class _HomeState extends State<Home> {
           ],
         ),
         child: Container(
-          alignment: Alignment(0, 0),
-          child: new ListTile(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => AddTraining()));
-              },
+            alignment: Alignment(0, 0),
+            child: new ListTile(
+              onTap: () {},
               title: Container(
-                padding: EdgeInsets.all(5),
-                child:
-                  Container(
+                  padding: EdgeInsets.all(5),
+                  child: Container(
                     child: Column(
                       children: <Widget>[
-                        Icon(Icons.add_circle,color: Colors.red,size: 70),
+                        Icon(Icons.add_circle, color: Colors.red, size: 70),
                         Padding(
-                          padding: EdgeInsets.only(top:10),
-                          child: Text("ADICIONAR TREINO",
+                          padding: EdgeInsets.only(top: 10),
+                          child: Text("ADICIONAR MÓDULO",
                               style: new TextStyle(
                                 fontSize: 25.0,
                                 fontFamily: 'Roboto',
@@ -161,43 +149,7 @@ class _HomeState extends State<Home> {
                         )
                       ],
                     ),
-                  )
-              ),
-        )));
-  }
-
-  void _addToDo(String title, String desc) {
-    setState(() {
-      Map<String, dynamic> newToDo = Map();
-      newToDo['title'] = title;
-      newToDo['desc'] = desc;
-      _treining.add(newToDo);
-      _saveData();
-    });
-  }
-
-  Future<File> _getFile() async {
-    final directory = await getApplicationDocumentsDirectory();
-    return File("${directory.path}/treining.json");
-  }
-
-  Future<File> _saveData() async {
-    String data = json.encode(_treining);
-    final file = await _getFile();
-    return file.writeAsString(data);
-  }
-
-  Future<String> _readData() async {
-    try {
-      final file = await _getFile();
-      if(FileSystemEntity.typeSync(file.path) != FileSystemEntityType.notFound){
-        return file.readAsString();
-      }else{
-        return null;
-      }
-
-    } catch (e) {
-      return null;
-    }
+                  )),
+            )));
   }
 }

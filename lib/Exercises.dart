@@ -4,21 +4,19 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
-class Challenge extends StatefulWidget {
+class Exercices extends StatefulWidget {
   @override
-  _ChallengeState createState() => _ChallengeState();
+  _ExercicesState createState() => _ExercicesState();
 }
 
-class _ChallengeState extends State<Challenge> {
-  List _challenges = [];
+class _ExercicesState extends State<Exercices> {
+  List _exercises = [];
 
-  void _addChallenge(String title, String desc, bool done) {
+  void _addExercice(String title) {
     setState(() {
       Map<String, dynamic> newToDo = Map();
       newToDo['title'] = title;
-      newToDo['desc'] = desc;
-      newToDo['done'] = done;
-      _challenges.add(newToDo);
+      _exercises.add(newToDo);
       _saveData();
     });
   }
@@ -29,13 +27,39 @@ class _ChallengeState extends State<Challenge> {
     _readData().then((data) {
       setState(() {
         if(data != null) {
-          _challenges = json.decode(data);
+          _exercises = json.decode(data);
         }else{
-          _addChallenge("1000 FLEXÕES", "Faça 100 flexões por dia em 10 dias", false);
-          _addChallenge("1000 ABDOMINAIS", "Faça 100 abdominais por dia em 10 dias", false);
-          _addChallenge("5000 POLICHINELOS", "Faça 500 flexões por dia em 10 dias", false);
-          _addChallenge("1000 AGACHAMENTOS", "Faça 100 agachamentos por dia em 10 dias", false);
-          _addChallenge("50 KM", "Corra 5 km por dia em 10 dias", false);
+          _addExercice("CORRIDA");
+          _addExercice("AGACHAMENTO SUMÔ");
+          _addExercice("AGACHAMENTO STIFF");
+          _addExercice("PASSADA");
+          _addExercice("AVANÇO");
+          _addExercice("FLEXÃO DE POSTERIOR");
+          _addExercice("AGACHAMENTO NA PAREDE");
+          _addExercice("COICE PARA GLÚTEOS");
+          _addExercice("PANTURRILHA  EM PÉ");
+          _addExercice("DESENVOLVIMENTO EM PÉ");
+          _addExercice("ELEVAÇÃO LATERAL");
+          _addExercice("ELEVAÇÃO FRONTAL");
+          _addExercice("ABDOMINAL SUPRA");
+          _addExercice("PULAR CORDA");
+          _addExercice("REMADA SUPINADA");
+          _addExercice("PULL OVER");
+          _addExercice("REMADA");
+          _addExercice("ROSCA DIRETA");
+          _addExercice("ROSCA INVERTIDA");
+          _addExercice("ROSCA UNILATERAL");
+          _addExercice("ROSCA ALTERNADA");
+          _addExercice("ROSCA MARTELO");
+          _addExercice("ABDOMINAL REMADOR");
+          _addExercice("POLICHINELO");
+          _addExercice("FLEXÕES");
+          _addExercice("VOADOR UNILATERAL");
+          _addExercice("CRUCIFIXO UNILATERAL");
+          _addExercice("TRÍCEPS TESTA");
+          _addExercice("TRÍCEPS FRANCÊS");
+          _addExercice("TRÍCEPS AFUNDO");
+          _addExercice("PRANCHA");
         }
       });
     });
@@ -48,7 +72,7 @@ class _ChallengeState extends State<Challenge> {
           alignment: Alignment.topRight,
           child: Padding(
             padding: EdgeInsets.only(right: 20, top: 60),
-            child: Text("DESAFIOS",
+            child: Text("EXERCÍCIOS",
                 textAlign: TextAlign.right,
                 style: TextStyle(
                     color: Colors.grey,
@@ -58,25 +82,27 @@ class _ChallengeState extends State<Challenge> {
       Expanded(
         child: Container(
           child: ListView.builder(
-              itemCount: _challenges.length, itemBuilder: generateRow),
+              itemCount: _exercises.length, itemBuilder: generateRow),
         ),
       ),
     ]);
   }
+
   Widget generateRow(context, index) {
     return Container(
         margin: const EdgeInsets.symmetric(
-          vertical: 16.0,
+          vertical: 5.0,
           horizontal: 24.0,
         ),
         child: new Stack(
+          alignment: Alignment.center,
           children: <Widget>[
             Container(
-                height: 124.0,
+                height: 62.0,
                 width: 500,
                 margin: new EdgeInsets.only(left: 46.0),
                 decoration: new BoxDecoration(
-                  color: _challenges[index]['done']? new Color(0x6677DD77) : new Color(0x66F80000),
+                  color: new Color(0xAAFFFFFF),
                   shape: BoxShape.rectangle,
                   borderRadius: new BorderRadius.circular(8.0),
                   boxShadow: <BoxShadow>[
@@ -91,34 +117,26 @@ class _ChallengeState extends State<Challenge> {
                   padding: EdgeInsets.only(left: 40),
                   alignment: Alignment(0, 0),
                   child: new ListTile(
-                      onTap: () {
-                        print("Clicou: $index");
-                      },
-                      title: Container(
-                        padding: EdgeInsets.all(5),
-                        child: new Text(_challenges[index]['title'],
-                            style: new TextStyle(
-                              fontSize: 20.0,
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            )),
-                      ),
-                      subtitle: Container(
-                          padding: EdgeInsets.all(5),
-                          child: Text(
-                            _challenges[index]['desc'],
-                            style: new TextStyle(
-                                fontSize: 13,
-                                fontFamily: 'Roboto',
-                                color: Colors.grey[600]),
-                          ))),
+                    onTap: () {
+                      print("Clicou: $index");
+                    },
+                    title: Container(
+                      padding: EdgeInsets.all(5),
+                      child: new Text(_exercises[index]['title'],
+                          style: new TextStyle(
+                            fontSize: 20.0,
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          )),
+                    ),
+                  ),
                 )),
             Container(
-              margin: new EdgeInsets.symmetric(vertical: 16.0),
+              margin: new EdgeInsets.symmetric(vertical: 5.0),
               alignment: FractionalOffset.centerLeft,
               child: new Image(
-                image: new AssetImage("assets/images/Imagem10.png"),
+                image: new AssetImage("assets/images/Imagem11.png"),
                 height: 92.0,
                 width: 92.0,
               ),
@@ -127,14 +145,13 @@ class _ChallengeState extends State<Challenge> {
         ));
   }
 
-
   Future<File> _getFile() async {
     final directory = await getApplicationDocumentsDirectory();
-    return File("${directory.path}/challenges.json");
+    return File("${directory.path}/exercises.json");
   }
 
   Future<File> _saveData() async {
-    String data = json.encode(_challenges);
+    String data = json.encode(_exercises);
     final file = await _getFile();
     return file.writeAsString(data);
   }

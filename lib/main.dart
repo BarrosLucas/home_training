@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hometraining/Challenge.dart';
+import 'package:hometraining/Exercises.dart';
 import 'package:hometraining/Home.dart';
+import 'package:hometraining/Profile.dart';
 
 void main() {
   runApp(MyApp());
@@ -45,6 +47,10 @@ class _MyHomePageState extends State<MyHomePage> {
         return Home();
       case 1:
         return Challenge();
+      case 2:
+        return Exercices();
+      case 3:
+        return Profile();
       default:
         return Home();
     }
