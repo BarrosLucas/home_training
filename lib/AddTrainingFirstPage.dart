@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hometraining/AddMTSecondPage.dart';
+import 'package:hometraining/AddModuleTraining.dart';
 
 class AddTrainingFirstPage extends StatefulWidget {
   @override
@@ -130,7 +132,9 @@ class _AddTrainingFirstPageState extends State<AddTrainingFirstPage> {
         child: Container(
             alignment: Alignment(0, 0),
             child: new ListTile(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AddModuleTraining()));
+              },
               title: Container(
                   padding: EdgeInsets.all(5),
                   child: Container(

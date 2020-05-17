@@ -12,10 +12,11 @@ class Exercices extends StatefulWidget {
 class _ExercicesState extends State<Exercices> {
   List _exercises = [];
 
-  void _addExercice(String title) {
+  void _addExercice(String title, bool doing) {
     setState(() {
       Map<String, dynamic> newToDo = Map();
       newToDo['title'] = title;
+      newToDo['doing'] = doing;
       _exercises.add(newToDo);
       _saveData();
     });
@@ -28,38 +29,39 @@ class _ExercicesState extends State<Exercices> {
       setState(() {
         if(data != null) {
           _exercises = json.decode(data);
-        }else{
-          _addExercice("CORRIDA");
-          _addExercice("AGACHAMENTO SUMÔ");
-          _addExercice("AGACHAMENTO STIFF");
-          _addExercice("PASSADA");
-          _addExercice("AVANÇO");
-          _addExercice("FLEXÃO DE POSTERIOR");
-          _addExercice("AGACHAMENTO NA PAREDE");
-          _addExercice("COICE PARA GLÚTEOS");
-          _addExercice("PANTURRILHA  EM PÉ");
-          _addExercice("DESENVOLVIMENTO EM PÉ");
-          _addExercice("ELEVAÇÃO LATERAL");
-          _addExercice("ELEVAÇÃO FRONTAL");
-          _addExercice("ABDOMINAL SUPRA");
-          _addExercice("PULAR CORDA");
-          _addExercice("REMADA SUPINADA");
-          _addExercice("PULL OVER");
-          _addExercice("REMADA");
-          _addExercice("ROSCA DIRETA");
-          _addExercice("ROSCA INVERTIDA");
-          _addExercice("ROSCA UNILATERAL");
-          _addExercice("ROSCA ALTERNADA");
-          _addExercice("ROSCA MARTELO");
-          _addExercice("ABDOMINAL REMADOR");
-          _addExercice("POLICHINELO");
-          _addExercice("FLEXÕES");
-          _addExercice("VOADOR UNILATERAL");
-          _addExercice("CRUCIFIXO UNILATERAL");
-          _addExercice("TRÍCEPS TESTA");
-          _addExercice("TRÍCEPS FRANCÊS");
-          _addExercice("TRÍCEPS AFUNDO");
-          _addExercice("PRANCHA");
+        }
+        else{
+          _addExercice("CORRIDA",false);
+          _addExercice("AGACHAMENTO SUMÔ",false);
+          _addExercice("AGACHAMENTO STIFF",false);
+          _addExercice("PASSADA",false);
+          _addExercice("AVANÇO",false);
+          _addExercice("FLEXÃO DE POSTERIOR",false);
+          _addExercice("AGACHAMENTO NA PAREDE",false);
+          _addExercice("COICE PARA GLÚTEOS",false);
+          _addExercice("PANTURRILHA  EM PÉ",false);
+          _addExercice("DESENVOLVIMENTO EM PÉ",false);
+          _addExercice("ELEVAÇÃO LATERAL",false);
+          _addExercice("ELEVAÇÃO FRONTAL",false);
+          _addExercice("ABDOMINAL SUPRA",false);
+          _addExercice("PULAR CORDA",false);
+          _addExercice("REMADA SUPINADA",false);
+          _addExercice("PULL OVER",false);
+          _addExercice("REMADA",false);
+          _addExercice("ROSCA DIRETA",false);
+          _addExercice("ROSCA INVERTIDA",false);
+          _addExercice("ROSCA UNILATERAL",false);
+          _addExercice("ROSCA ALTERNADA",false);
+          _addExercice("ROSCA MARTELO",false);
+          _addExercice("ABDOMINAL REMADOR",false);
+          _addExercice("POLICHINELO",false);
+          _addExercice("FLEXÕES",false);
+          _addExercice("VOADOR UNILATERAL",false);
+          _addExercice("CRUCIFIXO UNILATERAL",false);
+          _addExercice("TRÍCEPS TESTA",false);
+          _addExercice("TRÍCEPS FRANCÊS",false);
+          _addExercice("TRÍCEPS AFUNDO",false);
+          _addExercice("PRANCHA",false);
         }
       });
     });
