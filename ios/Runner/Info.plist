@@ -42,6 +42,9 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 
+
+    <key>NSPhotoLibraryAddUsageDescription</key><string>Share image of evolution</string>
+    <key>NSPhotoLibraryUsageDescription</key><string>read</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 	    <key>NSAllowsArbitraryLoads</key>

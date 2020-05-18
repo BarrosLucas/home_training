@@ -1,15 +1,19 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-
+import 'dart:ui';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hometraining/TrainingRun.dart';
+import 'package:flutter/rendering.dart';
+import 'package:hometraining/TrainingRunSecondPage.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:video_player/video_player.dart';
 
+
 class TrainingRunFirstPage extends StatefulWidget {
   final String _title;
+
 
   TrainingRunFirstPage(this._title);
 
@@ -26,30 +30,41 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
   var currentExercise;
   Stopwatch stopwatch = Stopwatch();
   Stopwatch stopwatchSeconder = Stopwatch();
-
+  int page = 0;
+  List<Map<dynamic,dynamic>> listTraning = [];
   _TrainingRunFirstPageState(this._title);
-
   int second = 0;
-
   int series = 0;
   int totalSeries = 3;
+  var key = GlobalKey();
+
+  void addToList(String time, String title){
+    Map<String,String> map = Map();
+    map['time']  = time;
+    map['title'] = title;
+    listTraning.add(map);
+  }
 
   void next() {
-    if(stopwatchSeconder.isRunning){
+    int timerSecond = stopwatchSeconder.elapsedMilliseconds;
+
+    if (stopwatchSeconder.isRunning) {
       stopwatchSeconder.reset();
       stopwatchSeconder.stop();
     }
-    if(stopwatch.isRunning){
+    if (stopwatch.isRunning) {
       stopwatch.stop();
     }
-    if (selectedIndex < (_exercises.length-1)) {
+    if (selectedIndex < (_exercises.length - 1)) {
+      addToList(TimerTextFormatter.format(timerSecond), _exercises[selectedIndex]['title']);
       setState(() {
         selectedIndex++;
         series = 0;
         stopwatchSeconder.reset();
       });
     } else {
-      //TELA DE CONCLUÍDO
+      Navigator.pop(context);
+      Navigator.push(context, MaterialPageRoute(builder: (context) => TrainingRunSecondPage(_title,listTraning)));
     }
   }
 
@@ -180,8 +195,7 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget pageOne() {
     return Stack(
       children: <Widget>[
         SingleChildScrollView(
@@ -241,7 +255,9 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
                     Expanded(
                       child: InkWell(
                         child: Text(
-                          (_exercises.length>0)?"${selectedIndex + 1}. ${_exercises[selectedIndex]['title']}":"",
+                          (_exercises.length > 0)
+                              ? "${selectedIndex + 1}. ${_exercises[selectedIndex]['title']}"
+                              : "",
                           style: TextStyle(
                             fontSize: 20,
                             color: Colors.grey,
@@ -324,7 +340,7 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
                                       next();
                                     });
                                   }
-                                }else{
+                                } else {
                                   stopwatchSeconder.start();
                                   stopwatch.start();
                                 }
@@ -348,11 +364,16 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
         ),
         dialogWidget(ListView.builder(
           itemBuilder: buildItem,
-          padding: EdgeInsets.all(10),
+          padding: EdgeInsets.all(1),
           itemCount: _exercises.length,
         ))
       ],
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return pageOne();
   }
 
   void _addExercice(String title, bool doing) {

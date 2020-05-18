@@ -20,7 +20,7 @@ class _TrainingRunState extends State<TrainingRun> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+        return Scaffold(
         backgroundColor: Colors.grey[200],
         body: Stack(children: <Widget>[
           Row(
