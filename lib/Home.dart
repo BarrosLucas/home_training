@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hometraining/AddTraining.dart';
+import 'package:hometraining/TrainingModules.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
@@ -80,7 +81,7 @@ class _HomeState extends State<Home> {
                     alignment: Alignment(0, 0),
                     child: new ListTile(
                         onTap: () {
-                          print("Clicou: $index");
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => TrainingModules()));
                         },
                         title: Container(
                           padding: EdgeInsets.all(5),

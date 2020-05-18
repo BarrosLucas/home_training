@@ -24,6 +24,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   path_provider: ^1.1.0
+  video_player: ^0.10.6
+  percent_indicator: ^2.1.1
+
 
 dev_dependencies:
   flutter_test:
