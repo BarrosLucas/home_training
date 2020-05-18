@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:hometraining/ChallengeRun.dart';
 import 'package:path_provider/path_provider.dart';
 
 class Challenge extends StatefulWidget {
@@ -92,7 +93,7 @@ class _ChallengeState extends State<Challenge> {
                   alignment: Alignment(0, 0),
                   child: new ListTile(
                       onTap: () {
-                        print("Clicou: $index");
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ChallengeRun(_challenges[index]['title'],3,10)));
                       },
                       title: Container(
                         padding: EdgeInsets.all(5),
