@@ -102,7 +102,7 @@ class _TrainingModulesState extends State<TrainingModules> {
                   alignment: Alignment(0, 0),
                   child: new ListTile(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => TrainingRun(_treining[index]['title'])));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => TrainingRun(_treining[index]['title'],false)));
                       },
                       title: Container(
                         padding: EdgeInsets.all(5),
