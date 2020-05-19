@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:hometraining/ChallengeRun.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'ChallengeDescription.dart';
+
 class Challenge extends StatefulWidget {
   @override
   _ChallengeState createState() => _ChallengeState();
@@ -93,7 +95,7 @@ class _ChallengeState extends State<Challenge> {
                   alignment: Alignment(0, 0),
                   child: new ListTile(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ChallengeRun(_challenges[index]['title'],3,10)));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ChallengeDescription(_challenges[index]['title'],"Descrição descrição descrição descrição")));
                       },
                       title: Container(
                         padding: EdgeInsets.all(5),
