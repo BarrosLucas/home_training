@@ -1,15 +1,42 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:hometraining/AddMTFirstPage.dart';
 import 'package:hometraining/AddMTSecondPage.dart';
+import 'package:hometraining/file.dart';
+import 'AddTrainingFirstPage.dart';
+
 class AddModuleTraining extends StatefulWidget {
+  AddTrainingFirstPage instance;
+  AddModuleTraining(this.instance);
+
   @override
-  _AddModuleTrainingState createState() => _AddModuleTrainingState();
+  _AddModuleTrainingState createState() => _AddModuleTrainingState(this.instance);
 }
 
 class _AddModuleTrainingState extends State<AddModuleTraining> {
 
-  int _selectedIndex = 0;
+  List _exercises = [{}];
 
+  void completeExercise() async{
+    _exercises = json.decode(await AccessFile.readData())['exercises'];
+    setState(() {
+      _exercises=_exercises;
+    });
+    print(_exercises);
+  }
+
+  AddTrainingFirstPage instance;
+
+
+  @override
+  void initState() {
+    super.initState();
+    completeExercise();
+  }
+
+  int _selectedIndex = 0;
+  _AddModuleTrainingState(this.instance);
     @override
     Widget build(BuildContext context) {
       Widget getBackButton(int index){
@@ -58,7 +85,10 @@ class _AddModuleTrainingState extends State<AddModuleTraining> {
                 splashColor: Colors.white,
                 onPressed: () {
                   setState(() {
-                    _selectedIndex++;
+                    if(AddModuleTrainingFirstPage.titleController.text.isNotEmpty && AddModuleTrainingFirstPage.descController.text.isNotEmpty) {
+                      _selectedIndex++;
+                    }
+
                   });
                 },
                 color: Colors.red[900],
@@ -85,7 +115,24 @@ class _AddModuleTrainingState extends State<AddModuleTraining> {
             width: 120,
             child: RaisedButton(
                 splashColor: Colors.white,
-                onPressed: () {},
+                onPressed: () {
+                  List list = AddModuleTrainingSecondPage.generateFinalList();
+                  if(AddModuleTrainingFirstPage.titleController.text.isNotEmpty && AddModuleTrainingFirstPage.descController.text.isNotEmpty && list.length>0) {
+                    Map map = {
+                      "title": AddModuleTrainingFirstPage.titleController.text
+                          .toUpperCase(),
+                      "desc": AddModuleTrainingFirstPage.descController.text,
+                      "exercises": list
+                    };
+                    setState(() {
+                      AddTrainingFirstPage.treining.add(map);
+                      AddModuleTrainingFirstPage.titleController.text = "";
+                      AddModuleTrainingFirstPage.descController.text = "";
+                      AddModuleTrainingSecondPage.zeroSecondList();
+                    });
+                    Navigator.pop(context);
+                  }
+                },
                 color: Colors.green,
                 textColor: Colors.white,
                 shape: RoundedRectangleBorder(
@@ -208,15 +255,16 @@ class _AddModuleTrainingState extends State<AddModuleTraining> {
         ),
       );
     }
+  Widget setPage(int index) {
+      if(_exercises==null || _exercises == []){
+        completeExercise();
+      }
+    switch (index) {
+      case 1:
+        return AddModuleTrainingSecondPage(_exercises);
+      case 0:
+      default:
+        return AddModuleTrainingFirstPage();
+    }
   }
-
-
-Widget setPage(int index) {
-  switch (index) {
-    case 1:
-      return AddModuleTrainingSecondPage();
-    case 0:
-    default:
-      return AddModuleTrainingFirstPage();
   }
-}

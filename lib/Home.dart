@@ -80,7 +80,24 @@ class _HomeState extends State<Home> {
                     alignment: Alignment(0, 0),
                     child: new ListTile(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => TrainingModules(_treining[index]['modules'])));
+                          if(_treining!=null){
+                            print("1 - Not null");
+                            if(_treining[index]!=null) {
+                              print("2 - Not null");
+                              print(_treining[index]);
+                              print(_treining[index][0]);
+                              print(_treining[index][0]==null);
+                              if(_treining[index]['modules']!=null){
+                                print("UAI");
+                                print("3 - Not null");
+                                Navigator.push(
+                                    context, MaterialPageRoute(builder: (
+                                    context) =>
+                                    TrainingModules(
+                                        _treining[index]['modules'])));
+                              }
+                            }
+                          }
                         },
                         title: Container(
                           padding: EdgeInsets.all(5),

@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:hometraining/AddMTSecondPage.dart';
 import 'package:hometraining/AddModuleTraining.dart';
 
 class AddTrainingFirstPage extends StatefulWidget {
+  static List treining = [];
   @override
   _AddTrainingFirstPageState createState() => _AddTrainingFirstPageState();
 }
 
 class _AddTrainingFirstPageState extends State<AddTrainingFirstPage> {
-  List treining = [];
-
 
 
   @override
@@ -37,14 +35,15 @@ class _AddTrainingFirstPageState extends State<AddTrainingFirstPage> {
       Expanded(
         child: Container(
           child: ListView.builder(
-              itemCount: treining.length + 1, itemBuilder: generateRow),
+              itemCount: AddTrainingFirstPage.treining.length + 1, itemBuilder: generateRow),
         ),
       ),
     ]));
   }
 
+
   Widget generateRow(context, index) {
-    if(index < treining.length) {
+    if(index < AddTrainingFirstPage.treining.length) {
       return Container(
           margin: const EdgeInsets.symmetric(
             vertical: 16.0,
@@ -77,7 +76,7 @@ class _AddTrainingFirstPageState extends State<AddTrainingFirstPage> {
                         },
                         title: Container(
                           padding: EdgeInsets.all(5),
-                          child: new Text(treining[index]['title'],
+                          child: new Text(AddTrainingFirstPage.treining[index]['title'],
                               style: new TextStyle(
                                 fontSize: 20.0,
                                 fontFamily: 'Roboto',
@@ -88,7 +87,7 @@ class _AddTrainingFirstPageState extends State<AddTrainingFirstPage> {
                         subtitle: Container(
                             padding: EdgeInsets.all(5),
                             child: Text(
-                              treining[index]['desc'],
+                              AddTrainingFirstPage.treining[index]['desc'],
                               style: new TextStyle(
                                   fontSize: 13,
                                   fontFamily: 'Roboto',
@@ -133,7 +132,7 @@ class _AddTrainingFirstPageState extends State<AddTrainingFirstPage> {
             alignment: Alignment(0, 0),
             child: new ListTile(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => AddModuleTraining()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AddModuleTraining(this.widget)));
               },
               title: Container(
                   padding: EdgeInsets.all(5),

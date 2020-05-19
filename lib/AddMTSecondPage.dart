@@ -1,31 +1,64 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 
 class AddModuleTrainingSecondPage extends StatefulWidget {
+  static List fullExercises;
+  AddModuleTrainingSecondPage(FullExercises){
+    if(FullExercises==null){
+      print("NULLLLLL");
+    }
+    fullExercises=FullExercises;
+    print("AAAAAAA");
+  }
+  static List secondList = [];
+
+  static void generateSecondList(title,bool doing) {
+
+    Map<String, dynamic> newToDo = Map();
+    newToDo['title'] = title;
+    newToDo['doing'] = doing;
+    AddModuleTrainingSecondPage.secondList.add(newToDo);
+
+  }
+
+  static void zeroSecondList(){
+    AddModuleTrainingSecondPage.secondList=[];
+
+    if(AddModuleTrainingSecondPage.fullExercises!= null) {
+      for (var i = 0; i < AddModuleTrainingSecondPage.fullExercises.length; i++) {
+        generateSecondList(AddModuleTrainingSecondPage.fullExercises[i]['title'], false);
+      }
+    }
+
+  }
+
+  static List generateFinalList(){
+    List ret = [];
+    for(var i = 0; i < secondList.length;i++){
+      if(secondList[i]['doing']){
+        ret.add(fullExercises[i]);
+      }
+    }
+    return ret;
+  }
+
   @override
   _AddModuleTrainingSecondPageState createState() =>
-      _AddModuleTrainingSecondPageState();
+      _AddModuleTrainingSecondPageState(fullExercises);
 }
 
 class _AddModuleTrainingSecondPageState
     extends State<AddModuleTrainingSecondPage> {
-  List _exercises = [];
 
-  void _addExercice(String title,bool doing) {
-    setState(() {
-      Map<String, dynamic> newToDo = Map();
-      newToDo['title'] = title;
-      newToDo['doing'] = doing;
-      _exercises.add(newToDo);
-      _saveData();
-    });
-  }
+  final List fullExercises;
+  _AddModuleTrainingSecondPageState(this.fullExercises);
+
+  //List _exercises = [];
 
   @override
   Widget build(BuildContext context) {
+    print("exercisesFull: ");
+    print("$fullExercises");
+    print("${fullExercises.length}");
     return Expanded(
         child:
         Column(
@@ -43,7 +76,7 @@ class _AddModuleTrainingSecondPageState
                 )),
             Expanded(
               child: ListView.builder(itemBuilder:buidItem, padding: EdgeInsets.only(top: 10),
-                itemCount: _exercises.length,),
+                itemCount: fullExercises.length,),
             )
           ],
     ));
@@ -52,77 +85,20 @@ class _AddModuleTrainingSecondPageState
   @override
   void initState() {
     super.initState();
-    _readData().then((data) {
-      setState(() {
-        if (data != null) {
-          _exercises = json.decode(data);
-        }
-        else {
-          _addExercice("CORRIDA",false);
-          _addExercice("AGACHAMENTO SUMÔ",false);
-          _addExercice("AGACHAMENTO STIFF",false);
-          _addExercice("PASSADA",false);
-          _addExercice("AVANÇO",false);
-          _addExercice("FLEXÃO DE POSTERIOR",false);
-          _addExercice("AGACHAMENTO NA PAREDE",false);
-          _addExercice("COICE PARA GLÚTEOS",false);
-          _addExercice("PANTURRILHA  EM PÉ",false);
-          _addExercice("DESENVOLVIMENTO EM PÉ",false);
-          _addExercice("ELEVAÇÃO LATERAL",false);
-          _addExercice("ELEVAÇÃO FRONTAL",false);
-          _addExercice("ABDOMINAL SUPRA",false);
-          _addExercice("PULAR CORDA",false);
-          _addExercice("REMADA SUPINADA",false);
-          _addExercice("PULL OVER",false);
-          _addExercice("REMADA",false);
-          _addExercice("ROSCA DIRETA",false);
-          _addExercice("ROSCA INVERTIDA",false);
-          _addExercice("ROSCA UNILATERAL",false);
-          _addExercice("ROSCA ALTERNADA",false);
-          _addExercice("ROSCA MARTELO",false);
-          _addExercice("ABDOMINAL REMADOR",false);
-          _addExercice("POLICHINELO",false);
-          _addExercice("FLEXÕES",false);
-          _addExercice("VOADOR UNILATERAL",false);
-          _addExercice("CRUCIFIXO UNILATERAL",false);
-          _addExercice("TRÍCEPS TESTA",false);
-          _addExercice("TRÍCEPS FRANCÊS",false);
-          _addExercice("TRÍCEPS AFUNDO",false);
-          _addExercice("PRANCHA",false);
-        }
-      });
-    });
-  }
-
-  Future<File> _getFile() async {
-    final directory = await getApplicationDocumentsDirectory();
-    return File("${directory.path}/exercises.json");
-  }
-
-  Future<File> _saveData() async {
-    String data = json.encode(_exercises);
-    final file = await _getFile();
-    return file.writeAsString(data);
-  }
-
-  Future<String> _readData() async {
-    try {
-      final file = await _getFile();
-      if (FileSystemEntity.typeSync(file.path) !=
-          FileSystemEntityType.notFound) {
-        return file.readAsString();
-      } else {
-        return null;
+    if(fullExercises!= null) {
+      for (var i = 0; i < fullExercises.length; i++) {
+        AddModuleTrainingSecondPage.generateSecondList(fullExercises[i]['title'], false);
       }
-    } catch (e) {
-      return null;
     }
+    setState(() {
+      AddModuleTrainingSecondPage.secondList = AddModuleTrainingSecondPage.secondList;
+    });
   }
 
   Widget buidItem(context, index) {
     return CheckboxListTile(
-      title: Text(_exercises[index]['title']),
-      value: _exercises[index]['doing'],
+      title: Text(AddModuleTrainingSecondPage.secondList[index]['title']),
+      value: AddModuleTrainingSecondPage.secondList[index]['doing'],
       secondary: CircleAvatar(
           child: new Image(
             image: new AssetImage("assets/images/Imagem5.png"),
@@ -132,8 +108,7 @@ class _AddModuleTrainingSecondPageState
       ),
       onChanged: (check) {
         setState(() {
-          _exercises[index]['doing'] = check;
-          _saveData();
+          AddModuleTrainingSecondPage.secondList[index]['doing'] = check;
         });
       },
     );

@@ -10,6 +10,8 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   Map<String,dynamic> _profile;
 
+  int calories = 0;
+
   TextEditingController nameController = TextEditingController();
   TextEditingController daysController = TextEditingController();
   TextEditingController challengesController = TextEditingController();
@@ -21,6 +23,7 @@ class _ProfileState extends State<Profile> {
       nameController.text = _profile['name'];
       daysController.text = "${_profile['trainingDays']}";
       challengesController.text = "${_profile['fullChallenge']}";
+      calories=_profile['calories'];
     });
     print(_profile);
   }
@@ -120,7 +123,7 @@ class _ProfileState extends State<Profile> {
                       Container(
                         padding: EdgeInsets.only(top: 15, bottom: 5),
                         child: Text(
-                          "${_profile['calories']}",
+                          "$calories",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 35,

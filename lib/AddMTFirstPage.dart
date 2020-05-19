@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 class AddModuleTrainingFirstPage extends StatefulWidget {
+  static TextEditingController titleController = TextEditingController();
+  static TextEditingController descController = TextEditingController();
   @override
   _AddModuleTrainingFirstPageState createState() => _AddModuleTrainingFirstPageState();
 }
 
 class _AddModuleTrainingFirstPageState extends State<AddModuleTrainingFirstPage> {
-  TextEditingController _titleController = TextEditingController();
-  TextEditingController _descController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class _AddModuleTrainingFirstPageState extends State<AddModuleTrainingFirstPage>
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 10,horizontal: 30),
                   child: TextField(
-                    controller: _titleController,
+                    controller: AddModuleTrainingFirstPage.titleController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.black)),
@@ -46,7 +46,7 @@ class _AddModuleTrainingFirstPageState extends State<AddModuleTrainingFirstPage>
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 10,horizontal: 30),
                   child: TextField(
-                    controller: _descController,
+                    controller: AddModuleTrainingFirstPage.descController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.black)),

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 class AddTrainingSecondPage extends StatefulWidget {
+  static TextEditingController titleController = TextEditingController();
+  static TextEditingController descController = TextEditingController();
   @override
   _AddTrainingSecondPageState createState() => _AddTrainingSecondPageState();
 }
 
 class _AddTrainingSecondPageState extends State<AddTrainingSecondPage> {
-  TextEditingController _titleController = TextEditingController();
-  TextEditingController _descController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class _AddTrainingSecondPageState extends State<AddTrainingSecondPage> {
                   Container(
                     margin: EdgeInsets.symmetric(vertical: 10,horizontal: 30),
                     child: TextField(
-                    controller: _titleController,
+                    controller: AddTrainingSecondPage.titleController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.black)),
@@ -47,7 +48,7 @@ class _AddTrainingSecondPageState extends State<AddTrainingSecondPage> {
                   Container(
                     margin: EdgeInsets.symmetric(vertical: 10,horizontal: 30),
                     child: TextField(
-                    controller: _descController,
+                    controller: AddTrainingSecondPage.descController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.black)),
