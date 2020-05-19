@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:hometraining/ChallengeRun.dart';
-import 'package:video_player/video_player.dart';
-
 import 'TrainingRunFirstPage.dart';
+import 'file.dart';
 
 class ChallengeDescription extends StatefulWidget {
-  final String _title;
-  final String _desc;
+  Map<String, dynamic> challenge;
+  int ind;
 
-  ChallengeDescription(this._title, this._desc);
+  ChallengeDescription(this.challenge,this.ind);
 
   @override
   _ChallengeDescriptionState createState() =>
-      _ChallengeDescriptionState(this._title, this._desc);
+      _ChallengeDescriptionState(this.challenge,this.ind);
 }
 
 class _ChallengeDescriptionState extends State<ChallengeDescription> {
-  final String _title;
-  final String _desc;
-
-  _ChallengeDescriptionState(this._title, this._desc);
+  Map<String, dynamic> challenge;
+  int ind;
+  _ChallengeDescriptionState(this.challenge,this.ind);
 
   @override
   Widget build(BuildContext context) {
@@ -27,78 +25,77 @@ class _ChallengeDescriptionState extends State<ChallengeDescription> {
       body: Column(
         children: <Widget>[
           Expanded(
-            flex: 2,
+              flex: 2,
               child: Container(
-
-
                   child: Stack(children: <Widget>[
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                    flex: 1,
-                    child: Container(
-                        margin: EdgeInsets.only(top: 40, left: 10),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              IconButton(
-                                icon: Icon(
-                                  Icons.navigate_before,
-                                  color: Colors.black,
-                                  size: 40,
-                                ),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                              ),
-                            ]))),
-                Expanded(
-                    flex: 2,
-                    child: Container(
-                      alignment: Alignment.topRight,
-                      child: Image.asset(
-                        "assets/images/Imagem2.png",
-                        width: 220,
-                        height: 220,
-                        alignment: Alignment.topRight,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Expanded(
+                        flex: 1,
+                        child: Container(
+                            margin: EdgeInsets.only(top: 40, left: 10),
+                            child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  IconButton(
+                                    icon: Icon(
+                                      Icons.navigate_before,
+                                      color: Colors.black,
+                                      size: 40,
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                ]))),
+                    Expanded(
+                        flex: 2,
+                        child: Container(
+                          alignment: Alignment.topRight,
+                          child: Image.asset(
+                            "assets/images/Imagem2.png",
+                            width: 220,
+                            height: 220,
+                            alignment: Alignment.topRight,
+                          ),
+                        ))
+                  ],
+                ),
+                Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Expanded(
+                        flex: 1,
+                        child: Container(),
                       ),
-                    ))
-              ],
-            ),
-            Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    flex: 1,
-                    child: Container(),
-                  ),
-                  Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: EdgeInsets.only(right: 20, top: 40),
-                        child: Text(_title.toUpperCase(),
-                            textAlign: TextAlign.right,
-                            style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 40,
-                                fontWeight: FontWeight.bold)),
-                      ))
-                ]),
-          ]))),
+                      Expanded(
+                          flex: 2,
+                          child: Padding(
+                            padding: EdgeInsets.only(right: 20, top: 40),
+                            child: Text(challenge['title'].toUpperCase(),
+                                textAlign: TextAlign.right,
+                                style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 40,
+                                    fontWeight: FontWeight.bold)),
+                          ))
+                    ]),
+              ]))),
           Expanded(
               flex: 2,
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 10,horizontal: 30),
-                child: Column(children: <Widget>[
-                  Video(
-                      'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4')
-                ],
-                mainAxisAlignment: MainAxisAlignment.end
-                  ,),
+                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                child: Column(
+                  children: <Widget>[
+                    Video(
+                        'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4')
+                  ],
+                  mainAxisAlignment: MainAxisAlignment.end,
+                ),
               )),
           Expanded(
-            child: Text(_desc),
+            child: Text(challenge['desc']),
           ),
           Expanded(
               child: Container(
@@ -112,12 +109,20 @@ class _ChallengeDescriptionState extends State<ChallengeDescription> {
                         margin: EdgeInsets.symmetric(vertical: 5),
                         child: RaisedButton(
                           onPressed: () {
+                            challenge['isIn'] = true;
+                            print(challenge);
+                            setState(() {
+                              AccessFile.map['challenge'][ind] = challenge;
+                              AccessFile.saveData();
+                            });
+
+                            print(AccessFile.map['challenge'][ind]);
                             Navigator.pop(context);
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        ChallengeRun(_title, 3, 10)));
+                                    builder: (context) => ChallengeRun(
+                                        challenge,ind)));
                           },
                           padding: EdgeInsets.symmetric(
                               vertical: 15, horizontal: 80),

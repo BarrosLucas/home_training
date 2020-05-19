@@ -247,25 +247,41 @@
       "title": "1000 Flexões",
       "desc": "Faça 100 flexões por dia no decorrer de 10 dias",
       "done": "Parabéns! Você realizou as 1000 flexões em 10 dias!",
-      "isIn": false
+      "isIn": false,
+      "lastDay": "",
+      "result": "win",
+      "amountDay": 0,
+      "amountTotal": 10
     },
     {
       "title": "1000 Abdominais",
       "desc": "Faça 100 abdominais por dia no decorrer de 10 dias",
       "done": "Parabéns! Você realizou as 1000 abdominais em 10 dias!",
-      "isIn": false
+      "isIn": false,
+      "lastDay": "",
+      "result": "win",
+      "amountDay": 0,
+      "amountTotal": 10
     },
     {
       "title": "5000 Polichinelos",
       "desc": "Faça 500 polichinelos por dia no decorrer de 10 dias",
       "done": "Parabéns! Você realizou as 5000 polichinelos em 10 dias!",
-      "isIn": false
+      "isIn": false,
+      "lastDay": "",
+      "result": "win",
+      "amountDay": 0,
+      "amountTotal": 10
     },
     {
       "title": "100 KM",
       "desc": "Corra 10 km por dia em 10 dias",
       "done": "Parabéns! Você correu 100 km em 10 dias!",
-      "isIn": false
+      "isIn": false,
+      "lastDay": "",
+      "result": "win",
+      "amountDay": 0,
+      "amountTotal": 10
     }
   ],
   "exercises": [

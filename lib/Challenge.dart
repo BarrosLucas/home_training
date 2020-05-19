@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'ChallengeDescription.dart';
+import 'ChallengeRun.dart';
 import 'file.dart';
 
 class Challenge extends StatefulWidget {
@@ -15,11 +16,12 @@ class Challenge extends StatefulWidget {
 class _ChallengeState extends State<Challenge> {
   List _challenges = [];
   void completeChallenge() async{
+    print("Uafa");
+    print(json.decode(await AccessFile.readData())['challenge']);
     _challenges = json.decode(await AccessFile.readData())['challenge'];
     setState(() {
       _challenges=_challenges;
     });
-    print(_challenges);
   }
 
   @override
@@ -51,6 +53,17 @@ class _ChallengeState extends State<Challenge> {
     ]);
   }
   Widget generateRow(context, index) {
+    if(_challenges[index]["isIn"]){
+      if(getOut(_challenges[index]["lastDay"])){
+        _challenges[index]["isIn"] = false;
+        _challenges[index]["result"] = "over";
+        _challenges[index]["lastDay"] = "";
+        _challenges[index]["amountDay"] = 0;
+          AccessFile.map["challenge"] = _challenges;
+          AccessFile.saveData();
+      }
+    }
+
     return Container(
         margin: const EdgeInsets.symmetric(
           vertical: 16.0,
@@ -79,7 +92,13 @@ class _ChallengeState extends State<Challenge> {
                   alignment: Alignment(0, 0),
                   child: new ListTile(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ChallengeDescription(_challenges[index]['title'],_challenges[index]['desc'])));
+                        if(!(_challenges[index]['isIn'])){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ChallengeDescription(_challenges[index],index)));
+                        }else{
+                          print("Ora ora");
+                          print(_challenges[index]);
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ChallengeRun(_challenges[index],index)));
+                        }
                       },
                       title: Container(
                         padding: EdgeInsets.all(5),
@@ -112,6 +131,19 @@ class _ChallengeState extends State<Challenge> {
             )
           ],
         ));
+  }
+  bool getOut(String date){
+    if(date.isEmpty){
+      return false;
+    }
+    var today = new DateTime.now();
+    var other = DateTime.parse(date);
+
+    var differenceInDay = today.difference(other).inDays;
+    if(differenceInDay>1){
+      return true;
+    }
+    return false;
   }
 
 }
