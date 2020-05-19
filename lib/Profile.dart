@@ -1,8 +1,6 @@
 import 'dart:convert';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
+import 'file.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -10,38 +8,27 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  List _profile = [];
+  Map<String,dynamic> _profile;
 
   TextEditingController nameController = TextEditingController();
   TextEditingController daysController = TextEditingController();
   TextEditingController challengesController = TextEditingController();
 
-  void _addProfile(
-      String name, int daysTraining, int challengeDone, int calories) {
+  void completeProfile() async{
+    _profile = json.decode(await AccessFile.readData())['profile'];
     setState(() {
-      Map<String, dynamic> newToDo = Map();
-      newToDo['name'] = name;
-      newToDo['daysTraining'] = daysTraining;
-      newToDo['challengeDone'] = challengeDone;
-      newToDo['calories'] = calories;
-      _profile.add(newToDo);
-      _saveData();
+      _profile=_profile;
+      nameController.text = _profile['name'];
+      daysController.text = "${_profile['trainingDays']}";
+      challengesController.text = "${_profile['fullChallenge']}";
     });
+    print(_profile);
   }
 
   @override
   void initState() {
-    _addProfile("", 5, 15, 1540);
     super.initState();
-    _readData().then((data) {
-      setState(() {
-        _profile = json.decode(data);
-        nameController.text = _profile[0]['name'];
-        daysController.text = "${_profile[0]['daysTraining']}";
-        challengesController.text = "${_profile[0]['challengeDone']}";
-        print("Desafios completos: ${challengesController.text}");
-      });
-    });
+    completeProfile();
   }
 
   @override
@@ -113,7 +100,7 @@ class _ProfileState extends State<Profile> {
                     )),
                 Container(
                   margin: EdgeInsets.only(top: 20),
-                  padding: EdgeInsets.all(30),
+                  padding: EdgeInsets.all(45),
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.white,
@@ -133,7 +120,7 @@ class _ProfileState extends State<Profile> {
                       Container(
                         padding: EdgeInsets.only(top: 15, bottom: 5),
                         child: Text(
-                          "${_profile[0]['calories']}",
+                          "${_profile['calories']}",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 35,
@@ -154,23 +141,4 @@ class _ProfileState extends State<Profile> {
     ]);
   }
 
-  Future<File> _getFile() async {
-    final directory = await getApplicationDocumentsDirectory();
-    return File("${directory.path}/profile.json");
-  }
-
-  Future<File> _saveData() async {
-    String data = json.encode(_profile);
-    final file = await _getFile();
-    return file.writeAsString(data);
-  }
-
-  Future<String> _readData() async {
-    try {
-      final file = await _getFile();
-      return file.readAsString();
-    } catch (e) {
-      return null;
-    }
-  }
 }

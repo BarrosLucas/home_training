@@ -1,9 +1,13 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hometraining/Challenge.dart';
 import 'package:hometraining/Exercises.dart';
 import 'package:hometraining/Home.dart';
 import 'package:hometraining/Profile.dart';
+import 'package:path_provider/path_provider.dart';
+
+import 'file.dart';
 
 void main() {
   runApp(MyApp());
@@ -33,7 +37,22 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
   int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    printCoisa();
+  }
+
+  void printCoisa() async{
+    AccessFile.map = json.decode(await AccessFile.readData());
+    AccessFile.map['read'] = true;
+    setState(() {
+      AccessFile.map = AccessFile.map;
+    });
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -100,4 +119,5 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+
 }

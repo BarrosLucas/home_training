@@ -1,41 +1,39 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:hometraining/TrainingRunSecondPage.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:video_player/video_player.dart';
 
 
 class TrainingRunFirstPage extends StatefulWidget {
   final String _title;
+  final List exercisesOfModule;
 
 
-  TrainingRunFirstPage(this._title);
+  TrainingRunFirstPage(this._title,this.exercisesOfModule);
 
   @override
   _TrainingRunFirstPageState createState() =>
-      _TrainingRunFirstPageState(this._title);
+      _TrainingRunFirstPageState(this._title,this.exercisesOfModule);
 }
 
 class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
+  final List exercisesOfModule;
   final String _title;
   int selectedIndex = 0;
   bool visible = false;
-  List _exercises = [];
+
   var currentExercise;
   Stopwatch stopwatch = Stopwatch();
   Stopwatch stopwatchSeconder = Stopwatch();
   int page = 0;
   List<Map<dynamic,dynamic>> listTraning = [];
-  _TrainingRunFirstPageState(this._title);
+  _TrainingRunFirstPageState(this._title,this.exercisesOfModule);
   int second = 0;
   int series = 0;
-  int totalSeries = 3;
   var key = GlobalKey();
 
   void addToList(String time, String title){
@@ -55,8 +53,8 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
     if (stopwatch.isRunning) {
       stopwatch.stop();
     }
-    if (selectedIndex < (_exercises.length - 1)) {
-      addToList(TimerTextFormatter.format(timerSecond), _exercises[selectedIndex]['title']);
+    addToList(TimerTextFormatter.format(timerSecond), exercisesOfModule[selectedIndex]['title']);
+    if (selectedIndex < (exercisesOfModule.length - 1)) {
       setState(() {
         selectedIndex++;
         series = 0;
@@ -77,7 +75,7 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
   Widget buildItem(context, index) {
     return ListTile(
       title: Text(
-        "${index + 1}. ${_exercises[index]['title']}",
+        "${index + 1}. ${exercisesOfModule[index]['title']}",
         style: TextStyle(
             fontWeight:
                 (selectedIndex == index) ? FontWeight.bold : FontWeight.normal),
@@ -87,7 +85,7 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
           visible = false;
           selectedIndex = index;
         });
-        print("Item clicado: ${_exercises[index]['title']}");
+        print("Item clicado: ${exercisesOfModule[index]['title']}");
       },
     );
   }
@@ -142,31 +140,6 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
             ),
           ),
         ));
-  }
-
-  Future<File> _getFile() async {
-    final directory = await getApplicationDocumentsDirectory();
-    return File("${directory.path}/exercises.json");
-  }
-
-  Future<File> _saveData() async {
-    String data = json.encode(_exercises);
-    final file = await _getFile();
-    return file.writeAsString(data);
-  }
-
-  Future<String> _readData() async {
-    try {
-      final file = await _getFile();
-      if (FileSystemEntity.typeSync(file.path) !=
-          FileSystemEntityType.notFound) {
-        return file.readAsString();
-      } else {
-        return null;
-      }
-    } catch (e) {
-      return null;
-    }
   }
 
   Widget cronometer(TextStyle textStyle, int which) {
@@ -255,8 +228,8 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
                     Expanded(
                       child: InkWell(
                         child: Text(
-                          (_exercises.length > 0)
-                              ? "${selectedIndex + 1}. ${_exercises[selectedIndex]['title']}"
+                          (exercisesOfModule.length > 0)
+                              ? "${selectedIndex + 1}. ${exercisesOfModule[selectedIndex]['title']}"
                               : "",
                           style: TextStyle(
                             fontSize: 20,
@@ -297,9 +270,9 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
                 Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      generateProgressBarGeneral(totalSeries, series,
+                      generateProgressBarGeneral(exercisesOfModule[selectedIndex]['settings'][0], series,
                           Colors.white, Colors.green[300], 180, 20,
-                          leading: "Séries", trailing: "$series/$totalSeries")
+                          leading: "Séries", trailing: "$series/${exercisesOfModule[selectedIndex]['settings'][0]}")
                     ]),
                 Padding(
                   child: Row(
@@ -335,7 +308,7 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
                                   stopwatchSeconder.stop();
                                   stopwatch.stop();
                                   series++;
-                                  if (series == totalSeries) {
+                                  if (series == exercisesOfModule[selectedIndex]['settings'][0]) {
                                     Future.delayed(Duration(seconds: 2), () {
                                       next();
                                     });
@@ -354,7 +327,7 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    generateProgressBarGeneral((_exercises.length - 1),
+                    generateProgressBarGeneral((exercisesOfModule.length - 1),
                         (selectedIndex), Colors.white, Colors.red, 280, 15)
                   ],
                 )
@@ -365,7 +338,7 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
         dialogWidget(ListView.builder(
           itemBuilder: buildItem,
           padding: EdgeInsets.all(1),
-          itemCount: _exercises.length,
+          itemCount: exercisesOfModule.length,
         ))
       ],
     );
@@ -376,59 +349,15 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
     return pageOne();
   }
 
-  void _addExercice(String title, bool doing) {
-    setState(() {
-      Map<String, dynamic> newToDo = Map();
-      newToDo['title'] = title;
-      newToDo['doing'] = doing;
-      _exercises.add(newToDo);
-      _saveData();
-    });
-  }
-
   @override
   void initState() {
     super.initState();
-    _readData().then((data) {
-      setState(() {
-        if (data != null) {
-          _exercises = json.decode(data);
-        } else {
-          _addExercice("CORRIDA", false);
-          _addExercice("AGACHAMENTO SUMÔ", false);
-          _addExercice("AGACHAMENTO STIFF", false);
-          _addExercice("PASSADA", false);
-          _addExercice("AVANÇO", false);
-          _addExercice("FLEXÃO DE POSTERIOR", false);
-          _addExercice("AGACHAMENTO NA PAREDE", false);
-          _addExercice("COICE PARA GLÚTEOS", false);
-          _addExercice("PANTURRILHA  EM PÉ", false);
-          _addExercice("DESENVOLVIMENTO EM PÉ", false);
-          _addExercice("ELEVAÇÃO LATERAL", false);
-          _addExercice("ELEVAÇÃO FRONTAL", false);
-          _addExercice("ABDOMINAL SUPRA", false);
-          _addExercice("PULAR CORDA", false);
-          _addExercice("REMADA SUPINADA", false);
-          _addExercice("PULL OVER", false);
-          _addExercice("REMADA", false);
-          _addExercice("ROSCA DIRETA", false);
-          _addExercice("ROSCA INVERTIDA", false);
-          _addExercice("ROSCA UNILATERAL", false);
-          _addExercice("ROSCA ALTERNADA", false);
-          _addExercice("ROSCA MARTELO", false);
-          _addExercice("ABDOMINAL REMADOR", false);
-          _addExercice("POLICHINELO", false);
-          _addExercice("FLEXÕES", false);
-          _addExercice("VOADOR UNILATERAL", false);
-          _addExercice("CRUCIFIXO UNILATERAL", false);
-          _addExercice("TRÍCEPS TESTA", false);
-          _addExercice("TRÍCEPS FRANCÊS", false);
-          _addExercice("TRÍCEPS AFUNDO", false);
-          _addExercice("PRANCHA", false);
-        }
-        currentExercise = _exercises[selectedIndex];
-      });
+    setState(() {
+      currentExercise = exercisesOfModule[selectedIndex];
     });
+    print("Teste: ");
+
+
   }
 }
 

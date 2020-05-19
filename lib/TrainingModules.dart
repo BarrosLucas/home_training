@@ -6,27 +6,20 @@ import 'package:hometraining/TrainingRun.dart';
 import 'package:path_provider/path_provider.dart';
 
 class TrainingModules extends StatefulWidget {
+  final List _modules;
+  TrainingModules(this._modules);
   @override
-  _TrainingModulesState createState() => _TrainingModulesState();
+  _TrainingModulesState createState() => _TrainingModulesState(_modules);
 }
 
 class _TrainingModulesState extends State<TrainingModules> {
-  List _treining = [];
+  final List _modules;
+  _TrainingModulesState(this._modules);
 
   @override
   void initState() {
     super.initState();
-    _readData().then((data) {
-      setState(() {
-        if (data != null) {
-          _treining = json.decode(data);
-        } else {
-          _addToDo("TREINO A", "MMI e Ombro");
-          _addToDo("TREINO B", "Costa e Bíceps");
-          _addToDo("TREINO C", "Peito e Tríceps");
-        }
-      });
-    });
+    print(_modules);
   }
 
   @override
@@ -102,11 +95,11 @@ class _TrainingModulesState extends State<TrainingModules> {
                   alignment: Alignment(0, 0),
                   child: new ListTile(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => TrainingRun(_treining[index]['title'],false)));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => TrainingRun(_modules[index]['title'],false,_modules[index]['exercises'])));
                       },
                       title: Container(
                         padding: EdgeInsets.all(5),
-                        child: new Text(_treining[index]['title'],
+                        child: new Text(_modules[index]['title'],
                             style: new TextStyle(
                               fontSize: 20.0,
                               fontFamily: 'Roboto',
@@ -117,7 +110,7 @@ class _TrainingModulesState extends State<TrainingModules> {
                       subtitle: Container(
                           padding: EdgeInsets.all(5),
                           child: Text(
-                            _treining[index]['desc'],
+                            _modules[index]['desc'],
                             style: new TextStyle(
                                 fontSize: 13,
                                 fontFamily: 'Roboto',
@@ -137,41 +130,6 @@ class _TrainingModulesState extends State<TrainingModules> {
         ));
   }
 
-  void _addToDo(String title, String desc) {
-    setState(() {
-      Map<String, dynamic> newToDo = Map();
-      newToDo['title'] = title;
-      newToDo['desc'] = desc;
-      _treining.add(newToDo);
-      _saveData();
-    });
-  }
-
-  Future<File> _getFile() async {
-    final directory = await getApplicationDocumentsDirectory();
-    return File("${directory.path}/treiningModule.json");
-  }
-
-  Future<File> _saveData() async {
-    String data = json.encode(_treining);
-    final file = await _getFile();
-    return file.writeAsString(data);
-  }
-
-  Future<String> _readData() async {
-    try {
-      final file = await _getFile();
-      if (FileSystemEntity.typeSync(file.path) !=
-          FileSystemEntityType.notFound) {
-        return file.readAsString();
-      } else {
-        return null;
-      }
-    } catch (e) {
-      return null;
-    }
-  }
-
   Widget generateContent() {
     return Column(children: <Widget>[
       Align(
@@ -188,7 +146,7 @@ class _TrainingModulesState extends State<TrainingModules> {
       Expanded(
         child: Container(
           child: ListView.builder(
-              itemCount: _treining.length, itemBuilder: generateRow),
+              itemCount: _modules.length, itemBuilder: generateRow),
         ),
       ),
     ]);

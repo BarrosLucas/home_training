@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'ExercisesRun.dart';
+import 'file.dart';
 
 class Exercices extends StatefulWidget {
   @override
@@ -14,59 +15,18 @@ class Exercices extends StatefulWidget {
 class _ExercicesState extends State<Exercices> {
   List _exercises = [];
 
-  void _addExercice(String title, bool doing) {
+  void completeExercise() async{
+    _exercises = json.decode(await AccessFile.readData())['exercises'];
     setState(() {
-      Map<String, dynamic> newToDo = Map();
-      newToDo['title'] = title;
-      newToDo['doing'] = doing;
-      _exercises.add(newToDo);
-      _saveData();
+      _exercises=_exercises;
     });
+
   }
 
   @override
   void initState() {
     super.initState();
-    _readData().then((data) {
-      setState(() {
-        if(data != null) {
-          _exercises = json.decode(data);
-        }
-        else{
-          _addExercice("CORRIDA",false);
-          _addExercice("AGACHAMENTO SUMÔ",false);
-          _addExercice("AGACHAMENTO STIFF",false);
-          _addExercice("PASSADA",false);
-          _addExercice("AVANÇO",false);
-          _addExercice("FLEXÃO DE POSTERIOR",false);
-          _addExercice("AGACHAMENTO NA PAREDE",false);
-          _addExercice("COICE PARA GLÚTEOS",false);
-          _addExercice("PANTURRILHA  EM PÉ",false);
-          _addExercice("DESENVOLVIMENTO EM PÉ",false);
-          _addExercice("ELEVAÇÃO LATERAL",false);
-          _addExercice("ELEVAÇÃO FRONTAL",false);
-          _addExercice("ABDOMINAL SUPRA",false);
-          _addExercice("PULAR CORDA",false);
-          _addExercice("REMADA SUPINADA",false);
-          _addExercice("PULL OVER",false);
-          _addExercice("REMADA",false);
-          _addExercice("ROSCA DIRETA",false);
-          _addExercice("ROSCA INVERTIDA",false);
-          _addExercice("ROSCA UNILATERAL",false);
-          _addExercice("ROSCA ALTERNADA",false);
-          _addExercice("ROSCA MARTELO",false);
-          _addExercice("ABDOMINAL REMADOR",false);
-          _addExercice("POLICHINELO",false);
-          _addExercice("FLEXÕES",false);
-          _addExercice("VOADOR UNILATERAL",false);
-          _addExercice("CRUCIFIXO UNILATERAL",false);
-          _addExercice("TRÍCEPS TESTA",false);
-          _addExercice("TRÍCEPS FRANCÊS",false);
-          _addExercice("TRÍCEPS AFUNDO",false);
-          _addExercice("PRANCHA",false);
-        }
-      });
-    });
+    completeExercise();
   }
 
   @override
@@ -122,7 +82,7 @@ class _ExercicesState extends State<Exercices> {
                   alignment: Alignment(0, 0),
                   child: new ListTile(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ExercisesRun(_exercises[index]['title'],3)));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ExercisesRun(_exercises[index]['title'],_exercises[index]['settings'][0])));
                     },
                     title: Container(
                       padding: EdgeInsets.all(5),
@@ -147,29 +107,5 @@ class _ExercicesState extends State<Exercices> {
             )
           ],
         ));
-  }
-
-  Future<File> _getFile() async {
-    final directory = await getApplicationDocumentsDirectory();
-    return File("${directory.path}/exercises.json");
-  }
-
-  Future<File> _saveData() async {
-    String data = json.encode(_exercises);
-    final file = await _getFile();
-    return file.writeAsString(data);
-  }
-
-  Future<String> _readData() async {
-    try {
-      final file = await _getFile();
-      if(FileSystemEntity.typeSync(file.path) != FileSystemEntityType.notFound){
-        return file.readAsString();
-      }else{
-        return null;
-      }
-    } catch (e) {
-      return null;
-    }
   }
 }

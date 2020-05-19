@@ -1,0 +1,497 @@
+{
+  "training": [
+    {
+      "title": "Treino Padrão",
+      "desc": "Treino moderado para definição muscular",
+      "modules": [
+        {
+          "title": "Modulo A",
+          "desc": "MMI e Ombro",
+          "exercises": [
+            {
+              "title": "Corrida",
+              "settings": [
+                1,
+                0.10
+              ]
+            },
+            {
+              "title": "Agac. Sumô",
+              "settings": [
+                3,
+                0.22
+              ]
+            },
+            {
+              "title": "Agac. Stiff",
+              "settings": [
+                3,
+                0.22
+              ]
+            },
+            {
+              "title": "Afundo",
+              "settings": [
+                3,
+                0.22
+              ]
+            },
+            {
+              "title": "Avanço",
+              "settings": [
+                3,
+                0.22
+              ]
+            },
+            {
+              "title": "Agac. na parede",
+              "settings": [
+                3,
+                0.22
+              ]
+            },
+            {
+              "title": "Coice para gluteos",
+              "settings": [
+                3,
+                0
+              ]
+            },
+            {
+              "title": "Flexão de posterior",
+              "settings": [
+                3,
+                0
+              ]
+            },
+            {
+              "title": "Panturrilha em pé",
+              "settings": [
+                3,
+                0
+              ]
+            },
+            {
+              "title": "Des. em pé",
+              "settings": [
+                3,
+                0
+              ]
+            },
+            {
+              "title": "Elev. lateral",
+              "settings": [
+                3,
+                0
+              ]
+            },
+            {
+              "title": "Elev. frontal",
+              "settings": [
+                3,
+                0
+              ]
+            },
+            {
+              "title": "ABS supra",
+              "settings": [
+                3,
+                0.16
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Modulo B",
+          "desc": "Costa e Bíceps",
+          "exercises": [
+            {
+              "title": "Pular corda",
+              "settings": [
+                3,
+                0.16
+              ]
+            },
+            {
+              "title": "Remada sup.",
+              "settings": [
+                3,
+                0
+              ]
+            },
+            {
+              "title": "Pull over",
+              "settings": [
+                3,
+                0
+              ]
+            },
+            {
+              "title": "Remada",
+              "settings": [
+                3,
+                0
+              ]
+            },
+            {
+              "title": "Rosca dir.",
+              "settings": [
+                3,
+                0
+              ]
+            },
+            {
+              "title": "Rosca inversa",
+              "settings": [
+                3,
+                0
+              ]
+            },
+            {
+              "title": "Rosca unil.",
+              "settings": [
+                3,
+                0
+              ]
+            },
+            {
+              "title": "Rosca alter.",
+              "settings": [
+                3,
+                0
+              ]
+            },
+            {
+              "title": "Rosca martelo",
+              "settings": [
+                3,
+                0
+              ]
+            },
+            {
+              "title": "ABS remador",
+              "settings": [
+                3,
+                0.16
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Modulo C",
+          "desc": "Peito e Tríceps",
+          "exercises": [
+            {
+              "title": "Polichinelo",
+              "settings": [
+                3,
+                0.22
+              ]
+            },
+            {
+              "title": "Flexão",
+              "settings": [
+                3,
+                0
+              ]
+            },
+            {
+              "title": "Voador unil.",
+              "settings": [
+                3,
+                0
+              ]
+            },
+            {
+              "title": "Crucifixo unil.",
+              "settings": [
+                3,
+                0
+              ]
+            },
+            {
+              "title": "Tríceps testa",
+              "settings": [
+                3,
+                0
+              ]
+            },
+            {
+              "title": "Tríceps francês",
+              "settings": [
+                3,
+                0
+              ]
+            },
+            {
+              "title": "Tríceps afun.",
+              "settings": [
+                3,
+                0
+              ]
+            },
+            {
+              "title": "Prancha",
+              "settings": [
+                3,
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "challenge": [
+    {
+      "title": "1000 Flexões",
+      "desc": "Faça 100 flexões por dia no decorrer de 10 dias",
+      "done": "Parabéns! Você realizou as 1000 flexões em 10 dias!",
+      "isIn": false
+    },
+    {
+      "title": "1000 Abdominais",
+      "desc": "Faça 100 abdominais por dia no decorrer de 10 dias",
+      "done": "Parabéns! Você realizou as 1000 abdominais em 10 dias!",
+      "isIn": false
+    },
+    {
+      "title": "5000 Polichinelos",
+      "desc": "Faça 500 polichinelos por dia no decorrer de 10 dias",
+      "done": "Parabéns! Você realizou as 5000 polichinelos em 10 dias!",
+      "isIn": false
+    },
+    {
+      "title": "100 KM",
+      "desc": "Corra 10 km por dia em 10 dias",
+      "done": "Parabéns! Você correu 100 km em 10 dias!",
+      "isIn": false
+    }
+  ],
+  "exercises": [
+    {
+      "title": "Corrida",
+      "settings": [
+        1,
+        0.10
+      ]
+    },
+    {
+      "title": "Agac. Sumô",
+      "settings": [
+        3,
+        0.22
+      ]
+    },
+    {
+      "title": "Agac. Stiff",
+      "settings": [
+        3,
+        0.22
+      ]
+    },
+    {
+      "title": "Afundo",
+      "settings": [
+        3,
+        0.22
+      ]
+    },
+    {
+      "title": "Avanço",
+      "settings": [
+        3,
+        0.22
+      ]
+    },
+    {
+      "title": "Agac. na parede",
+      "settings": [
+        3,
+        0.22
+      ]
+    },
+    {
+      "title": "Coice para gluteos",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "title": "Flexão de posterior",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "title": "Panturrilha em pé",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "title": "Des. em pé",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "title": "Elev. lateral",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "title": "Elev. frontal",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "title": "ABS supra",
+      "settings": [
+        3,
+        0.16
+      ]
+    },
+    {
+      "title": "Pular corda",
+      "settings": [
+        3,
+        0.16
+      ]
+    },
+    {
+      "title": "Remada sup.",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "title": "Pull over",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "title": "Remada",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "title": "Rosca dir.",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "title": "Rosca inversa",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "title": "Rosca unil.",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "title": "Rosca alter.",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "title": "Rosca martelo",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "title": "ABS remador",
+      "settings": [
+        3,
+        0.16
+      ]
+    },
+    {
+      "title": "Polichinelo",
+      "settings": [
+        3,
+        0.22
+      ]
+    },
+    {
+      "title": "Flexão",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "title": "Voador unil.",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "title": "Crucifixo unil.",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "title": "Tríceps testa",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "title": "Tríceps francês",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "title": "Tríceps afun.",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "title": "Prancha",
+      "settings": [
+        3,
+        0
+      ]
+    }
+  ],
+  "profile": {
+    "name": "",
+    "trainingDays": 0,
+    "fullChallenge": 0,
+    "calories": 0
+  },
+  "read": false
+}

@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:hometraining/ChallengeRun.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'ChallengeDescription.dart';
+import 'file.dart';
 
 class Challenge extends StatefulWidget {
   @override
@@ -14,34 +14,18 @@ class Challenge extends StatefulWidget {
 
 class _ChallengeState extends State<Challenge> {
   List _challenges = [];
-
-  void _addChallenge(String title, String desc, bool done) {
+  void completeChallenge() async{
+    _challenges = json.decode(await AccessFile.readData())['challenge'];
     setState(() {
-      Map<String, dynamic> newToDo = Map();
-      newToDo['title'] = title;
-      newToDo['desc'] = desc;
-      newToDo['done'] = done;
-      _challenges.add(newToDo);
-      _saveData();
+      _challenges=_challenges;
     });
+    print(_challenges);
   }
 
   @override
   void initState() {
     super.initState();
-    _readData().then((data) {
-      setState(() {
-        if(data != null) {
-          _challenges = json.decode(data);
-        }else{
-          _addChallenge("1000 FLEXÕES", "Faça 100 flexões por dia em 10 dias", false);
-          _addChallenge("1000 ABDOMINAIS", "Faça 100 abdominais por dia em 10 dias", false);
-          _addChallenge("5000 POLICHINELOS", "Faça 500 flexões por dia em 10 dias", false);
-          _addChallenge("1000 AGACHAMENTOS", "Faça 100 agachamentos por dia em 10 dias", false);
-          _addChallenge("50 KM", "Corra 5 km por dia em 10 dias", false);
-        }
-      });
-    });
+    completeChallenge();
   }
 
   @override
@@ -79,7 +63,7 @@ class _ChallengeState extends State<Challenge> {
                 width: 500,
                 margin: new EdgeInsets.only(left: 46.0),
                 decoration: new BoxDecoration(
-                  color: _challenges[index]['done']? new Color(0x6677DD77) : new Color(0x66F80000),
+                  color: _challenges[index]['isIn']? new Color(0x6677DD77) : new Color(0x66F80000),
                   shape: BoxShape.rectangle,
                   borderRadius: new BorderRadius.circular(8.0),
                   boxShadow: <BoxShadow>[
@@ -95,7 +79,7 @@ class _ChallengeState extends State<Challenge> {
                   alignment: Alignment(0, 0),
                   child: new ListTile(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ChallengeDescription(_challenges[index]['title'],"Descrição descrição descrição descrição")));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ChallengeDescription(_challenges[index]['title'],_challenges[index]['desc'])));
                       },
                       title: Container(
                         padding: EdgeInsets.all(5),
@@ -130,28 +114,4 @@ class _ChallengeState extends State<Challenge> {
         ));
   }
 
-
-  Future<File> _getFile() async {
-    final directory = await getApplicationDocumentsDirectory();
-    return File("${directory.path}/challenges.json");
-  }
-
-  Future<File> _saveData() async {
-    String data = json.encode(_challenges);
-    final file = await _getFile();
-    return file.writeAsString(data);
-  }
-
-  Future<String> _readData() async {
-    try {
-      final file = await _getFile();
-      if(FileSystemEntity.typeSync(file.path) != FileSystemEntityType.notFound){
-        return file.readAsString();
-      }else{
-        return null;
-      }
-    } catch (e) {
-      return null;
-    }
-  }
 }

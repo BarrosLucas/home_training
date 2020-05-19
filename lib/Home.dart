@@ -3,8 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:hometraining/AddTraining.dart';
 import 'package:hometraining/TrainingModules.dart';
 import 'dart:convert';
-import 'dart:io';
-import 'package:path_provider/path_provider.dart';
+import 'file.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -14,18 +13,18 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   List _treining = [];
 
+  void completeTraining() async{
+    _treining = json.decode(await AccessFile.readData())['training'];
+    setState(() {
+      _treining=_treining;
+    });
+    print(_treining);
+  }
+
   @override
   void initState() {
     super.initState();
-    _readData().then((data) {
-      setState(() {
-        if(data != null){
-          _treining = json.decode(data);
-        }else{
-          _addToDo("TREINO PADRÃO", "Treino moderado para definição muscular");
-        }
-      });
-    });
+    completeTraining();
   }
 
   @override
@@ -81,11 +80,11 @@ class _HomeState extends State<Home> {
                     alignment: Alignment(0, 0),
                     child: new ListTile(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => TrainingModules()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => TrainingModules(_treining[index]['modules'])));
                         },
                         title: Container(
                           padding: EdgeInsets.all(5),
-                          child: new Text(_treining[index]['title'],
+                          child: new Text("${_treining[index]['title']}".toUpperCase(),
                               style: new TextStyle(
                                 fontSize: 20.0,
                                 fontFamily: 'Roboto',
@@ -167,38 +166,4 @@ class _HomeState extends State<Home> {
         )));
   }
 
-  void _addToDo(String title, String desc) {
-    setState(() {
-      Map<String, dynamic> newToDo = Map();
-      newToDo['title'] = title;
-      newToDo['desc'] = desc;
-      _treining.add(newToDo);
-      _saveData();
-    });
-  }
-
-  Future<File> _getFile() async {
-    final directory = await getApplicationDocumentsDirectory();
-    return File("${directory.path}/treining.json");
-  }
-
-  Future<File> _saveData() async {
-    String data = json.encode(_treining);
-    final file = await _getFile();
-    return file.writeAsString(data);
-  }
-
-  Future<String> _readData() async {
-    try {
-      final file = await _getFile();
-      if(FileSystemEntity.typeSync(file.path) != FileSystemEntityType.notFound){
-        return file.readAsString();
-      }else{
-        return null;
-      }
-
-    } catch (e) {
-      return null;
-    }
-  }
 }
