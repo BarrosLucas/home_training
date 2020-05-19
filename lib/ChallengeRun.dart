@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hometraining/ChallengeDone.dart';
 
 class ChallengeRun extends StatefulWidget {
   final String _title;
@@ -133,7 +134,8 @@ Widget build(BuildContext context) {
                             _qnt++;
                           }
                           if(_qnt==_total){
-                            //NAVEGAR PARA A PRÓXIMA PÁGINA
+                            Navigator.pop(context);
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>ChallengeDone()));
                           }
                         });
                       },

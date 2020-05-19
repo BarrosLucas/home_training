@@ -25,7 +25,11 @@ class _ChallengeDescriptionState extends State<ChallengeDescription> {
       body: Column(
         children: <Widget>[
           Expanded(
-              child: Stack(children: <Widget>[
+            flex: 2,
+              child: Container(
+
+
+                  child: Stack(children: <Widget>[
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -79,7 +83,7 @@ class _ChallengeDescriptionState extends State<ChallengeDescription> {
                                 fontWeight: FontWeight.bold)),
                       ))
                 ]),
-          ])),
+          ]))),
           Expanded(
               flex: 2,
               child: Container(
