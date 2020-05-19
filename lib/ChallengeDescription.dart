@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hometraining/ChallengeRun.dart';
 import 'package:video_player/video_player.dart';
 
+import 'TrainingRunFirstPage.dart';
+
 class ChallengeDescription extends StatefulWidget {
   final String _title;
   final String _desc;
@@ -141,99 +143,6 @@ class _ChallengeDescriptionState extends State<ChallengeDescription> {
           ))
         ],
       ),
-    );
-  }
-}
-
-class Video extends StatefulWidget {
-  final String linkVideo;
-
-  Video(this.linkVideo);
-
-  @override
-  _VideoState createState() => _VideoState(linkVideo);
-}
-
-class _VideoState extends State<Video> {
-  VideoPlayerController _controller;
-  Future<void> _initializeVideoPlayerFuture;
-  final String linkVideo;
-
-  _VideoState(this.linkVideo);
-
-  @override
-  void initState() {
-    _controller = VideoPlayerController.network(
-      linkVideo,
-    );
-    _initializeVideoPlayerFuture = _controller.initialize();
-    _controller.setLooping(true);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        Container(
-          child: FutureBuilder(
-            future: _initializeVideoPlayerFuture,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                // If the VideoPlayerController has finished initialization, use
-                // the data it provides to limit the aspect ratio of the VideoPlayer.
-                return AspectRatio(
-                    aspectRatio: _controller.value.aspectRatio,
-                    // Use the VideoPlayer widget to display the video.
-                    child: Stack(
-                      children: <Widget>[
-                        VideoPlayer(_controller),
-                        Container(
-                          alignment: Alignment.bottomRight,
-                          child: Container(
-                            width: 45,
-                            height: 45,
-                            color: new Color(0xAAFFFFFF),
-                            child: Center(
-                                child: IconButton(
-                              onPressed: () {
-                                print("CLICOU");
-                                setState(() {
-                                  if (_controller.value.isPlaying) {
-                                    _controller.pause();
-                                  } else {
-                                    _controller.play();
-                                  }
-                                });
-                              },
-                              alignment: Alignment.center,
-                              icon: Icon(
-                                (_controller.value.isPlaying)
-                                    ? Icons.pause_circle_outline
-                                    : Icons.play_circle_outline,
-                                color: Colors.black,
-                                size: 35,
-                              ),
-                            )),
-                          ),
-                        ),
-                      ],
-                    ));
-              } else {
-                // If the VideoPlayerController is still initializing, show a
-                // loading spinner.
-                return Center(child: CircularProgressIndicator());
-              }
-            },
-          ),
-        ),
-      ],
     );
   }
 }

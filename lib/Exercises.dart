@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'ExercisesRun.dart';
+
 class Exercices extends StatefulWidget {
   @override
   _ExercicesState createState() => _ExercicesState();
@@ -120,7 +122,7 @@ class _ExercicesState extends State<Exercices> {
                   alignment: Alignment(0, 0),
                   child: new ListTile(
                     onTap: () {
-                      print("Clicou: $index");
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ExercisesRun(_exercises[index]['title'],3)));
                     },
                     title: Container(
                       padding: EdgeInsets.all(5),
