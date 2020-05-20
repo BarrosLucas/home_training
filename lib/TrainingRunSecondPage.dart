@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 import 'file.dart';
@@ -22,6 +23,9 @@ class _TrainingRunSecondPageState extends State<TrainingRunSecondPage> {
   Map<String, dynamic> _profile;
   final double calor;
   var key = GlobalKey();
+
+
+
   _TrainingRunSecondPageState(this._title,this._list,this.calor);
   Widget pageTwo(List list) {
     return Stack(
@@ -77,7 +81,7 @@ class _TrainingRunSecondPageState extends State<TrainingRunSecondPage> {
                               var pngBytes = byteData.buffer.asUint8List();
                               print(pngBytes);
                               //final res = await _imageSaver.saveImage(imageBytes: pngBytes,imageName: DateTime.now().toIso8601String(),directoryName: (await getApplicationDocumentsDirectory ()).path);
-                              await Share.file('esys image', 'esys.png', pngBytes, 'image/png', text: 'Acabei de concluir meu treino! Olha meu desempenho <3');
+                              await Share.file('At Home', 'esys.png', pngBytes, 'image/png', text: 'Acabei de concluir meu treino! Olha meu desempenho <3');
                             }
                             takescrshot();
                             print("VEIOOO");
@@ -123,7 +127,7 @@ class _TrainingRunSecondPageState extends State<TrainingRunSecondPage> {
                       ),
                     ),
                     Text(
-                      "KCAL",
+                      "CAL",
                       style: TextStyle(fontSize: 12,
                       ),
                     )
@@ -166,10 +170,27 @@ class _TrainingRunSecondPageState extends State<TrainingRunSecondPage> {
   @override
   void initState() {
     super.initState();
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp
+    ]);
+    
     completeProfile();
     print("lastDayTraining:");
     print(_profile);
 
+  }
+
+
+  @override
+  void dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown
+    ]);
+    super.dispose();
   }
 
   @override

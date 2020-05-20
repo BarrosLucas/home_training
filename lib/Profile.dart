@@ -23,7 +23,7 @@ class _ProfileState extends State<Profile> {
       nameController.text = _profile['name'];
       daysController.text = "${_profile['trainingDays']}";
       challengesController.text = "${_profile['fullChallenge']}";
-      calories=_profile['calories'];
+      calories=(_profile['calories']).toDouble();
     });
     print(_profile['calories']);
   }
@@ -139,7 +139,7 @@ class _ProfileState extends State<Profile> {
                         ),
                       ),
                       Text(
-                        "KCAL",
+                        "CAL",
                         style: TextStyle(fontSize: 12,
                         ),
                       )

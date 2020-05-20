@@ -49,9 +49,7 @@ class _ExercisesRunState extends State<ExercisesRun> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          Expanded(
-              flex: 3,
-              child: Container(
+          Container(
 
 
                   child: Stack(children: <Widget>[
@@ -108,65 +106,67 @@ class _ExercisesRunState extends State<ExercisesRun> {
                                         fontWeight: FontWeight.bold)),
                               ))
                         ]),
-                  ]))),
+                  ])),
           Expanded(
               flex: 3,
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 10,horizontal: 30),
-                child: Column(children: <Widget>[
-                  Video(this._link
-                      )
-                ],
-                  mainAxisAlignment: MainAxisAlignment.end
-                  ,),
-              )),
-          Expanded(
-            flex: 1,
-            child: Row(children:<Widget>[Text(
-              _title,style:TextStyle(
-              fontSize: 24
-            ),
-            ),],
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,)
-          ),
-          Expanded(
-            flex: 2,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    cronometer(TextStyle(color: Colors.black,fontSize: 50)),
-                    IconButton(
-                      icon: Icon(
-                          (stopwatch.isRunning)? Icons.check_circle:Icons.play_circle_filled,
-                        color: (stopwatch.isRunning)? Colors.green:Colors.red,
-                        size: 50,
-                      ),
-                      onPressed: (){
-                        if(stopwatch.isRunning){
-                          setState(() {
-                            stopwatch.stop();
-                            current++;
-                            if (current == total) {
-                              Future.delayed(Duration(seconds: 2), () {
-                                setState(() {
-                                  current = 0;
-                                });
+                child:
+                SingleChildScrollView(
+                 child: Column(
+                   children: <Widget>[
+                     Video(this._link),
+                     Row(children:<Widget>[Text(
+                       _title,style:TextStyle(
+                         fontSize: 24
+                     ),
+                     ),],
+                       mainAxisAlignment: MainAxisAlignment.center,
+                       crossAxisAlignment: CrossAxisAlignment.start,),
 
-                              });
-                            }
-                          });
-                        }else{
-                          setState(() {
-                            stopwatch.start();
-                          });
-                        }
-                      },
-                    )
-                  ],
-              ),
-          ),
+                     Padding(
+                       padding: EdgeInsets.only(top: 50),
+                       child: Row(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         mainAxisAlignment: MainAxisAlignment.center,
+                         children: <Widget>[
+                           cronometer(TextStyle(color: Colors.black,fontSize: 50)),
+                           IconButton(
+                             icon: Icon(
+                               (stopwatch.isRunning)? Icons.check_circle:Icons.play_circle_filled,
+                               color: (stopwatch.isRunning)? Colors.green:Colors.red,
+                               size: 50,
+                             ),
+                             onPressed: (){
+                               if(stopwatch.isRunning){
+                                 setState(() {
+                                   stopwatch.stop();
+                                   current++;
+                                   if (current == total) {
+                                     Future.delayed(Duration(seconds: 2), () {
+                                       setState(() {
+                                         current = 0;
+                                       });
+
+                                     });
+                                   }
+                                 });
+                               }else{
+                                 setState(() {
+                                   stopwatch.start();
+                                 });
+                               }
+                             },
+                           )
+                         ],
+                       )
+                     )
+
+                   ],
+                   mainAxisAlignment: MainAxisAlignment.end
+                   ,),
+                )
+              )),
           Expanded(
             flex: 1,
               child: Row(

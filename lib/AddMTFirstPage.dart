@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 class AddModuleTrainingFirstPage extends StatefulWidget {
   static TextEditingController titleController = TextEditingController();
   static TextEditingController descController = TextEditingController();
@@ -7,6 +8,8 @@ class AddModuleTrainingFirstPage extends StatefulWidget {
 }
 
 class _AddModuleTrainingFirstPageState extends State<AddModuleTrainingFirstPage> {
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -64,4 +67,25 @@ class _AddModuleTrainingFirstPageState extends State<AddModuleTrainingFirstPage>
           ),
         ]));
   }
+
+  @override
+  void initState() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp
+    ]);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft
+    ]);
+    super.dispose();
+  }
+
+
 }

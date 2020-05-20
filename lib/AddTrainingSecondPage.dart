@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AddTrainingSecondPage extends StatefulWidget {
   static TextEditingController titleController = TextEditingController();
@@ -8,6 +9,7 @@ class AddTrainingSecondPage extends StatefulWidget {
 }
 
 class _AddTrainingSecondPageState extends State<AddTrainingSecondPage> {
+
 
 
   @override
@@ -66,4 +68,25 @@ class _AddTrainingSecondPageState extends State<AddTrainingSecondPage> {
           ),
         ]));
   }
+
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp
+    ]);
+  }
+
+  @override
+  void dispose() {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitDown,
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.landscapeRight,
+        DeviceOrientation.landscapeLeft
+      ]);
+      super.dispose();
+  }
+
+
 }

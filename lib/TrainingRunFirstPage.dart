@@ -9,17 +9,15 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:video_player/video_player.dart';
 import 'file.dart';
 
-
 class TrainingRunFirstPage extends StatefulWidget {
   final String _title;
   final List exercisesOfModule;
 
-
-  TrainingRunFirstPage(this._title,this.exercisesOfModule);
+  TrainingRunFirstPage(this._title, this.exercisesOfModule);
 
   @override
   _TrainingRunFirstPageState createState() =>
-      _TrainingRunFirstPageState(this._title,this.exercisesOfModule);
+      _TrainingRunFirstPageState(this._title, this.exercisesOfModule);
 }
 
 class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
@@ -33,24 +31,25 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
   Stopwatch stopwatch = Stopwatch();
   Stopwatch stopwatchSeconder = Stopwatch();
   int page = 0;
-  List<Map<dynamic,dynamic>> listTraning = [];
-  _TrainingRunFirstPageState(this._title,this.exercisesOfModule);
+  List<Map<dynamic, dynamic>> listTraning = [];
+
+  _TrainingRunFirstPageState(this._title, this.exercisesOfModule);
+
   int second = 0;
   int series = 0;
   var key = GlobalKey();
-  Map<String,dynamic> _profile;
+  Map<String, dynamic> _profile;
 
-
-  void completeProfile() async{
+  void completeProfile() async {
     _profile = json.decode(await AccessFile.readData())['profile'];
     setState(() {
-      _profile=_profile;
+      _profile = _profile;
     });
   }
 
-  void sumCalories(int timeSeconds, var calPerSecond){
-    _profile['calories'] += calPerSecond*timeSeconds;
-    calor += calPerSecond*timeSeconds;
+  void sumCalories(int timeSeconds, var calPerSecond) {
+    _profile['calories'] += calPerSecond * timeSeconds;
+    calor += calPerSecond * timeSeconds;
     setState(() {
       AccessFile.map['profile'] = _profile;
       AccessFile.saveData();
@@ -59,9 +58,9 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
     print(_profile);
   }
 
-  void addToList(String time, String title){
-    Map<String,String> map = Map();
-    map['time']  = time;
+  void addToList(String time, String title) {
+    Map<String, String> map = Map();
+    map['time'] = time;
     map['title'] = title;
     listTraning.add(map);
   }
@@ -76,8 +75,10 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
     if (stopwatch.isRunning) {
       stopwatch.stop();
     }
-    addToList(TimerTextFormatter.format(timerSecond), exercisesOfModule[selectedIndex]['title']);
-    sumCalories((stopwatchSeconder.elapsedMilliseconds/1000).toInt(), exercisesOfModule[selectedIndex]['settings'][1]);
+    addToList(TimerTextFormatter.format(timerSecond),
+        exercisesOfModule[selectedIndex]['title']);
+    sumCalories((stopwatchSeconder.elapsedMilliseconds / 1000).toInt(),
+        exercisesOfModule[selectedIndex]['settings'][1]);
     if (selectedIndex < (exercisesOfModule.length - 1)) {
       setState(() {
         selectedIndex++;
@@ -86,7 +87,11 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
       });
     } else {
       Navigator.pop(context);
-      Navigator.push(context, MaterialPageRoute(builder: (context) => TrainingRunSecondPage(_title,listTraning,calor)));
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  TrainingRunSecondPage(_title, listTraning, calor)));
     }
   }
 
@@ -228,8 +233,7 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
                       ),
                     ],
                   ),
-                  child: Video(
-                      currentExercise['link']),
+                  child: Video(currentExercise['link']),
                   margin: EdgeInsets.all(30),
                 ),
                 Row(
@@ -294,9 +298,16 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
                 Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      generateProgressBarGeneral(exercisesOfModule[selectedIndex]['settings'][0], series,
-                          Colors.white, Colors.green[300], 180, 20,
-                          leading: "Séries", trailing: "$series/${exercisesOfModule[selectedIndex]['settings'][0]}")
+                      generateProgressBarGeneral(
+                          exercisesOfModule[selectedIndex]['settings'][0],
+                          series,
+                          Colors.white,
+                          Colors.green[300],
+                          180,
+                          20,
+                          leading: "Séries",
+                          trailing:
+                              "$series/${exercisesOfModule[selectedIndex]['settings'][0]}")
                     ]),
                 Padding(
                   child: Row(
@@ -332,7 +343,9 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
                                   stopwatchSeconder.stop();
                                   stopwatch.stop();
                                   series++;
-                                  if (series == exercisesOfModule[selectedIndex]['settings'][0]) {
+                                  if (series ==
+                                      exercisesOfModule[selectedIndex]
+                                          ['settings'][0]) {
                                     Future.delayed(Duration(seconds: 2), () {
                                       next();
                                     });
@@ -381,8 +394,6 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
       currentExercise = exercisesOfModule[selectedIndex];
     });
     print("Teste: ");
-
-
   }
 }
 
@@ -413,6 +424,8 @@ class _VideoState extends State<Video> {
   Future<void> _initializeVideoPlayerFuture;
   final String linkVideo;
 
+  bool errorInternet = false;
+
   _VideoState(this.linkVideo);
 
   @override
@@ -433,62 +446,109 @@ class _VideoState extends State<Video> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        Container(
-          child: FutureBuilder(
-            future: _initializeVideoPlayerFuture,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                // If the VideoPlayerController has finished initialization, use
-                // the data it provides to limit the aspect ratio of the VideoPlayer.
-                return AspectRatio(
-                    aspectRatio: _controller.value.aspectRatio,
-                    // Use the VideoPlayer widget to display the video.
-                    child: Stack(
-                      children: <Widget>[
-                        VideoPlayer(_controller),
-                        Container(
-                          alignment: Alignment.bottomRight,
-                          child: Container(
-                            width: 45,
-                            height: 45,
-                            color: new Color(0xAAFFFFFF),
-                            child: Center(
-                                child: IconButton(
-                              onPressed: () {
-                                print("CLICOU");
-                                setState(() {
-                                  if (_controller.value.isPlaying) {
-                                    _controller.pause();
-                                  } else {
-                                    _controller.play();
-                                  }
-                                });
-                              },
-                              alignment: Alignment.center,
-                              icon: Icon(
-                                (_controller.value.isPlaying)
-                                    ? Icons.pause_circle_outline
-                                    : Icons.play_circle_outline,
-                                color: Colors.black,
-                                size: 35,
-                              ),
-                            )),
-                          ),
-                        ),
-                      ],
-                    ));
-              } else {
-                // If the VideoPlayerController is still initializing, show a
-                // loading spinner.
-                return Center(child: CircularProgressIndicator());
-              }
-            },
-          ),
+    Widget element;
+    if (errorInternet) {
+      element = Container(
+        padding: EdgeInsets.all(30),
+        alignment: Alignment(0, 0),
+        decoration: new BoxDecoration(
+          color: new Color(0xCCFFFFFF),
+          shape: BoxShape.rectangle,
+          borderRadius: new BorderRadius.circular(8.0),
+          boxShadow: <BoxShadow>[
+            new BoxShadow(
+              color: Colors.black12,
+              blurRadius: 10.0,
+              offset: new Offset(0.0, 10.0),
+            ),
+          ],
         ),
-      ],
-    );
+        child: Stack(
+          children: <Widget>[
+            Container(
+                child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Image.asset(
+                      "assets/images/sad.png",
+                      width: 30,
+                    ),
+                    Text("Falha na conexão")
+                  ],
+                )
+              ],
+            ))
+          ],
+        ),
+      );
+    } else {
+      element = Stack(
+        children: <Widget>[
+          Container(
+            child: FutureBuilder(
+              future: _initializeVideoPlayerFuture,
+              builder: (context, snapshot) {
+                errorInternet = false;
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasError) {
+                    errorInternet = true;
+                  }
+                  // If the VideoPlayerController has finished initialization, use
+                  // the data it provides to limit the aspect ratio of the VideoPlayer.
+                  return AspectRatio(
+                      aspectRatio: _controller.value.aspectRatio,
+                      // Use the VideoPlayer widget to display the video.
+                      child: Stack(
+                        children: <Widget>[
+                          VideoPlayer(_controller),
+                          Container(
+                            alignment: Alignment.bottomRight,
+                            child: Container(
+                              width: 45,
+                              height: 45,
+                              color: new Color(0xAAFFFFFF),
+                              child: Center(
+                                  child: IconButton(
+                                onPressed: () {
+                                  print("CLICOU");
+                                  setState(() {
+                                    if (_controller.value.isPlaying) {
+                                      _controller.pause();
+                                    } else {
+                                      _controller.play();
+                                    }
+                                  });
+                                },
+                                alignment: Alignment.center,
+                                icon: Icon(
+                                  (_controller.value.isPlaying)
+                                      ? Icons.pause_circle_outline
+                                      : Icons.play_circle_outline,
+                                  color: Colors.black,
+                                  size: 35,
+                                ),
+                              )),
+                            ),
+                          ),
+                        ],
+                      ));
+                } else {
+                  // If the VideoPlayerController is still initializing, show a
+                  // loading spinner.
+                  return Center(child: CircularProgressIndicator());
+                }
+              },
+            ),
+          ),
+        ],
+      );
+    }
+
+    return element;
   }
 }
 

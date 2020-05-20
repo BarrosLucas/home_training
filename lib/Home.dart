@@ -29,6 +29,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    completeTraining();
     return Column(children: <Widget>[
       Align(
           alignment: Alignment.topRight,

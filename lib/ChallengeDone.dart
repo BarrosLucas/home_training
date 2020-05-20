@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 
 class ChallengeDone extends StatefulWidget {
   final Map<String, dynamic> challenge;
@@ -17,6 +18,26 @@ class _ChallengeDoneState extends State<ChallengeDone> {
 
   var key = GlobalKey();
 
+
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp
+    ]);
+  }
+
+
+  @override
+  void dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft
+    ]);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +116,7 @@ class _ChallengeDoneState extends State<ChallengeDone> {
                                     var pngBytes = byteData.buffer.asUint8List();
                                     print(pngBytes);
                                     //final res = await _imageSaver.saveImage(imageBytes: pngBytes,imageName: DateTime.now().toIso8601String(),directoryName: (await getApplicationDocumentsDirectory ()).path);
-                                    await Share.file('esys image', 'esys.png', pngBytes, 'image/png', text: 'Olha só o desafio que acabei de completar!!!');
+                                    await Share.file('At Home', 'esys.png', pngBytes, 'image/png', text: 'Olha só o desafio que acabei de completar!!!');
                                   }
                                   takescrshot();
                                   print("VEIOOO");

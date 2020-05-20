@@ -29,7 +29,8 @@ class AccessFile{
         return file.readAsString();
       } else {
         map = json.decode(defaultContent);
-        saveData();
+        (await saveData());
+        return file.readAsString();
       }
     } catch (e) {
       return null;

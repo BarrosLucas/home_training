@@ -24,9 +24,7 @@ class _ChallengeDescriptionState extends State<ChallengeDescription> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          Expanded(
-              flex: 2,
-              child: Container(
+          Container(
                   child: Stack(children: <Widget>[
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,7 +68,7 @@ class _ChallengeDescriptionState extends State<ChallengeDescription> {
                         child: Container(),
                       ),
                       Expanded(
-                          flex: 2,
+                          flex: 5,
                           child: Padding(
                             padding: EdgeInsets.only(right: 20, top: 40),
                             child: Text(challenge['title'].toUpperCase(),
@@ -81,71 +79,81 @@ class _ChallengeDescriptionState extends State<ChallengeDescription> {
                                     fontWeight: FontWeight.bold)),
                           ))
                     ]),
-              ]))),
+              ])),
+          SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  Container(
+                        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                        child: Column(
+                          children: <Widget>[
+                            Video(
+                                challenge['link']??"")
+                          ],
+                          mainAxisAlignment: MainAxisAlignment.end,
+                        ),
+                      ),
+                  Text(challenge['desc']),
+                ],
+              ),
+            ),
           Expanded(
-              flex: 2,
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-                child: Column(
-                  children: <Widget>[
-                    Video(
-                        challenge['link']??"")
-                  ],
-                  mainAxisAlignment: MainAxisAlignment.end,
-                ),
-              )),
-          Expanded(
-            child: Text(challenge['desc']),
-          ),
-          Expanded(
-              child: Container(
-            margin: EdgeInsets.only(bottom: 50),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Container(
-                        margin: EdgeInsets.symmetric(vertical: 5),
-                        child: RaisedButton(
-                          onPressed: () {
-                            challenge['isIn'] = true;
-                            print(challenge);
-                            setState(() {
-                              AccessFile.map['challenge'][ind] = challenge;
-                              AccessFile.saveData();
-                            });
+                Container(
+                  margin: EdgeInsets.only(bottom: 50),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Container(
+                              margin: EdgeInsets.symmetric(vertical: 5),
+                              child: RaisedButton(
+                                onPressed: () {
+                                  challenge['isIn'] = true;
+                                  print(challenge);
+                                  setState(() {
+                                    AccessFile.map['challenge'][ind] = challenge;
+                                    AccessFile.saveData();
+                                  });
 
-                            print(AccessFile.map['challenge'][ind]);
-                            Navigator.pop(context);
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ChallengeRun(
-                                        challenge,ind)));
-                          },
-                          padding: EdgeInsets.symmetric(
-                              vertical: 15, horizontal: 80),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Padding(
-                                child: Text(
-                                  "PARTICIPAR",
-                                  style: TextStyle(color: Colors.white),
+                                  print(AccessFile.map['challenge'][ind]);
+                                  Navigator.pop(context);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ChallengeRun(
+                                              challenge,ind)));
+                                },
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 15, horizontal: 80),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Padding(
+                                      child: Text(
+                                        "PARTICIPAR",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      padding: EdgeInsets.all(5),
+                                    )
+                                  ],
                                 ),
-                                padding: EdgeInsets.all(5),
-                              )
-                            ],
-                          ),
-                          color: Colors.green,
-                        ))
-                  ],
-                  mainAxisAlignment: MainAxisAlignment.center,
+                                color: Colors.green,
+                              ))
+                        ],
+                        mainAxisAlignment: MainAxisAlignment.center,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
-          ))
+          )
+
+
         ],
       ),
     );
