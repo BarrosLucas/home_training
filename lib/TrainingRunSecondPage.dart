@@ -1,21 +1,28 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:intl/intl.dart';
+
+import 'file.dart';
 class TrainingRunSecondPage extends StatefulWidget {
   final List _list;
   final String _title;
-  TrainingRunSecondPage(this._title,this._list);
+  final double calor;
+  TrainingRunSecondPage(this._title,this._list,this.calor);
   @override
-  _TrainingRunSecondPageState createState() => _TrainingRunSecondPageState(this._title,this._list);
+  _TrainingRunSecondPageState createState() => _TrainingRunSecondPageState(this._title,this._list,this.calor);
 }
 
 class _TrainingRunSecondPageState extends State<TrainingRunSecondPage> {
   final List _list;
   final String _title;
+  Map<String, dynamic> _profile;
+  final double calor;
   var key = GlobalKey();
-  _TrainingRunSecondPageState(this._title,this._list);
+  _TrainingRunSecondPageState(this._title,this._list,this.calor);
   Widget pageTwo(List list) {
     return Stack(
       children: <Widget>[
@@ -87,8 +94,8 @@ class _TrainingRunSecondPageState extends State<TrainingRunSecondPage> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 20),
-                padding: EdgeInsets.all(30),
+                margin: EdgeInsets.only(top: 10),
+                padding: EdgeInsets.all(45),
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.white,
@@ -108,7 +115,7 @@ class _TrainingRunSecondPageState extends State<TrainingRunSecondPage> {
                     Container(
                       padding: EdgeInsets.only(top: 15, bottom: 5),
                       child: Text(
-                        "1000",
+                        '${calor.toStringAsPrecision(2)}',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 35,
@@ -139,6 +146,30 @@ class _TrainingRunSecondPageState extends State<TrainingRunSecondPage> {
       title: Text(_list[index]['title']),
       leading: Text(_list[index]['time']),
     );
+  }
+
+  void completeProfile() async{
+    _profile = json.decode(await AccessFile.readData())['profile'];
+    print("Aqui");
+    print(_profile);
+    setState(() {
+      _profile=_profile;
+      if(!dateEqual(_profile["lastDayTraining"])){
+        _profile["lastDayTraining"] = new DateFormat("yyyy-MM-dd").format(DateTime.now());
+        _profile["trainingDays"]++;
+        AccessFile.map['profile']=_profile;
+        AccessFile.saveData();
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    completeProfile();
+    print("lastDayTraining:");
+    print(_profile);
+
   }
 
   @override
@@ -176,5 +207,20 @@ class _TrainingRunSecondPageState extends State<TrainingRunSecondPage> {
               )),
           pageTwo(_list),
         ])),key: key,);
+  }
+
+  bool dateEqual(String date){
+    print(date);
+    if (date.isEmpty) {
+      return false;
+    } else {
+      var today = new DateTime.now();
+      var other = DateTime.parse(date);
+
+      if(today.difference(other).inDays == 0){
+        return true;
+      }
+    }
+    return false;
   }
 }

@@ -10,7 +10,7 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   Map<String,dynamic> _profile;
 
-  int calories = 0;
+  double calories;
 
   TextEditingController nameController = TextEditingController();
   TextEditingController daysController = TextEditingController();
@@ -25,7 +25,7 @@ class _ProfileState extends State<Profile> {
       challengesController.text = "${_profile['fullChallenge']}";
       calories=_profile['calories'];
     });
-    print(_profile);
+    print(_profile['calories']);
   }
 
   @override
@@ -58,6 +58,14 @@ class _ProfileState extends State<Profile> {
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 10),
                   child: TextField(
+                    onSubmitted: (text){
+                      _profile['name'] = text;
+                      setState(() {
+                        AccessFile.map['profile'] = _profile;
+                        AccessFile.saveData();
+                      });
+
+                    },
                     controller: nameController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
@@ -123,7 +131,7 @@ class _ProfileState extends State<Profile> {
                       Container(
                         padding: EdgeInsets.only(top: 15, bottom: 5),
                         child: Text(
-                          "$calories",
+                          (calories==null)? "0":"${calories.toStringAsPrecision(2)}",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 35,

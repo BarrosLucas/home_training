@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hometraining/ChallengeDone.dart';
@@ -18,6 +20,7 @@ class ChallengeRun extends StatefulWidget {
 class _ChallengeRunState extends State<ChallengeRun> {
   Map<String, dynamic> challenge;
   int ind;
+  Map<String,dynamic> _profile;
 
   _ChallengeRunState(this.challenge, this.ind);
 
@@ -52,6 +55,18 @@ class _ChallengeRunState extends State<ChallengeRun> {
       ));
     }
     return listRows;
+  }
+
+  void challengeComplete() async{
+    print("Aqui ooooo");
+    _profile = json.decode(await AccessFile.readData())['profile'];
+    print(_profile);
+    setState(() {
+      _profile=_profile;
+      _profile["fullChallenge"]++;
+      AccessFile.map['profile']=_profile;
+      AccessFile.saveData();
+    });
   }
 
   @override
@@ -147,6 +162,8 @@ class _ChallengeRunState extends State<ChallengeRun> {
                             }
                             if (challenge["amountDay"] ==
                                 challenge["amountTotal"]) {
+                              challengeComplete();
+
                               Navigator.pop(context);
                               Navigator.push(
                                   context,

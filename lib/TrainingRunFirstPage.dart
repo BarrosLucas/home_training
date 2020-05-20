@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/rendering.dart';
 import 'package:hometraining/TrainingRunSecondPage.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:video_player/video_player.dart';
+import 'file.dart';
 
 
 class TrainingRunFirstPage extends StatefulWidget {
@@ -25,6 +27,7 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
   final String _title;
   int selectedIndex = 0;
   bool visible = false;
+  double calor = 0;
 
   var currentExercise;
   Stopwatch stopwatch = Stopwatch();
@@ -35,6 +38,26 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
   int second = 0;
   int series = 0;
   var key = GlobalKey();
+  Map<String,dynamic> _profile;
+
+
+  void completeProfile() async{
+    _profile = json.decode(await AccessFile.readData())['profile'];
+    setState(() {
+      _profile=_profile;
+    });
+  }
+
+  void sumCalories(int timeSeconds, var calPerSecond){
+    _profile['calories'] += calPerSecond*timeSeconds;
+    calor += calPerSecond*timeSeconds;
+    setState(() {
+      AccessFile.map['profile'] = _profile;
+      AccessFile.saveData();
+    });
+    print("Calories:");
+    print(_profile);
+  }
 
   void addToList(String time, String title){
     Map<String,String> map = Map();
@@ -54,6 +77,7 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
       stopwatch.stop();
     }
     addToList(TimerTextFormatter.format(timerSecond), exercisesOfModule[selectedIndex]['title']);
+    sumCalories((stopwatchSeconder.elapsedMilliseconds/1000).toInt(), exercisesOfModule[selectedIndex]['settings'][1]);
     if (selectedIndex < (exercisesOfModule.length - 1)) {
       setState(() {
         selectedIndex++;
@@ -62,7 +86,7 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
       });
     } else {
       Navigator.pop(context);
-      Navigator.push(context, MaterialPageRoute(builder: (context) => TrainingRunSecondPage(_title,listTraning)));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => TrainingRunSecondPage(_title,listTraning,calor)));
     }
   }
 
@@ -352,6 +376,7 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
   @override
   void initState() {
     super.initState();
+    completeProfile();
     setState(() {
       currentExercise = exercisesOfModule[selectedIndex];
     });
@@ -470,6 +495,8 @@ class _VideoState extends State<Video> {
 Widget generateProgressBarGeneral(int total, int current, Color background,
     Color progresssBar, double width, double height,
     {String leading, String trailing}) {
+  print("Total: $total");
+  print("Curre: $current");
   var percent = 100 * (current / total);
   return Padding(
     padding: EdgeInsets.all(15),
