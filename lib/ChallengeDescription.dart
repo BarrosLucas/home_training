@@ -89,7 +89,7 @@ class _ChallengeDescriptionState extends State<ChallengeDescription> {
                 child: Column(
                   children: <Widget>[
                     Video(
-                        'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4')
+                        challenge['link']??"")
                   ],
                   mainAxisAlignment: MainAxisAlignment.end,
                 ),

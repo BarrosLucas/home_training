@@ -82,7 +82,7 @@ class _ExercicesState extends State<Exercices> {
                   alignment: Alignment(0, 0),
                   child: new ListTile(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ExercisesRun(_exercises[index]['title'],_exercises[index]['settings'][0])));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ExercisesRun(_exercises[index]['title'],_exercises[index]['settings'][0],_exercises[index]['link'])));
                     },
                     title: Container(
                       padding: EdgeInsets.all(5),

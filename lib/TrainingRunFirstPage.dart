@@ -229,7 +229,7 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
                     ],
                   ),
                   child: Video(
-                      'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4'),
+                      currentExercise['link']),
                   margin: EdgeInsets.all(30),
                 ),
                 Row(

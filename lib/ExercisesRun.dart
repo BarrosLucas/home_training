@@ -9,9 +9,10 @@ import 'TrainingRunFirstPage.dart';
 class ExercisesRun extends StatefulWidget {
   final String _title;
   final int total;
-  ExercisesRun(this._title,this.total);
+  final String _link;
+  ExercisesRun(this._title,this.total,this._link);
   @override
-  _ExercisesRunState createState() => _ExercisesRunState(this._title,this.total);
+  _ExercisesRunState createState() => _ExercisesRunState(this._title,this.total,this._link);
 }
 
 class _ExercisesRunState extends State<ExercisesRun> {
@@ -20,7 +21,8 @@ class _ExercisesRunState extends State<ExercisesRun> {
 
   final String _title;
   final int total;
-  _ExercisesRunState(this._title,this.total);
+  final String _link;
+  _ExercisesRunState(this._title,this.total,this._link);
 
 
   Widget cronometer(TextStyle textStyle) {
@@ -112,8 +114,8 @@ class _ExercisesRunState extends State<ExercisesRun> {
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 10,horizontal: 30),
                 child: Column(children: <Widget>[
-                  Video(
-                      'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4')
+                  Video(this._link
+                      )
                 ],
                   mainAxisAlignment: MainAxisAlignment.end
                   ,),
