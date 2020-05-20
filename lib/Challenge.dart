@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'ChallengeDescription.dart';
+import 'ChallengeDone.dart';
 import 'ChallengeRun.dart';
 import 'file.dart';
 
@@ -93,13 +94,14 @@ class _ChallengeState extends State<Challenge> {
                   child: new ListTile(
                       onTap: () {
                         if(!(_challenges[index]['isIn'])){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ChallengeDescription(_challenges[index],index)));
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>ChallengeDescription(_challenges[index],index)));
                         }else{
-                          print("Ora ora");
-                          print(_challenges[index]);
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ChallengeRun(_challenges[index],index)));
-                        }
-                      },
+                          if(!finished(_challenges[index])){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>ChallengeRun(_challenges[index],index)));
+                          }else{
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>ChallengeDone(_challenges[index])));
+                          }
+                      }},
                       title: Container(
                         padding: EdgeInsets.all(5),
                         child: new Text(_challenges[index]['title'],
@@ -132,6 +134,17 @@ class _ChallengeState extends State<Challenge> {
           ],
         ));
   }
+
+  bool finished(Map<String,dynamic> challenge){
+    print("qnt: ${challenge['amountDay']}");
+    print("tot: ${challenge['amountTotal']}");
+    if(challenge["amountDay"] ==
+        challenge["amountTotal"]){
+      return true;
+    }
+    return false;
+  }
+
   bool getOut(String date){
     if(date.isEmpty){
       return false;

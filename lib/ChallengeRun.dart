@@ -151,7 +151,7 @@ class _ChallengeRunState extends State<ChallengeRun> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ChallengeDone()));
+                                      builder: (context) => ChallengeDone(challenge)));
                             }
                           });
                         },
@@ -187,16 +187,16 @@ class _ChallengeRunState extends State<ChallengeRun> {
                       margin: EdgeInsets.symmetric(vertical: 5),
                       child: RaisedButton(
                         onPressed: () {
-                            challenge["isIn"] = false;
-                            challenge["result"] = "win";
-                            challenge["lastDay"] = "";
-                            challenge["amountDay"] = 0;
+                          challenge["isIn"] = false;
+                          challenge["result"] = "win";
+                          challenge["lastDay"] = "";
+                          challenge["amountDay"] = 0;
 
-                            setState(() {
-                              AccessFile.map["challenge"][ind] = challenge;
-                              AccessFile.saveData();
-                            });
-                            print(AccessFile.map["challenge"]);
+                          setState(() {
+                            AccessFile.map["challenge"][ind] = challenge;
+                            AccessFile.saveData();
+                          });
+                          print(AccessFile.map["challenge"]);
 
                           Navigator.pop(context);
                         },

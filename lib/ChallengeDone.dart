@@ -5,11 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 class ChallengeDone extends StatefulWidget {
+  final Map<String, dynamic> challenge;
+  ChallengeDone(this.challenge);
   @override
-  _ChallengeDoneState createState() => _ChallengeDoneState();
+  _ChallengeDoneState createState() => _ChallengeDoneState(this.challenge);
 }
 
 class _ChallengeDoneState extends State<ChallengeDone> {
+  final Map<String,dynamic> challenge;
+  _ChallengeDoneState(this.challenge);
+
   var key = GlobalKey();
 
 
@@ -123,7 +128,7 @@ class _ChallengeDoneState extends State<ChallengeDone> {
               Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child:Text(
-                "Você concluiu o desafio de realizar 500 polichinelos por dia no decorrer de 10 dias consecutivos",
+                challenge['done'],
                 textAlign: TextAlign.center,style: TextStyle(fontSize: 16),
               )),
             )
