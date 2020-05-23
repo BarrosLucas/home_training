@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:hometraining/ChallengeDescription.dart';
 import 'package:hometraining/ChallengeDone.dart';
 import 'package:hometraining/file.dart';
 import 'package:intl/intl.dart';
@@ -54,6 +56,49 @@ class _ChallengeRunState extends State<ChallengeRun> {
         children: listExpa,
       ));
     }
+    listRows.add(
+      Row(
+        children: <Widget>[
+          Container(
+              margin: EdgeInsets.only(top: 15),
+              child: RaisedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (
+                      context) =>
+                      ChallengeDescription(
+                          challenge,ind)));
+                },
+                padding:
+                EdgeInsets.symmetric(vertical: 15, horizontal: 80),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                      child: Icon(
+                        Icons.remove_red_eye,
+                        color: Colors.white,
+                      ),
+                      padding: EdgeInsets.only(right: 10),
+                    ),
+                    Padding(
+                      child: Text(
+                        "DESCRIÇÃO",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      padding: EdgeInsets.only(left: 10),
+                    )
+                  ],
+                ),
+                color: Colors.blue,
+              ))
+        ],
+        mainAxisAlignment: MainAxisAlignment.center,
+      ),
+
+
+    );
+
     return listRows;
   }
 
@@ -115,9 +160,9 @@ class _ChallengeRunState extends State<ChallengeRun> {
               child: Container(),
             ),
             Expanded(
-                flex: 2,
+                flex: 4,
                 child: Padding(
-                  padding: EdgeInsets.only(right: 20, top: 40),
+                  padding: EdgeInsets.only(right: 20, top: 60),
                   child: Text(challenge['title'].toUpperCase(),
                       textAlign: TextAlign.right,
                       style: TextStyle(
@@ -247,6 +292,26 @@ class _ChallengeRunState extends State<ChallengeRun> {
         ))
       ]),
     );
+  }
+
+  @override
+  void initState() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp
+    ]);
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown
+    ]);
+    super.dispose();
   }
 
   bool todayCan(String date) {

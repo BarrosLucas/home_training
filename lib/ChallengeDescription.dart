@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hometraining/ChallengeRun.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'TrainingRunFirstPage.dart';
 import 'file.dart';
 
@@ -15,6 +16,19 @@ class ChallengeDescription extends StatefulWidget {
 }
 
 class _ChallengeDescriptionState extends State<ChallengeDescription> {
+  YoutubePlayerController _controller;
+
+  @override
+  void initState() {
+    _controller = YoutubePlayerController(
+      initialVideoId: YoutubePlayer.convertUrlToId(challenge['link']),
+      flags: YoutubePlayerFlags(
+        autoPlay: false,
+      ),
+    );
+    super.initState();
+  }
+
   Map<String, dynamic> challenge;
   int ind;
   _ChallengeDescriptionState(this.challenge,this.ind);
@@ -87,9 +101,17 @@ class _ChallengeDescriptionState extends State<ChallengeDescription> {
                         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
                         child: Column(
                           children: <Widget>[
+                            YoutubePlayer(
+                              key: ObjectKey(_controller),
+                              controller: _controller,
+                              showVideoProgressIndicator: true,
+                            ),
+                          ],
+
+                          /*children: <Widget>[
                             Video(
                                 challenge['link']??"")
-                          ],
+                          ],*/
                           mainAxisAlignment: MainAxisAlignment.end,
                         ),
                       ),
@@ -113,13 +135,10 @@ class _ChallengeDescriptionState extends State<ChallengeDescription> {
                               child: RaisedButton(
                                 onPressed: () {
                                   challenge['isIn'] = true;
-                                  print(challenge);
                                   setState(() {
                                     AccessFile.map['challenge'][ind] = challenge;
                                     AccessFile.saveData();
                                   });
-
-                                  print(AccessFile.map['challenge'][ind]);
                                   Navigator.pop(context);
                                   Navigator.push(
                                       context,

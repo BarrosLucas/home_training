@@ -9,31 +9,31 @@
           "desc": "MMI e Ombro",
           "exercises": [
             {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-              "title": "Corrida",
+              "link": "https://www.youtube.com/watch?v=oJR49sAkWkQ",
+              "title": "Polichinelo",
               "settings": [
-                1,
-                0.10
+                3,
+                0.1
               ]
             },
             {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-              "title": "Agac. Sumô",
+              "link": "https://www.youtube.com/watch?v=7YDr04Mk9V8",
+              "title": "Agacha.",
               "settings": [
                 3,
                 0.22
               ]
             },
             {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-              "title": "Agac. Stiff",
+              "link": "https://www.youtube.com/watch?v=Vm_AjALaJU8",
+              "title": "Agac. com Chute",
               "settings": [
                 3,
                 0.22
               ]
             },
             {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
+              "link": "https://www.youtube.com/watch?v=8mR4zjEE3lE",
               "title": "Afundo",
               "settings": [
                 3,
@@ -41,15 +41,7 @@
               ]
             },
             {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-              "title": "Avanço",
-              "settings": [
-                3,
-                0.22
-              ]
-            },
-            {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
+              "link": "https://www.youtube.com/watch?v=oMBB1l1ZQt0",
               "title": "Agac. na parede",
               "settings": [
                 3,
@@ -57,39 +49,63 @@
               ]
             },
             {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-              "title": "Coice para gluteos",
-              "settings": [
-                3,
-                0
-              ]
-            },
-            {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
+              "link": "https://www.youtube.com/watch?v=X8kD4NISxO4",
               "title": "Flexão de posterior",
               "settings": [
                 3,
-                0
+                0.12
               ]
             },
             {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-              "title": "Panturrilha em pé",
+              "link": "https://www.youtube.com/watch?v=wdTu9BQsCxY",
+              "title": "F. P. Pés juntos",
+              "settings": [
+                3,
+                0.12
+              ]
+            },
+            {
+              "link": "https://www.youtube.com/watch?v=E5KgA2pHDfs",
+              "title": "Extensão de Pés",
               "settings": [
                 3,
                 0
               ]
             },
             {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-              "title": "Des. em pé",
+              "link": "https://www.youtube.com/watch?v=U2sqhtRYMF0",
+              "title": "Extensão de Quadril",
+              "settings": [
+                3,
+                0.1
+              ]
+            },
+            {
+              "link": "https://www.youtube.com/watch?v=nVcEjuT75mc",
+              "title": "Ext. Quad. Conc.",
+              "settings": [
+                3,
+                0.1
+              ]
+            },
+            {
+              "link": "https://www.youtube.com/watch?v=sr5ueh5xN_Y",
+              "title": "Ext. Quad. Dobrado",
+              "settings": [
+                3,
+                0.1
+              ]
+            },
+            {
+              "link": "https://www.youtube.com/watch?v=7dcN3hed3Gw",
+              "title": "Lançamento Lateral",
               "settings": [
                 3,
                 0
               ]
             },
             {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
+              "link": "https://www.youtube.com/watch?v=lj114PlX_Jk",
               "title": "Elev. lateral",
               "settings": [
                 3,
@@ -97,7 +113,15 @@
               ]
             },
             {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
+              "link": "https://www.youtube.com/watch?v=P8lekbas2ig",
+              "title": "Elev. lat. Inclinado",
+              "settings": [
+                3,
+                0
+              ]
+            },
+            {
+              "link": "https://www.youtube.com/watch?v=V1BZ1_0oxe4",
               "title": "Elev. frontal",
               "settings": [
                 3,
@@ -105,10 +129,26 @@
               ]
             },
             {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
+              "link": "https://www.youtube.com/watch?v=PaW-N43kjSQ",
               "title": "ABS supra",
               "settings": [
-                3,
+                1,
+                0.16
+              ]
+            },
+            {
+              "link": "https://www.youtube.com/watch?v=LsKAie0v6Uc",
+              "title": "ABS em 4 tempos",
+              "settings": [
+                1,
+                0.16
+              ]
+            },
+            {
+              "link": "https://www.youtube.com/watch?v=uK1ueYROKig",
+              "title": "Prancha",
+              "settings": [
+                1,
                 0.16
               ]
             }
@@ -119,82 +159,58 @@
           "desc": "Costa e Bíceps",
           "exercises": [
             {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-              "title": "Pular corda",
+              "link": "https://www.youtube.com/watch?v=oJR49sAkWkQ",
+              "title": "Polichinelo",
               "settings": [
                 3,
+                0.1
+              ]
+            },
+            {
+              "link": "https://www.youtube.com/watch?v=Yxnd9KhnAFI",
+              "title": "Rosca Martelo ALt.",
+              "settings": [
+                3,
+                0
+              ]
+            },
+            {
+              "link": "https://www.youtube.com/watch?v=kZhR6K5oVys",
+              "title": "Rosca Conc. Alt.",
+              "settings": [
+                3,
+                0
+              ]
+            },
+            {
+              "link": "https://www.youtube.com/watch?v=6tp-Xw_DhY0",
+              "title": "Rosca Inversa",
+              "settings": [
+                3,
+                0
+              ]
+            },
+            {
+              "link": "https://www.youtube.com/watch?v=u-34VQPWpgs",
+              "title": "Prancha Lateral",
+              "settings": [
+                1,
                 0.16
               ]
             },
             {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-              "title": "Remada sup.",
+              "link": "https://www.youtube.com/watch?v=Nin-YgqJMcM",
+              "title": "Pr. Lat. Estática",
               "settings": [
-                3,
-                0
+                1,
+                0.16
               ]
             },
             {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-              "title": "Pull over",
+              "link": "https://www.youtube.com/watch?v=o-1jAL_y1Ek",
+              "title": "ABS Alternada",
               "settings": [
-                3,
-                0
-              ]
-            },
-            {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-              "title": "Remada",
-              "settings": [
-                3,
-                0
-              ]
-            },
-            {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-              "title": "Rosca dir.",
-              "settings": [
-                3,
-                0
-              ]
-            },
-            {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-              "title": "Rosca inversa",
-              "settings": [
-                3,
-                0
-              ]
-            },
-            {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-              "title": "Rosca unil.",
-              "settings": [
-                3,
-                0
-              ]
-            },
-            {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-              "title": "Rosca alter.",
-              "settings": [
-                3,
-                0
-              ]
-            },
-            {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-              "title": "Rosca martelo",
-              "settings": [
-                3,
-                0
-              ]
-            },
-            {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-              "title": "ABS remador",
-              "settings": [
-                3,
+                1,
                 0.16
               ]
             }
@@ -205,67 +221,115 @@
           "desc": "Peito e Tríceps",
           "exercises": [
             {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
+              "link": "https://www.youtube.com/watch?v=oJR49sAkWkQ",
               "title": "Polichinelo",
               "settings": [
                 3,
-                0.22
+                0.1
               ]
             },
             {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-              "title": "Flexão",
+              "link": "https://www.youtube.com/watch?v=KJgBotMpj9c",
+              "title": "Flexão de Braços",
+              "settings": [
+                3,
+                0.05
+              ]
+            },
+            {
+              "link": "https://www.youtube.com/watch?v=Xi6lJYursVo",
+              "title": "Flexão Hindu",
+              "settings": [
+                3,
+                0.05
+              ]
+            },
+            {
+              "link": "https://www.youtube.com/watch?v=VdJlR2jAy5A",
+              "title": "Flexão \"Atlante\"",
+              "settings": [
+                3,
+                0.05
+              ]
+            },
+            {
+              "link": "https://www.youtube.com/watch?v=uI5ngLOwdZo",
+              "title": "Flexão em T",
+              "settings": [
+                3,
+                0.05
+              ]
+            },
+            {
+              "link": "https://www.youtube.com/watch?v=74G6kn0vjPQ",
+              "title": "Flex. mãos fechadas",
+              "settings": [
+                3,
+                0.05
+              ]
+            },
+            {
+              "link": "https://www.youtube.com/watch?v=BMiBEPtmHMw",
+              "title": "Flex. no banco",
+              "settings": [
+                3,
+                0.05
+              ]
+            },
+            {
+              "link": "https://www.youtube.com/watch?v=GM21qkns-Ao",
+              "title": "Tríceps Banco",
               "settings": [
                 3,
                 0
               ]
             },
             {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-              "title": "Voador unil.",
+              "link": "https://www.youtube.com/watch?v=QOj3e-BKFs4",
+              "title": "Tríceps Francês",
               "settings": [
                 3,
                 0
               ]
             },
             {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-              "title": "Crucifixo unil.",
+              "link": "https://www.youtube.com/watch?v=9olc3k6C_g4",
+              "title": "Tcps. dois bancos",
               "settings": [
                 3,
                 0
               ]
             },
             {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-              "title": "Tríceps testa",
+              "link": "https://www.youtube.com/watch?v=JEYJ6MHwM6A",
+              "title": "Extensão de Antebraços",
               "settings": [
                 3,
                 0
               ]
             },
             {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-              "title": "Tríceps francês",
+              "link": "https://www.youtube.com/watch?v=KyzKAd5d1-8",
+              "title": "ABS",
               "settings": [
-                3,
-                0
+                1,
+                0.16
               ]
             },
             {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-              "title": "Tríceps afun.",
+              "link": "https://www.youtube.com/watch?v=PaW-N43kjSQ",
+              "title": "ABS supra",
               "settings": [
-                3,
-                0
+                1,
+                0.16
               ]
             },
             {
-              "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-              "title": "Prancha",
+              "link": "https://www.youtube.com/watch?v=LsKAie0v6Uc",
+              "title": "ABS em 4 tempos",
               "settings": [
-                3,
-                0
+                1,
+                0.16
               ]
             }
           ]
@@ -275,7 +339,7 @@
   ],
   "challenge": [
     {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
+      "link": "https://www.youtube.com/watch?v=KJgBotMpj9c",
       "title": "1000 Flexões",
       "desc": "Faça 100 flexões por dia no decorrer de 10 dias",
       "done": "Parabéns! Você realizou as 1000 flexões em 10 dias!",
@@ -286,7 +350,7 @@
       "amountTotal": 10
     },
     {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
+      "link": "https://www.youtube.com/watch?v=KyzKAd5d1-8",
       "title": "1000 Abdominais",
       "desc": "Faça 100 abdominais por dia no decorrer de 10 dias",
       "done": "Parabéns! Você realizou as 1000 abdominais em 10 dias!",
@@ -297,7 +361,7 @@
       "amountTotal": 10
     },
     {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
+      "link": "https://www.youtube.com/watch?v=oJR49sAkWkQ",
       "title": "5000 Polichinelos",
       "desc": "Faça 500 polichinelos por dia no decorrer de 10 dias",
       "done": "Parabéns! Você realizou as 5000 polichinelos em 10 dias!",
@@ -308,9 +372,9 @@
       "amountTotal": 10
     },
     {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-      "title": "100 KM",
-      "desc": "Corra 10 km por dia em 10 dias",
+      "link": "https://www.youtube.com/watch?v=uK1ueYROKig",
+      "title": "100 minutos de prancha",
+      "desc": "Faça 10 minutos de prancha por dia em 10 dias",
       "done": "Parabéns! Você correu 100 km em 10 dias!",
       "isIn": false,
       "lastDay": "",
@@ -321,31 +385,23 @@
   ],
   "exercises": [
     {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-      "title": "Corrida",
-      "settings": [
-        1,
-        0.10
-      ]
-    },
-    {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-      "title": "Agac. Sumô",
+      "link": "https://www.youtube.com/watch?v=7YDr04Mk9V8",
+      "title": "Agach.",
       "settings": [
         3,
         0.22
       ]
     },
     {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-      "title": "Agac. Stiff",
+      "link": "https://www.youtube.com/watch?v=Vm_AjALaJU8",
+      "title": "Agac. com Chute",
       "settings": [
         3,
         0.22
       ]
     },
     {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
+      "link": "https://www.youtube.com/watch?v=8mR4zjEE3lE",
       "title": "Afundo",
       "settings": [
         3,
@@ -353,15 +409,15 @@
       ]
     },
     {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-      "title": "Avanço",
+      "link": "https://www.youtube.com/watch?v=o-1jAL_y1Ek",
+      "title": "ABS Alternada",
       "settings": [
-        3,
-        0.22
+        1,
+        0.16
       ]
     },
     {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
+      "link": "https://www.youtube.com/watch?v=oMBB1l1ZQt0",
       "title": "Agac. na parede",
       "settings": [
         3,
@@ -369,39 +425,39 @@
       ]
     },
     {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-      "title": "Coice para gluteos",
+      "link": "https://www.youtube.com/watch?v=KyzKAd5d1-8",
+      "title": "ABS",
       "settings": [
-        3,
-        0
+        1,
+        0.16
       ]
     },
     {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
+      "link": "https://www.youtube.com/watch?v=X8kD4NISxO4",
       "title": "Flexão de posterior",
       "settings": [
         3,
-        0
+        0.12
       ]
     },
     {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-      "title": "Panturrilha em pé",
+      "link": "https://www.youtube.com/watch?v=wdTu9BQsCxY",
+      "title": "F. P. Pés juntos",
+      "settings": [
+        3,
+        0.12
+      ]
+    },
+    {
+      "link": "https://www.youtube.com/watch?v=E5KgA2pHDfs",
+      "title": "Extensão de Pés",
       "settings": [
         3,
         0
       ]
     },
     {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-      "title": "Des. em pé",
-      "settings": [
-        3,
-        0
-      ]
-    },
-    {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
+      "link": "https://www.youtube.com/watch?v=lj114PlX_Jk",
       "title": "Elev. lateral",
       "settings": [
         3,
@@ -409,7 +465,15 @@
       ]
     },
     {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
+      "link": "https://www.youtube.com/watch?v=P8lekbas2ig",
+      "title": "Elev. lat. Inclinado",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "link": "https://www.youtube.com/watch?v=V1BZ1_0oxe4",
       "title": "Elev. frontal",
       "settings": [
         3,
@@ -417,157 +481,214 @@
       ]
     },
     {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
+      "link": "https://www.youtube.com/watch?v=PaW-N43kjSQ",
       "title": "ABS supra",
       "settings": [
-        3,
+        1,
         0.16
       ]
     },
     {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-      "title": "Pular corda",
+      "link": "https://www.youtube.com/watch?v=LsKAie0v6Uc",
+      "title": "ABS em 4 tempos",
       "settings": [
-        3,
+        1,
         0.16
       ]
     },
     {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-      "title": "Remada sup.",
-      "settings": [
-        3,
-        0
-      ]
-    },
-    {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-      "title": "Pull over",
-      "settings": [
-        3,
-        0
-      ]
-    },
-    {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-      "title": "Remada",
-      "settings": [
-        3,
-        0
-      ]
-    },
-    {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-      "title": "Rosca dir.",
-      "settings": [
-        3,
-        0
-      ]
-    },
-    {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-      "title": "Rosca inversa",
-      "settings": [
-        3,
-        0
-      ]
-    },
-    {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-      "title": "Rosca unil.",
-      "settings": [
-        3,
-        0
-      ]
-    },
-    {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-      "title": "Rosca alter.",
-      "settings": [
-        3,
-        0
-      ]
-    },
-    {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-      "title": "Rosca martelo",
-      "settings": [
-        3,
-        0
-      ]
-    },
-    {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-      "title": "ABS remador",
+      "link": "https://www.youtube.com/watch?v=i1xvpUkpo48",
+      "title": "Burpees com Salto",
       "settings": [
         3,
         0.16
       ]
     },
     {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
+      "link": "https://www.youtube.com/watch?v=U2sqhtRYMF0",
+      "title": "Extensão de Quadril",
+      "settings": [
+        3,
+        0.1
+      ]
+    },
+    {
+      "link": "https://www.youtube.com/watch?v=nVcEjuT75mc",
+      "title": "Ext. Quad. Conc.",
+      "settings": [
+        3,
+        0.1
+      ]
+    },
+    {
+      "link": "https://www.youtube.com/watch?v=sr5ueh5xN_Y",
+      "title": "Ext. Quad. Dobrado",
+      "settings": [
+        3,
+        0.1
+      ]
+    },
+    {
+      "link": "https://www.youtube.com/watch?v=KJgBotMpj9c",
+      "title": "Flexão de Braços",
+      "settings": [
+        3,
+        0.05
+      ]
+    },
+    {
+      "link": "https://www.youtube.com/watch?v=Xi6lJYursVo",
+      "title": "Flexão Hindu",
+      "settings": [
+        3,
+        0.05
+      ]
+    },
+    {
+      "link": "https://www.youtube.com/watch?v=VdJlR2jAy5A",
+      "title": "Flexão \"Atlante\"",
+      "settings": [
+        3,
+        0.05
+      ]
+    },
+    {
+      "link": "https://www.youtube.com/watch?v=uI5ngLOwdZo",
+      "title": "Flexão em T",
+      "settings": [
+        3,
+        0.05
+      ]
+    },
+    {
+      "link": "https://www.youtube.com/watch?v=74G6kn0vjPQ",
+      "title": "Flex. mãos fechadas",
+      "settings": [
+        3,
+        0.05
+      ]
+    },
+    {
+      "link": "https://www.youtube.com/watch?v=BMiBEPtmHMw",
+      "title": "Flex. no banco",
+      "settings": [
+        3,
+        0.05
+      ]
+    },
+    {
+      "link": "https://www.youtube.com/watch?v=7dcN3hed3Gw",
+      "title": "Lançamento Lateral",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "link": "https://www.youtube.com/watch?v=oJR49sAkWkQ",
       "title": "Polichinelo",
       "settings": [
         3,
-        0.22
+        0.1
       ]
     },
     {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-      "title": "Flexão",
+      "link": "https://www.youtube.com/watch?v=kHnAas-45Pk",
+      "title": "Flexão de Joelhos",
       "settings": [
         3,
-        0
+        0.05
       ]
     },
     {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-      "title": "Voador unil.",
-      "settings": [
-        3,
-        0
-      ]
-    },
-    {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-      "title": "Crucifixo unil.",
-      "settings": [
-        3,
-        0
-      ]
-    },
-    {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-      "title": "Tríceps testa",
-      "settings": [
-        3,
-        0
-      ]
-    },
-    {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-      "title": "Tríceps francês",
-      "settings": [
-        3,
-        0
-      ]
-    },
-    {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-      "title": "Tríceps afun.",
-      "settings": [
-        3,
-        0
-      ]
-    },
-    {
-      "link": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
+      "link": "https://www.youtube.com/watch?v=uK1ueYROKig",
       "title": "Prancha",
+      "settings": [
+        1,
+        0.16
+      ]
+    },
+    {
+      "link": "https://www.youtube.com/watch?v=u-34VQPWpgs",
+      "title": "Prancha Lateral",
+      "settings": [
+        1,
+        0.16
+      ]
+    },
+    {
+      "link": "https://www.youtube.com/watch?v=Nin-YgqJMcM",
+      "title": "Pr. Lat. Estática",
+      "settings": [
+        1,
+        0.16
+      ]
+    },
+    {
+      "link": "https://www.youtube.com/watch?v=Yxnd9KhnAFI",
+      "title": "Rosca Martelo ALt.",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "link": "https://www.youtube.com/watch?v=kZhR6K5oVys",
+      "title": "Rosca Concent Alt.",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "link": "https://www.youtube.com/watch?v=6tp-Xw_DhY0",
+      "title": "Rosca Inversa",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "link": "https://www.youtube.com/watch?v=-l9Xk8M1dNg",
+      "title": "Supino com halteres",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "link": "https://www.youtube.com/watch?v=GM21qkns-Ao",
+      "title": "Tríceps Banco",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "link": "https://www.youtube.com/watch?v=QOj3e-BKFs4",
+      "title": "Tríceps Francês",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "link": "https://www.youtube.com/watch?v=9olc3k6C_g4",
+      "title": "Tcps. dois bancos",
+      "settings": [
+        3,
+        0
+      ]
+    },
+    {
+      "link": "https://www.youtube.com/watch?v=JEYJ6MHwM6A",
+      "title": "Extensão de Antebraços",
       "settings": [
         3,
         0
       ]
     }
+
   ],
   "profile": {
     "name": "",

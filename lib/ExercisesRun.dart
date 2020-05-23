@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import 'TrainingRunFirstPage.dart';
 
@@ -19,6 +20,7 @@ class _ExercisesRunState extends State<ExercisesRun> {
   Stopwatch stopwatch = Stopwatch();
   int current = 0;
 
+  YoutubePlayerController _controller;
   final String _title;
   final int total;
   final String _link;
@@ -95,7 +97,7 @@ class _ExercisesRunState extends State<ExercisesRun> {
                             child: Container(),
                           ),
                           Expanded(
-                              flex: 2,
+                              flex: 4,
                               child: Padding(
                                 padding: EdgeInsets.only(right: 20, top: 40),
                                 child: Text(_title.toUpperCase(),
@@ -115,7 +117,11 @@ class _ExercisesRunState extends State<ExercisesRun> {
                 SingleChildScrollView(
                  child: Column(
                    children: <Widget>[
-                     Video(this._link),
+                     YoutubePlayer(
+                       key: ObjectKey(_controller),
+                       controller: _controller,
+                       showVideoProgressIndicator: true,
+                     ),
                      Row(children:<Widget>[Text(
                        _title,style:TextStyle(
                          fontSize: 24
@@ -178,6 +184,17 @@ class _ExercisesRunState extends State<ExercisesRun> {
         ],
       ),
     );
+  }
+
+  @override
+  void initState() {
+    _controller = YoutubePlayerController(
+      initialVideoId: YoutubePlayer.convertUrlToId(this._link),
+      flags: YoutubePlayerFlags(
+        autoPlay: false,
+      ),
+    );
+    super.initState();
   }
 }
 Widget generateProgressBarGeneral(int total, int current, Color background,

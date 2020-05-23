@@ -19,7 +19,6 @@ class _TrainingModulesState extends State<TrainingModules> {
   @override
   void initState() {
     super.initState();
-    print(_modules);
   }
 
   @override

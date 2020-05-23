@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:hometraining/TrainingRunSecondPage.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'package:video_player/video_player.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'file.dart';
 
 class TrainingRunFirstPage extends StatefulWidget {
@@ -26,12 +26,12 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
   int selectedIndex = 0;
   bool visible = false;
   double calor = 0;
-
   var currentExercise;
   Stopwatch stopwatch = Stopwatch();
   Stopwatch stopwatchSeconder = Stopwatch();
   int page = 0;
   List<Map<dynamic, dynamic>> listTraning = [];
+  List<YoutubePlayerController> _controllers;
 
   _TrainingRunFirstPageState(this._title, this.exercisesOfModule);
 
@@ -54,8 +54,6 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
       AccessFile.map['profile'] = _profile;
       AccessFile.saveData();
     });
-    print("Calories:");
-    print(_profile);
   }
 
   void addToList(String time, String title) {
@@ -114,7 +112,6 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
           visible = false;
           selectedIndex = index;
         });
-        print("Item clicado: ${exercisesOfModule[index]['title']}");
       },
     );
   }
@@ -221,20 +218,8 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
                   ),
                 ),
                 Container(
-                  decoration: new BoxDecoration(
-                    color: new Color(0xCCFFFFFF),
-                    shape: BoxShape.rectangle,
-                    borderRadius: new BorderRadius.circular(8.0),
-                    boxShadow: <BoxShadow>[
-                      new BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 10.0,
-                        offset: new Offset(0.0, 10.0),
-                      ),
-                    ],
-                  ),
-                  child: Video(currentExercise['link']),
-                  margin: EdgeInsets.all(30),
+                  child: generateListVideo(),
+                  margin: EdgeInsets.only(bottom: 30,left: 30, right:30),
                 ),
                 Row(
                   children: <Widget>[
@@ -268,7 +253,6 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
                         onTap: () {
                           setState(() {
                             visible = true;
-                            print("Clicado");
                           });
                         },
                       ),
@@ -337,8 +321,6 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
                             ),
                             onPressed: () {
                               setState(() {
-                                print(
-                                    "isRunning: ${stopwatchSeconder.isRunning}");
                                 if (stopwatchSeconder.isRunning) {
                                   stopwatchSeconder.stop();
                                   stopwatch.stop();
@@ -381,9 +363,49 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
     );
   }
 
+  Widget generateListVideo(){
+    return ListView.builder(
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        return Visibility(
+            visible: (selectedIndex == index) ? true : false,
+            child: YoutubePlayer(
+              key: ObjectKey(_controllers[index]),
+              controller: _controllers[index],
+              showVideoProgressIndicator: true,
+            ));
+      },
+      itemCount: _controllers.length,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return pageOne();
+  }
+
+  List<String> generateIDVideos() {
+    List<String> list = [];
+    for (var i = 0; i < exercisesOfModule.length; i++) {
+      list.add(YoutubePlayer.convertUrlToId(exercisesOfModule[i]['link']));
+    }
+    return list;
+  }
+
+  List<YoutubePlayerController> generateControllers() {
+    List<YoutubePlayerController> list = [];
+    list = generateIDVideos()
+        .map<YoutubePlayerController>(
+          (videoId) => YoutubePlayerController(
+            initialVideoId: videoId,
+            flags: YoutubePlayerFlags(
+              autoPlay: false,
+            ),
+          ),
+        )
+        .toList();
+    return list;
   }
 
   @override
@@ -393,7 +415,17 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
     setState(() {
       currentExercise = exercisesOfModule[selectedIndex];
     });
-    print("Teste: ");
+
+    _controllers = generateIDVideos()
+        .map<YoutubePlayerController>(
+          (videoId) => YoutubePlayerController(
+            initialVideoId: videoId,
+            flags: YoutubePlayerFlags(
+              autoPlay: false,
+            ),
+          ),
+        )
+        .toList();
   }
 }
 
@@ -410,153 +442,9 @@ class TimerTextFormatter {
   }
 }
 
-class Video extends StatefulWidget {
-  final String linkVideo;
-
-  Video(this.linkVideo);
-
-  @override
-  _VideoState createState() => _VideoState(linkVideo);
-}
-
-class _VideoState extends State<Video> {
-  VideoPlayerController _controller;
-  Future<void> _initializeVideoPlayerFuture;
-  final String linkVideo;
-
-  bool errorInternet = false;
-
-  _VideoState(this.linkVideo);
-
-  @override
-  void initState() {
-    _controller = VideoPlayerController.network(
-      linkVideo,
-    );
-    _initializeVideoPlayerFuture = _controller.initialize();
-    _controller.setLooping(true);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    Widget element;
-    if (errorInternet) {
-      element = Container(
-        padding: EdgeInsets.all(30),
-        alignment: Alignment(0, 0),
-        decoration: new BoxDecoration(
-          color: new Color(0xCCFFFFFF),
-          shape: BoxShape.rectangle,
-          borderRadius: new BorderRadius.circular(8.0),
-          boxShadow: <BoxShadow>[
-            new BoxShadow(
-              color: Colors.black12,
-              blurRadius: 10.0,
-              offset: new Offset(0.0, 10.0),
-            ),
-          ],
-        ),
-        child: Stack(
-          children: <Widget>[
-            Container(
-                child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Image.asset(
-                      "assets/images/sad.png",
-                      width: 30,
-                    ),
-                    Text("Falha na conexão")
-                  ],
-                )
-              ],
-            ))
-          ],
-        ),
-      );
-    } else {
-      element = Stack(
-        children: <Widget>[
-          Container(
-            child: FutureBuilder(
-              future: _initializeVideoPlayerFuture,
-              builder: (context, snapshot) {
-                errorInternet = false;
-                if (snapshot.connectionState == ConnectionState.done) {
-                  if (snapshot.hasError) {
-                    errorInternet = true;
-                  }
-                  // If the VideoPlayerController has finished initialization, use
-                  // the data it provides to limit the aspect ratio of the VideoPlayer.
-                  return AspectRatio(
-                      aspectRatio: _controller.value.aspectRatio,
-                      // Use the VideoPlayer widget to display the video.
-                      child: Stack(
-                        children: <Widget>[
-                          VideoPlayer(_controller),
-                          Container(
-                            alignment: Alignment.bottomRight,
-                            child: Container(
-                              width: 45,
-                              height: 45,
-                              color: new Color(0xAAFFFFFF),
-                              child: Center(
-                                  child: IconButton(
-                                onPressed: () {
-                                  print("CLICOU");
-                                  setState(() {
-                                    if (_controller.value.isPlaying) {
-                                      _controller.pause();
-                                    } else {
-                                      _controller.play();
-                                    }
-                                  });
-                                },
-                                alignment: Alignment.center,
-                                icon: Icon(
-                                  (_controller.value.isPlaying)
-                                      ? Icons.pause_circle_outline
-                                      : Icons.play_circle_outline,
-                                  color: Colors.black,
-                                  size: 35,
-                                ),
-                              )),
-                            ),
-                          ),
-                        ],
-                      ));
-                } else {
-                  // If the VideoPlayerController is still initializing, show a
-                  // loading spinner.
-                  return Center(child: CircularProgressIndicator());
-                }
-              },
-            ),
-          ),
-        ],
-      );
-    }
-
-    return element;
-  }
-}
-
 Widget generateProgressBarGeneral(int total, int current, Color background,
     Color progresssBar, double width, double height,
     {String leading, String trailing}) {
-  print("Total: $total");
-  print("Curre: $current");
   var percent = 100 * (current / total);
   return Padding(
     padding: EdgeInsets.all(15),
