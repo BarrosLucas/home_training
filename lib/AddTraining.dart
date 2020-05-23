@@ -24,6 +24,7 @@ class _AddTrainingState extends State<AddTraining> {
     _training = json.decode(await AccessFile.readData())['training'];
     setState(() {
       _training=_training;
+      AddTrainingFirstPage.treining = AddTrainingFirstPage.treining;
     });
 
   }
@@ -149,6 +150,9 @@ class _AddTrainingState extends State<AddTraining> {
 
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      AddTrainingFirstPage.treining = AddTrainingFirstPage.treining;
+    });
     return Scaffold(
       body: Container(
         color: Colors.grey[200],
@@ -256,6 +260,7 @@ class _AddTrainingState extends State<AddTraining> {
 }
 
 Widget setPage(int index) {
+  print("Uasfas");
   switch (index) {
     case 1:
       return AddTrainingSecondPage();

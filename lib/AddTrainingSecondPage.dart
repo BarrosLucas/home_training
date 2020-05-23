@@ -10,8 +10,6 @@ class AddTrainingSecondPage extends StatefulWidget {
 
 class _AddTrainingSecondPageState extends State<AddTrainingSecondPage> {
 
-
-
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -21,7 +19,7 @@ class _AddTrainingSecondPageState extends State<AddTrainingSecondPage> {
               alignment: Alignment.topRight,
               child: Padding(
                 padding: EdgeInsets.only(right: 20, top: 60),
-                child: Text("TREINOS",
+                child: Text("NOVO\nTREINO",
                     textAlign: TextAlign.right,
                     style: TextStyle(
                         color: Colors.grey,

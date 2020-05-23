@@ -53,6 +53,7 @@ class _ChallengeState extends State<Challenge> {
       ),
     ]);
   }
+
   Widget generateRow(context, index) {
     if(_challenges[index]["isIn"]){
       if(getOut(_challenges[index]["lastDay"])){
@@ -92,12 +93,18 @@ class _ChallengeState extends State<Challenge> {
                   padding: EdgeInsets.only(left: 40),
                   alignment: Alignment(0, 0),
                   child: new ListTile(
-                      onTap: () {
+                      onTap: () async{
                         if(!(_challenges[index]['isIn'])){
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>ChallengeDescription(_challenges[index],index)));
+                            await Navigator.push(context, MaterialPageRoute(builder: (context)=>ChallengeDescription(_challenges[index],index)));
+                            setState(() {
+
+                            });
                         }else{
                           if(!finished(_challenges[index])){
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>ChallengeRun(_challenges[index],index)));
+                            await Navigator.push(context, MaterialPageRoute(builder: (context)=>ChallengeRun(_challenges[index],index)));
+                            setState(() {
+
+                            });
                           }else{
                             Navigator.push(context, MaterialPageRoute(builder: (context)=>ChallengeDone(_challenges[index])));
                           }

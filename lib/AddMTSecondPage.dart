@@ -67,7 +67,7 @@ class _AddModuleTrainingSecondPageState
                 alignment: Alignment.topRight,
                 child: Padding(
                   padding: EdgeInsets.only(right: 20, top: 60),
-                  child: Text("TREINOS",
+                  child: Text("NOVO\nMÓDULO",
                       textAlign: TextAlign.right,
                       style: TextStyle(
                           color: Colors.grey,

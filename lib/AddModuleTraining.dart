@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hometraining/AddMTFirstPage.dart';
 import 'package:hometraining/AddMTSecondPage.dart';
 import 'package:hometraining/file.dart';
+import 'AddTraining.dart';
 import 'AddTrainingFirstPage.dart';
 
 class AddModuleTraining extends StatefulWidget {
@@ -130,7 +131,7 @@ class _AddModuleTrainingState extends State<AddModuleTraining> {
                       AddModuleTrainingFirstPage.descController.text = "";
                       AddModuleTrainingSecondPage.zeroSecondList();
                     });
-                    Navigator.pop(context);
+                    Navigator.pop(context,AddTrainingFirstPage.treining);
                   }
                 },
                 color: Colors.green,

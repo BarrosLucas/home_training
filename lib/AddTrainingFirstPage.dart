@@ -19,26 +19,26 @@ class _AddTrainingFirstPageState extends State<AddTrainingFirstPage> {
   Widget build(BuildContext context) {
     return
       Expanded(
-        child:
-      Column(children: <Widget>[
-      Align(
-          alignment: Alignment.topRight,
-          child: Padding(
-            padding: EdgeInsets.only(right: 20, top: 60),
-            child: Text("TREINOS",
-                textAlign: TextAlign.right,
-                style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold)),
-          )),
-      Expanded(
-        child: Container(
-          child: ListView.builder(
-              itemCount: AddTrainingFirstPage.treining.length + 1, itemBuilder: generateRow),
-        ),
-      ),
-    ]));
+          child:
+          Column(children: <Widget>[
+            Align(
+                alignment: Alignment.topRight,
+                child: Padding(
+                  padding: EdgeInsets.only(right: 20, top: 60),
+                  child: Text("NOVO\nTREINO",
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold)),
+                )),
+            Expanded(
+              child: Container(
+                child: ListView.builder(
+                    itemCount: AddTrainingFirstPage.treining.length + 1, itemBuilder: generateRow),
+              ),
+            ),
+          ]));
   }
 
 
@@ -131,8 +131,13 @@ class _AddTrainingFirstPageState extends State<AddTrainingFirstPage> {
         child: Container(
             alignment: Alignment(0, 0),
             child: new ListTile(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => AddModuleTraining(this.widget)));
+              onTap: () async{
+                final result = await Navigator.push(context, MaterialPageRoute(builder: (context) => AddModuleTraining(this.widget)));
+                if(result!= null){
+                  setState(() {
+                    AddTrainingFirstPage.treining = result;
+                  });
+                }
               },
               title: Container(
                   padding: EdgeInsets.all(5),
