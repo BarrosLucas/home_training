@@ -27,7 +27,7 @@ class _AddTrainingSecondPageState extends State<AddTrainingSecondPage> {
                         fontWeight: FontWeight.bold)),
               )),
           Expanded(
-            child: Column(
+            child: Center(child: SingleChildScrollView(child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
@@ -61,7 +61,7 @@ class _AddTrainingSecondPageState extends State<AddTrainingSecondPage> {
                   ),)
 
                 ],
-              ),
+              ))),
 
           ),
         ]));

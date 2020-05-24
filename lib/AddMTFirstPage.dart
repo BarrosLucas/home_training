@@ -28,7 +28,7 @@ class _AddModuleTrainingFirstPageState extends State<AddModuleTrainingFirstPage>
                         fontWeight: FontWeight.bold)),
               )),
           Expanded(
-            child: Column(
+            child: Center( child: SingleChildScrollView(child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -62,7 +62,7 @@ class _AddModuleTrainingFirstPageState extends State<AddModuleTrainingFirstPage>
                   ),)
 
               ],
-            ),
+            ))),
 
           ),
         ]));
