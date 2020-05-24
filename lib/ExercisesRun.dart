@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:screen/screen.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import 'TrainingRunFirstPage.dart';
@@ -187,7 +188,14 @@ class _ExercisesRunState extends State<ExercisesRun> {
   }
 
   @override
+  void dispose() {
+    Screen.keepOn(false);
+    super.dispose();
+  }
+
+  @override
   void initState() {
+    Screen.keepOn(true);
     _controller = YoutubePlayerController(
       initialVideoId: YoutubePlayer.convertUrlToId(this._link),
       flags: YoutubePlayerFlags(

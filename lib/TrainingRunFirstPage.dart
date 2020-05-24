@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:hometraining/TrainingRunSecondPage.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:screen/screen.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'file.dart';
 
@@ -363,6 +364,12 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
     );
   }
 
+  @override
+  void dispose() {
+    Screen.keepOn(false);
+    super.dispose();
+  }
+
   Widget generateListVideo(){
     return ListView.builder(
       scrollDirection: Axis.vertical,
@@ -412,6 +419,7 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
   void initState() {
     super.initState();
     completeProfile();
+    Screen.keepOn(true);
     setState(() {
       currentExercise = exercisesOfModule[selectedIndex];
     });
