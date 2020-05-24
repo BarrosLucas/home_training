@@ -17,8 +17,6 @@ class Challenge extends StatefulWidget {
 class _ChallengeState extends State<Challenge> {
   List _challenges = [];
   void completeChallenge() async{
-    print("Uafa");
-    print(json.decode(await AccessFile.readData())['challenge']);
     _challenges = json.decode(await AccessFile.readData())['challenge'];
     setState(() {
       _challenges=_challenges;
@@ -143,8 +141,6 @@ class _ChallengeState extends State<Challenge> {
   }
 
   bool finished(Map<String,dynamic> challenge){
-    print("qnt: ${challenge['amountDay']}");
-    print("tot: ${challenge['amountTotal']}");
     if(challenge["amountDay"] ==
         challenge["amountTotal"]){
       return true;

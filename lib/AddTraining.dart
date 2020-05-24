@@ -260,7 +260,6 @@ class _AddTrainingState extends State<AddTraining> {
 }
 
 Widget setPage(int index) {
-  print("Uasfas");
   switch (index) {
     case 1:
       return AddTrainingSecondPage();

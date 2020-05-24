@@ -25,7 +25,6 @@ class _ProfileState extends State<Profile> {
       challengesController.text = "${_profile['fullChallenge']}";
       calories=(_profile['calories']).toDouble();
     });
-    print(_profile['calories']);
   }
 
   @override

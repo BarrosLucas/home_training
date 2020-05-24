@@ -103,9 +103,7 @@ class _ChallengeRunState extends State<ChallengeRun> {
   }
 
   void challengeComplete() async{
-    print("Aqui ooooo");
     _profile = json.decode(await AccessFile.readData())['profile'];
-    print(_profile);
     setState(() {
       _profile=_profile;
       _profile["fullChallenge"]++;
@@ -192,9 +190,7 @@ class _ChallengeRunState extends State<ChallengeRun> {
                           setState(() {
                             if (challenge["amountDay"] <
                                 challenge["amountTotal"]) {
-                              print("Aqui 1");
                               if (todayCan(challenge['lastDay'])) {
-                                print("Aqui 2");
                                 challenge["amountDay"]++;
                                 challenge["lastDay"] =
                                     new DateFormat("yyyy-MM-dd")
@@ -258,7 +254,6 @@ class _ChallengeRunState extends State<ChallengeRun> {
                             AccessFile.map["challenge"][ind] = challenge;
                             AccessFile.saveData();
                           });
-                          print(AccessFile.map["challenge"]);
 
                           Navigator.pop(context);
                         },
@@ -315,7 +310,6 @@ class _ChallengeRunState extends State<ChallengeRun> {
   }
 
   bool todayCan(String date) {
-    print(date);
     if (date.isEmpty) {
       return true;
     } else {

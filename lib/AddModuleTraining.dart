@@ -24,7 +24,6 @@ class _AddModuleTrainingState extends State<AddModuleTraining> {
     setState(() {
       _exercises=_exercises;
     });
-    print(_exercises);
   }
 
   AddTrainingFirstPage instance;
@@ -173,9 +172,6 @@ class _AddModuleTrainingState extends State<AddModuleTraining> {
                 splashColor: Colors.white,
                 onPressed: () {
                   List list = AddModuleTrainingSecondPage.generateFinalList();
-                  print("List length: ${list.length}");
-                  print("isNotEmpty Title: ${AddModuleTrainingFirstPage.titleController.text.isNotEmpty}");
-                  print("isNotEmpty Title: ${AddModuleTrainingFirstPage.descController.text.isNotEmpty}");
                   if(AddModuleTrainingFirstPage.titleController.text.isNotEmpty && AddModuleTrainingFirstPage.descController.text.isNotEmpty && list.length>0) {
                     Map map = {
                       "title": AddModuleTrainingFirstPage.titleController.text
@@ -340,7 +336,6 @@ class _AddModuleTrainingState extends State<AddModuleTraining> {
         return AddModuleTrainingSecondPage(_exercises);
       case 0:
       default:
-        print(AddModuleTrainingSecondPage.secondFinalList);
         return AddModuleTrainingFirstPage();
     }
   }

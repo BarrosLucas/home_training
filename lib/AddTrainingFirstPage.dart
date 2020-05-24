@@ -72,7 +72,6 @@ class _AddTrainingFirstPageState extends State<AddTrainingFirstPage> {
                     alignment: Alignment(0, 0),
                     child: new ListTile(
                         onTap: () {
-                          print("Clicou: $index");
                         },
                         title: Container(
                           padding: EdgeInsets.all(5),

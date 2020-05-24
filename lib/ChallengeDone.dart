@@ -114,12 +114,10 @@ class _ChallengeDoneState extends State<ChallengeDone> {
                                     var image = await boundary.toImage();
                                     var byteData = await image.toByteData(format: ImageByteFormat.png);
                                     var pngBytes = byteData.buffer.asUint8List();
-                                    print(pngBytes);
                                     //final res = await _imageSaver.saveImage(imageBytes: pngBytes,imageName: DateTime.now().toIso8601String(),directoryName: (await getApplicationDocumentsDirectory ()).path);
                                     await Share.file('At Home', 'esys.png', pngBytes, 'image/png', text: 'Olha só o desafio que acabei de completar!!!');
                                   }
                                   takescrshot();
-                                  print("VEIOOO");
                                 },
                               )),
                           flex: 1,

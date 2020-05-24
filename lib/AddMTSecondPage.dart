@@ -3,11 +3,7 @@ import 'package:flutter/material.dart';
 class AddModuleTrainingSecondPage extends StatefulWidget {
   static List fullExercises;
   AddModuleTrainingSecondPage(FullExercises){
-    if(FullExercises==null){
-      print("NULLLLLL");
-    }
     fullExercises=FullExercises;
-    print("AAAAAAA");
   }
   static List secondList = [];
   static List secondFinalList = [];
@@ -24,8 +20,6 @@ class AddModuleTrainingSecondPage extends StatefulWidget {
         secondFinalList = orderList(secondFinalList);
       }
     }
-    print("SECOND FINAL LIST");
-    print("${secondFinalList}");
 
   }
 
@@ -84,8 +78,6 @@ class AddModuleTrainingSecondPage extends StatefulWidget {
     List ret = [];
     for(var i = 0; i < secondFinalList.length;i++){
       if(secondFinalList[i]['doing']){
-        print("Titulo full: ${fullExercises[secondFinalList[i]['index']]['title']}");
-        print("Second: ${secondFinalList[i]['amount']}");
         fullExercises[secondFinalList[i]['index']]['settings'][0] = secondFinalList[i]['amount'];
         ret.add(fullExercises[secondFinalList[i]['index']]);
       }
@@ -110,9 +102,6 @@ class _AddModuleTrainingSecondPageState
 
   @override
   Widget build(BuildContext context) {
-    print("exercisesFull: ");
-    print("$fullExercises");
-    print("${fullExercises.length}");
     return Expanded(
         child:
         Column(

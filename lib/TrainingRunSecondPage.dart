@@ -79,12 +79,10 @@ class _TrainingRunSecondPageState extends State<TrainingRunSecondPage> {
                               var image = await boundary.toImage();
                               var byteData = await image.toByteData(format: ImageByteFormat.png);
                               var pngBytes = byteData.buffer.asUint8List();
-                              print(pngBytes);
                               //final res = await _imageSaver.saveImage(imageBytes: pngBytes,imageName: DateTime.now().toIso8601String(),directoryName: (await getApplicationDocumentsDirectory ()).path);
                               await Share.file('At Home', 'esys.png', pngBytes, 'image/png', text: 'Acabei de concluir meu treino! Olha meu desempenho <3');
                             }
                             takescrshot();
-                            print("VEIOOO");
                           },
                         )),
                     flex: 1,
@@ -154,8 +152,6 @@ class _TrainingRunSecondPageState extends State<TrainingRunSecondPage> {
 
   void completeProfile() async{
     _profile = json.decode(await AccessFile.readData())['profile'];
-    print("Aqui");
-    print(_profile);
     setState(() {
       _profile=_profile;
       if(!dateEqual(_profile["lastDayTraining"])){
@@ -176,8 +172,6 @@ class _TrainingRunSecondPageState extends State<TrainingRunSecondPage> {
     ]);
     
     completeProfile();
-    print("lastDayTraining:");
-    print(_profile);
 
   }
 
@@ -231,7 +225,6 @@ class _TrainingRunSecondPageState extends State<TrainingRunSecondPage> {
   }
 
   bool dateEqual(String date){
-    print(date);
     if (date.isEmpty) {
       return false;
     } else {
