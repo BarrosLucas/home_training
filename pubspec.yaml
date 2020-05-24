@@ -29,7 +29,6 @@ dependencies:
   save_in_gallery: ^0.1.3
   esys_flutter_share: ^1.0.2
   intl: ^0.15.8
-  flutter_launcher_icons: ^0.7.5
   flutter_launcher_name: ^0.0.1
 
 flutter_launcher_name:
@@ -39,14 +38,13 @@ flutter_launcher_name:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  flutter_launcher_icons: ^0.7.5
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 flutter_icons:
   #  image_path: "assets/images/icon-128x128.png"
-  image_path_android: "assets/icon/roundedIcon.png"
-  image_path_ios: "assets/icon/roundedIcon.png"
+  image_path: "assets/icon/roundedIcon.png"
   android: true # can specify file name here e.g. "ic_launcher"
   ios: true # can
 # The following section is specific to Flutter.

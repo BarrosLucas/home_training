@@ -149,8 +149,11 @@ class _HomeState extends State<Home> {
         child: Container(
           alignment: Alignment(0, 0),
           child: new ListTile(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => AddTraining()));
+              onTap: () async{
+                await Navigator.push(context, MaterialPageRoute(builder: (context) => AddTraining()));
+                setState(() {
+
+                });
               },
               title: Container(
                 padding: EdgeInsets.all(5),
