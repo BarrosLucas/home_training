@@ -95,7 +95,7 @@ class _ChallengeState extends State<Challenge> {
                   child: new ListTile(
                       onTap: () async{
                         if(!(_challenges[index]['isIn'])){
-                            await Navigator.push(context, MaterialPageRoute(builder: (context)=>ChallengeDescription(_challenges[index],index)));
+                            await Navigator.push(context, MaterialPageRoute(builder: (context)=>ChallengeDescription(_challenges[index],index,true)));
                             setState(() {
 
                             });

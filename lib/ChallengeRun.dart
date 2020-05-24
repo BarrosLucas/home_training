@@ -67,7 +67,7 @@ class _ChallengeRunState extends State<ChallengeRun> {
                       context, MaterialPageRoute(builder: (
                       context) =>
                       ChallengeDescription(
-                          challenge,ind)));
+                          challenge,ind,false)));
                 },
                 padding:
                 EdgeInsets.symmetric(vertical: 15, horizontal: 80),

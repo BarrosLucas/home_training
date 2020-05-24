@@ -7,16 +7,17 @@ import 'file.dart';
 class ChallengeDescription extends StatefulWidget {
   Map<String, dynamic> challenge;
   int ind;
-
-  ChallengeDescription(this.challenge,this.ind);
+  final bool isVisibleButton;
+  ChallengeDescription(this.challenge,this.ind,this.isVisibleButton);
 
   @override
   _ChallengeDescriptionState createState() =>
-      _ChallengeDescriptionState(this.challenge,this.ind);
+      _ChallengeDescriptionState(this.challenge,this.ind,this.isVisibleButton);
 }
 
 class _ChallengeDescriptionState extends State<ChallengeDescription> {
   YoutubePlayerController _controller;
+  final bool isVisibleButton;
 
   @override
   void initState() {
@@ -31,7 +32,7 @@ class _ChallengeDescriptionState extends State<ChallengeDescription> {
 
   Map<String, dynamic> challenge;
   int ind;
-  _ChallengeDescriptionState(this.challenge,this.ind);
+  _ChallengeDescriptionState(this.challenge,this.ind,this.isVisibleButton);
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +133,9 @@ class _ChallengeDescriptionState extends State<ChallengeDescription> {
                         children: <Widget>[
                           Container(
                               margin: EdgeInsets.symmetric(vertical: 5),
-                              child: RaisedButton(
+                              child: Visibility(
+                                  visible: isVisibleButton,
+                                  child: RaisedButton(
                                 onPressed: () {
                                   challenge['isIn'] = true;
                                   setState(() {
@@ -161,7 +164,7 @@ class _ChallengeDescriptionState extends State<ChallengeDescription> {
                                   ],
                                 ),
                                 color: Colors.green,
-                              ))
+                              )))
                         ],
                         mainAxisAlignment: MainAxisAlignment.center,
                       ),
