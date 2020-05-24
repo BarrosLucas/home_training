@@ -19,15 +19,50 @@ class AddModuleTrainingSecondPage extends StatefulWidget {
         secondFinalList.add(secondList[i]);
       }
     }
+    if(secondFinalList!= null){
+      if(secondFinalList.length>0){
+        secondFinalList = orderList(secondFinalList);
+      }
+    }
+    print("SECOND FINAL LIST");
+    print("${secondFinalList}");
+
   }
 
-  static void generateSecondList(title,bool doing,int amount,int index) {
+  static List orderList(List list){
+    int minSequence = list[0]['sequence'];
+    int minIndex = 0;
+
+    List ret = [];
+
+    while(list.length>0){
+      int ind = 0;
+      while(ind < list.length){
+        if(list[ind]['sequence']<minSequence){
+          minSequence = list[ind]['sequence'];
+          minIndex = ind;
+        }
+        ind++;
+      }
+      ret.add(list[minIndex]);
+      list.removeAt(minIndex);
+      if(list.length>0){
+        minSequence = list[0]['sequence'];
+      }
+      minIndex = 0;
+    }
+
+    return ret;
+  }
+
+  static void generateSecondList(title,bool doing,int amount,int index,int sequence) {
 
     Map<String, dynamic> newToDo = Map();
     newToDo['title'] = title;
     newToDo['doing'] = doing;
     newToDo['amount'] = amount;
     newToDo['index'] = index;
+    newToDo['sequence'] = sequence;
     AddModuleTrainingSecondPage.secondList.add(newToDo);
 
   }
@@ -39,7 +74,7 @@ class AddModuleTrainingSecondPage extends StatefulWidget {
 
     if(AddModuleTrainingSecondPage.fullExercises!= null) {
       for (var i = 0; i < AddModuleTrainingSecondPage.fullExercises.length; i++) {
-        generateSecondList(AddModuleTrainingSecondPage.fullExercises[i]['title'], false,AddModuleTrainingSecondPage.fullExercises[i]['settings'][0],i);
+        generateSecondList(AddModuleTrainingSecondPage.fullExercises[i]['title'], false,AddModuleTrainingSecondPage.fullExercises[i]['settings'][0],i,-1);
       }
     }
 
@@ -69,6 +104,8 @@ class _AddModuleTrainingSecondPageState
   final List fullExercises;
   _AddModuleTrainingSecondPageState(this.fullExercises);
 
+
+  int sequence = 0;
   //List _exercises = [];
 
   @override
@@ -104,7 +141,7 @@ class _AddModuleTrainingSecondPageState
     super.initState();
     if(fullExercises!= null) {
       for (var i = 0; i < fullExercises.length; i++) {
-        AddModuleTrainingSecondPage.generateSecondList(fullExercises[i]['title'], false, fullExercises[i]['settings'][0],i);
+        AddModuleTrainingSecondPage.generateSecondList(fullExercises[i]['title'], false, fullExercises[i]['settings'][0],i,-1);
       }
     }
     setState(() {
@@ -130,6 +167,13 @@ class _AddModuleTrainingSecondPageState
       onChanged: (check) {
         setState(() {
           AddModuleTrainingSecondPage.secondList[index]['doing'] = check;
+          if(check) {
+            AddModuleTrainingSecondPage.secondList[index]['sequence'] =
+                sequence;
+            sequence++;
+          }else{
+            AddModuleTrainingSecondPage.secondList[index]['sequence'] = -1;
+          }
         });
       },
     );
