@@ -6,9 +6,6 @@ import 'package:hometraining/Challenge.dart';
 import 'package:hometraining/Exercises.dart';
 import 'package:hometraining/Home.dart';
 import 'package:hometraining/Profile.dart';
-import 'package:appcenter/appcenter.dart';
-import 'package:appcenter_analytics/appcenter_analytics.dart';
-import 'package:appcenter_crashes/appcenter_crashes.dart';
 
 import 'file.dart';
 
@@ -17,30 +14,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  String _appSecret;
-  String _installId = 'Unknown';
-  bool _areAnalyticsEnabled = false, _areCrashesEnabled = false;
-  MyApp(){
-    final ios = defaultTargetPlatform == TargetPlatform.iOS;
-    _appSecret = ios ? "d3b04268-5f5a-44e8-b50d-484df1579d4a" : "a65498d8-a8ed-44cd-a39e-f536bf1782ce";
-    initPlatformState();
-  }
-
-  initPlatformState() async {
-    await AppCenter.start(
-        _appSecret, [AppCenterAnalytics.id, AppCenterCrashes.id]);
-
-    var installId = await AppCenter.installId;
-
-    var areAnalyticsEnabled = await AppCenterAnalytics.isEnabled;
-    var areCrashesEnabled = await AppCenterCrashes.isEnabled;
-
-    _installId = installId;
-    _areAnalyticsEnabled = areAnalyticsEnabled;
-    _areCrashesEnabled = areCrashesEnabled;
-
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -91,16 +64,12 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget setPage(int index) {
     switch (index) {
       case 0:
-        AppCenterAnalytics.trackEvent("Home");
         return Home();
       case 1:
-        AppCenterAnalytics.trackEvent("Challenge");
         return Challenge();
       case 2:
-        AppCenterAnalytics.trackEvent("Exercises");
         return Exercices();
       case 3:
-        AppCenterAnalytics.trackEvent("Profile");
         return Profile();
       default:
         return Home();

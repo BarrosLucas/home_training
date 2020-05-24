@@ -1,15 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hometraining/AddMTFirstPage.dart';
 import 'package:hometraining/AddTrainingFirstPage.dart';
 import 'package:hometraining/AddTrainingSecondPage.dart';
 import 'package:hometraining/file.dart';
-import 'package:appcenter/appcenter.dart';
-import 'package:appcenter_analytics/appcenter_analytics.dart';
-import 'package:appcenter_crashes/appcenter_crashes.dart';
 import 'AddMTSecondPage.dart';
 
 class AddTraining extends StatefulWidget {
@@ -20,14 +16,6 @@ class AddTraining extends StatefulWidget {
 class _AddTrainingState extends State<AddTraining> {
   int _selectedIndex = 0;
   String _appSecret;
-  String _installId = 'Unknown';
-  bool _areAnalyticsEnabled = false, _areCrashesEnabled = false;
-
-  _AddTrainingState(){
-    final ios = defaultTargetPlatform == TargetPlatform.iOS;
-    _appSecret = ios ? "d3b04268-5f5a-44e8-b50d-484df1579d4a" : "a65498d8-a8ed-44cd-a39e-f536bf1782ce";
-  }
-
 
   List _training = [];
 
@@ -40,29 +28,10 @@ class _AddTrainingState extends State<AddTraining> {
 
   }
 
-  initPlatformState() async {
-    await AppCenter.start(
-        _appSecret, [AppCenterAnalytics.id, AppCenterCrashes.id]);
-
-    if (!mounted) return;
-
-    var installId = await AppCenter.installId;
-
-    var areAnalyticsEnabled = await AppCenterAnalytics.isEnabled;
-    var areCrashesEnabled = await AppCenterCrashes.isEnabled;
-
-    setState(() {
-      _installId = installId;
-      _areAnalyticsEnabled = areAnalyticsEnabled;
-      _areCrashesEnabled = areCrashesEnabled;
-    });
-  }
-
   @override
   void initState() {
     super.initState();
     completeTraining();
-    initPlatformState();
   }
 
   Widget getBackButton(int index) {
@@ -154,8 +123,8 @@ class _AddTrainingState extends State<AddTraining> {
                   _training.add(map);
                   AccessFile.map['training'] = _training;
                   AccessFile.saveData();
+                  AddTrainingFirstPage.treining = [];
                 });
-                AppCenterAnalytics.trackEvent("Created a personalized training");
                 Navigator.pop(context);
               }
             },

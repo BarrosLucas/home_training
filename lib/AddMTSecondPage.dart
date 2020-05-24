@@ -10,22 +10,36 @@ class AddModuleTrainingSecondPage extends StatefulWidget {
     print("AAAAAAA");
   }
   static List secondList = [];
+  static List secondFinalList = [];
 
-  static void generateSecondList(title,bool doing) {
+  static void generateFinalListSecond(){
+    secondFinalList = [];
+    for(var i = 0; i < secondList.length;i++){
+      if(secondList[i]['doing']){
+        secondFinalList.add(secondList[i]);
+      }
+    }
+  }
+
+  static void generateSecondList(title,bool doing,int amount,int index) {
 
     Map<String, dynamic> newToDo = Map();
     newToDo['title'] = title;
     newToDo['doing'] = doing;
+    newToDo['amount'] = amount;
+    newToDo['index'] = index;
     AddModuleTrainingSecondPage.secondList.add(newToDo);
 
   }
+
+
 
   static void zeroSecondList(){
     AddModuleTrainingSecondPage.secondList=[];
 
     if(AddModuleTrainingSecondPage.fullExercises!= null) {
       for (var i = 0; i < AddModuleTrainingSecondPage.fullExercises.length; i++) {
-        generateSecondList(AddModuleTrainingSecondPage.fullExercises[i]['title'], false);
+        generateSecondList(AddModuleTrainingSecondPage.fullExercises[i]['title'], false,AddModuleTrainingSecondPage.fullExercises[i]['settings'][0],i);
       }
     }
 
@@ -33,9 +47,12 @@ class AddModuleTrainingSecondPage extends StatefulWidget {
 
   static List generateFinalList(){
     List ret = [];
-    for(var i = 0; i < secondList.length;i++){
-      if(secondList[i]['doing']){
-        ret.add(fullExercises[i]);
+    for(var i = 0; i < secondFinalList.length;i++){
+      if(secondFinalList[i]['doing']){
+        print("Titulo full: ${fullExercises[secondFinalList[i]['index']]['title']}");
+        print("Second: ${secondFinalList[i]['amount']}");
+        fullExercises[secondFinalList[i]['index']]['settings'][0] = secondFinalList[i]['amount'];
+        ret.add(fullExercises[secondFinalList[i]['index']]);
       }
     }
     return ret;
@@ -87,7 +104,7 @@ class _AddModuleTrainingSecondPageState
     super.initState();
     if(fullExercises!= null) {
       for (var i = 0; i < fullExercises.length; i++) {
-        AddModuleTrainingSecondPage.generateSecondList(fullExercises[i]['title'], false);
+        AddModuleTrainingSecondPage.generateSecondList(fullExercises[i]['title'], false, fullExercises[i]['settings'][0],i);
       }
     }
     setState(() {
@@ -97,7 +114,11 @@ class _AddModuleTrainingSecondPageState
 
   Widget buidItem(context, index) {
     return CheckboxListTile(
-      title: Text(AddModuleTrainingSecondPage.secondList[index]['title']),
+      title:
+
+          Text(AddModuleTrainingSecondPage.secondList[index]['title']),
+
+
       value: AddModuleTrainingSecondPage.secondList[index]['doing'],
       secondary: CircleAvatar(
           child: new Image(

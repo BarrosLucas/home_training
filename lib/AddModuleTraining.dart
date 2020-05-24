@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:hometraining/AddMTFirstPage.dart';
 import 'package:hometraining/AddMTSecondPage.dart';
+import 'package:hometraining/AddMTThirdPage.dart';
 import 'package:hometraining/file.dart';
-import 'AddTraining.dart';
 import 'AddTrainingFirstPage.dart';
 
 class AddModuleTraining extends StatefulWidget {
@@ -110,7 +110,62 @@ class _AddModuleTrainingState extends State<AddModuleTraining> {
                   ],
                 )),
           );
-        }else{
+        }else if(index == 1){
+          return Container(
+            margin: EdgeInsets.all(20),
+            width: 120,
+            child: RaisedButton(
+                splashColor: Colors.white,
+                onPressed: () {
+                  setState(() {
+                    AddModuleTrainingSecondPage.generateFinalListSecond();
+                    if(AddModuleTrainingSecondPage.secondFinalList != null){
+                      if(AddModuleTrainingSecondPage.secondFinalList.length>0){
+                        _selectedIndex ++;
+                      }
+                    }
+                  });
+
+                  /*
+
+                  if(AddModuleTrainingFirstPage.titleController.text.isNotEmpty && AddModuleTrainingFirstPage.descController.text.isNotEmpty && list.length>0) {
+                    Map map = {
+                      "title": AddModuleTrainingFirstPage.titleController.text
+                          .toUpperCase(),
+                      "desc": AddModuleTrainingFirstPage.descController.text,
+                      "exercises": list
+                    };
+                    setState(() {
+                      AddTrainingFirstPage.treining.add(map);
+                      AddModuleTrainingFirstPage.titleController.text = "";
+                      AddModuleTrainingFirstPage.descController.text = "";
+                      AddModuleTrainingSecondPage.zeroSecondList();
+                    });
+                    Navigator.pop(context,AddTrainingFirstPage.treining);
+                  }
+
+                   */
+                },
+                color: Colors.red[900],
+                textColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      "Avançar",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.end,
+                    ),
+                    Icon(Icons.navigate_next, color: Colors.white)
+                  ],
+                )),
+          );
+        }
+        else{
           return Container(
             margin: EdgeInsets.all(20),
             width: 120,
@@ -118,6 +173,9 @@ class _AddModuleTrainingState extends State<AddModuleTraining> {
                 splashColor: Colors.white,
                 onPressed: () {
                   List list = AddModuleTrainingSecondPage.generateFinalList();
+                  print("List length: ${list.length}");
+                  print("isNotEmpty Title: ${AddModuleTrainingFirstPage.titleController.text.isNotEmpty}");
+                  print("isNotEmpty Title: ${AddModuleTrainingFirstPage.descController.text.isNotEmpty}");
                   if(AddModuleTrainingFirstPage.titleController.text.isNotEmpty && AddModuleTrainingFirstPage.descController.text.isNotEmpty && list.length>0) {
                     Map map = {
                       "title": AddModuleTrainingFirstPage.titleController.text
@@ -245,7 +303,22 @@ class _AddModuleTrainingState extends State<AddModuleTraining> {
                                         offset: new Offset(0.0, 10.0),
                                       ),
                                     ]),
-                              )
+                              ),
+                              Container(
+                                margin: EdgeInsets.symmetric(horizontal: 3),
+                                padding: EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: (_selectedIndex == 2)? Colors.grey[850]: Colors.white,
+                                    border: Border.all(),
+                                    boxShadow: <BoxShadow>[
+                                      new BoxShadow(
+                                        color: Colors.white,
+                                        blurRadius: 10.0,
+                                        offset: new Offset(0.0, 10.0),
+                                      ),
+                                    ]),
+                              ),
                             ],
                           ),
                         ))
@@ -261,10 +334,13 @@ class _AddModuleTrainingState extends State<AddModuleTraining> {
         completeExercise();
       }
     switch (index) {
+      case 2:
+        return AddModuleTrainingThirdPage();
       case 1:
         return AddModuleTrainingSecondPage(_exercises);
       case 0:
       default:
+        print(AddModuleTrainingSecondPage.secondFinalList);
         return AddModuleTrainingFirstPage();
     }
   }
