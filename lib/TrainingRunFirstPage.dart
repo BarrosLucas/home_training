@@ -8,6 +8,7 @@ import 'package:hometraining/TrainingRunSecondPage.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:screen/screen.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'TrainingRun.dart';
 import 'file.dart';
 
 class TrainingRunFirstPage extends StatefulWidget {
@@ -74,10 +75,15 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
     if (stopwatch.isRunning) {
       stopwatch.stop();
     }
-    addToList(TimerTextFormatter.format(timerSecond),
-        exercisesOfModule[selectedIndex]['title']);
-    sumCalories((stopwatchSeconder.elapsedMilliseconds / 1000).toInt(),
-        exercisesOfModule[selectedIndex]['settings'][1]);
+
+    if (timerSecond > 0 &&
+        series == exercisesOfModule[selectedIndex]['settings'][0]) {
+      addToList(TimerTextFormatter.format(timerSecond),
+          exercisesOfModule[selectedIndex]['title']);
+      sumCalories((stopwatchSeconder.elapsedMilliseconds / 1000).toInt(),
+          exercisesOfModule[selectedIndex]['settings'][1]);
+    }
+
     if (selectedIndex < (exercisesOfModule.length - 1)) {
       setState(() {
         selectedIndex++;
@@ -95,9 +101,67 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
   }
 
   void before() {
-    if (selectedIndex > 0) {
-      selectedIndex--;
+    if (stopwatchSeconder.isRunning) {
+      stopwatchSeconder.reset();
+      stopwatchSeconder.stop();
     }
+    if (stopwatch.isRunning) {
+      stopwatch.stop();
+    }
+
+    if (selectedIndex > 0) {
+      setState(() {
+        selectedIndex--;
+      });
+    }
+  }
+
+  void alert(int act) {
+    bool isRunning = stopwatchSeconder.isRunning;
+    if (stopwatchSeconder.isRunning) {
+      stopwatchSeconder.stop();
+    }
+    if (stopwatch.isRunning) {
+      stopwatch.stop();
+    }
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Mudar exercício"),
+            content: Text("Se mudar ele não será contabilizado no treino"),
+            actions: <Widget>[
+              FlatButton(
+                child: Text("Cancelar"),
+                onPressed: () {
+                  Navigator.pop(context);
+                  if (isRunning) {
+                    stopwatchSeconder.start();
+                    stopwatch.start();
+                  }
+                },
+              ),
+              FlatButton(
+                child: Text("Sim"),
+                onPressed: () {
+                  if (isRunning) {
+                    stopwatchSeconder.start();
+                    stopwatch.start();
+                  }
+                  if (act == 0) {
+                    //Avançar
+                    Navigator.pop(context);
+                    next();
+                  } else {
+                    //voltar
+                    Navigator.pop(context);
+                    before();
+                  }
+                },
+              )
+            ],
+          );
+        });
   }
 
   Widget buildItem(context, index) {
@@ -220,23 +284,28 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
                 ),
                 Container(
                   child: generateListVideo(),
-                  margin: EdgeInsets.only(bottom: 30,left: 30, right:30),
+                  margin: EdgeInsets.only(bottom: 30, left: 30, right: 30),
                 ),
                 Row(
                   children: <Widget>[
                     Expanded(
                       flex: 1,
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.navigate_before,
-                          size: 40,
-                          color: Colors.black,
+                      child: Visibility(
+                        visible: (selectedIndex > 0)? true:false,
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.navigate_before,
+                            size: 40,
+                            color: Colors.black,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              if(selectedIndex > 0){
+                                alert(1);
+                              }
+                            });
+                          },
                         ),
-                        onPressed: () {
-                          setState(() {
-                            before();
-                          });
-                        },
                       ),
                     ),
                     Expanded(
@@ -268,7 +337,7 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
                         ),
                         onPressed: () {
                           setState(() {
-                            next();
+                            alert(0);
                             /*if (selectedIndex < (_exercises.length - 1)) {
                               selectedIndex++;
                               print("Veio: $selectedIndex");
@@ -370,7 +439,7 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
     super.dispose();
   }
 
-  Widget generateListVideo(){
+  Widget generateListVideo() {
     return ListView.builder(
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
