@@ -8,7 +8,7 @@ import 'package:hometraining/TrainingRunSecondPage.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:screen/screen.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-import 'TrainingRun.dart';
+import 'package:flutter_circular_chart/flutter_circular_chart.dart';
 import 'file.dart';
 
 class TrainingRunFirstPage extends StatefulWidget {
@@ -27,13 +27,17 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
   final String _title;
   int selectedIndex = 0;
   bool visible = false;
+  bool waiting = false;
   double calor = 0;
   var currentExercise;
   Stopwatch stopwatch = Stopwatch();
   Stopwatch stopwatchSeconder = Stopwatch();
+  Stopwatch stopwatchWaiting = Stopwatch();
   int page = 0;
   List<Map<dynamic, dynamic>> listTraning = [];
   List<YoutubePlayerController> _controllers;
+  final GlobalKey<AnimatedCircularChartState> _key =
+      new GlobalKey<AnimatedCircularChartState>();
 
   _TrainingRunFirstPageState(this._title, this.exercisesOfModule);
 
@@ -259,6 +263,46 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
     );
   }
 
+  void showRegressiveTimer() {
+    print("UAAAA");
+    setState(() {
+      waiting = true;
+    });
+    stopwatchWaiting.start();
+    double second = double.parse(TimerTextFormatter.formatToOnlySeconds(
+        stopwatchWaiting.elapsedMilliseconds, 30));
+
+    Timer timer = Timer.periodic(Duration(milliseconds: 500), (timer) {
+      if (this.mounted) {
+        if (stopwatchWaiting.isRunning) {
+          second = double.parse(TimerTextFormatter.formatToOnlySeconds(
+              stopwatchWaiting.elapsedMilliseconds, 30));
+          setState(() {
+            print("Line1: $second");
+            print("Line2: ${30-second}");
+            _key.currentState.updateData(<CircularStackEntry>[
+              new CircularStackEntry(
+                  <CircularSegmentEntry>[
+                    new CircularSegmentEntry(second, Colors.green[400]),
+                    new CircularSegmentEntry(30-second, Colors.grey)
+                  ]
+              )
+            ]);
+            if (waiting) {
+              if (second < 0) {
+                setState(() {
+                  stopwatchWaiting.stop();
+                  stopwatchWaiting.reset();
+                  waiting = false;
+                });
+              }
+            }
+          });
+        }
+      }
+    });
+  }
+
   Widget pageOne() {
     return Stack(
       children: <Widget>[
@@ -291,7 +335,7 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
                     Expanded(
                       flex: 1,
                       child: Visibility(
-                        visible: (selectedIndex > 0)? true:false,
+                        visible: (selectedIndex > 0) ? true : false,
                         child: IconButton(
                           icon: Icon(
                             Icons.navigate_before,
@@ -300,7 +344,7 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
                           ),
                           onPressed: () {
                             setState(() {
-                              if(selectedIndex > 0){
+                              if (selectedIndex > 0) {
                                 alert(1);
                               }
                             });
@@ -401,6 +445,11 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
                                     Future.delayed(Duration(seconds: 2), () {
                                       next();
                                     });
+                                  } else {
+                                    setState(() {
+                                      print("ta vindo, mas ta sendo mau");
+                                      showRegressiveTimer();
+                                    });
                                   }
                                 } else {
                                   stopwatchSeconder.start();
@@ -428,7 +477,35 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
           itemBuilder: buildItem,
           padding: EdgeInsets.all(1),
           itemCount: exercisesOfModule.length,
-        ))
+        )),
+        Visibility(
+          visible: waiting,
+          child: Container(
+              color: new Color(0xEE000000),
+              child: Stack(
+                children: <Widget>[
+                  Center(
+                    child: AnimatedCircularChart(
+                      size: const Size(300, 300),
+                      initialChartData: <CircularStackEntry>[
+                        new CircularStackEntry(<CircularSegmentEntry>[
+                          new CircularSegmentEntry(30, Colors.green[400]),
+                          new CircularSegmentEntry(0, Colors.grey)
+                        ])
+                      ],
+                      key: _key,
+                      chartType: CircularChartType.Radial,
+                    ),
+                  ),
+                  Center(
+                    child: Text(
+                      TimerTextFormatter.formatToOnlySeconds(
+                        stopwatchWaiting.elapsedMilliseconds, 30),
+                      style: TextStyle(fontSize: 80,color: Colors.white),),
+                  )
+                ],
+              )),
+        )
       ],
     );
   }
@@ -489,6 +566,7 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
     super.initState();
     completeProfile();
     Screen.keepOn(true);
+
     setState(() {
       currentExercise = exercisesOfModule[selectedIndex];
     });
@@ -516,6 +594,17 @@ class TimerTextFormatter {
     String secondsStr = (seconds % 60).toString().padLeft(2, "0");
 
     return '$minutesStr:$secondsStr';
+  }
+
+  static String formatToOnlySeconds(int milliseconds, int total) {
+    int hundreds = (milliseconds / 10).truncate();
+    int seconds = (hundreds / 100).truncate();
+
+    int waiting = total - (seconds % 60);
+
+    String secondsStr = waiting.toString().padLeft(2, "0");
+
+    return '$secondsStr';
   }
 }
 
