@@ -9,6 +9,7 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:screen/screen.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
+import 'TrainingRun.dart';
 import 'file.dart';
 
 class TrainingRunFirstPage extends StatefulWidget {
@@ -29,6 +30,7 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
   bool visible = false;
   bool waiting = false;
   double calor = 0;
+  final snackBar = SnackBar(content: Text("Não pode descansar mais que um minuto", style: TextStyle(color: Colors.white),),backgroundColor: Colors.red[900],);
   var currentExercise;
   Stopwatch stopwatch = Stopwatch();
   Stopwatch stopwatchSeconder = Stopwatch();
@@ -36,6 +38,7 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
   int page = 0;
   List<Map<dynamic, dynamic>> listTraning = [];
   List<YoutubePlayerController> _controllers;
+  int totalTimer = 30;
   final GlobalKey<AnimatedCircularChartState> _key =
       new GlobalKey<AnimatedCircularChartState>();
 
@@ -264,36 +267,39 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
   }
 
   void showRegressiveTimer() {
-    print("UAAAA");
     setState(() {
       waiting = true;
     });
     stopwatchWaiting.start();
     double second = double.parse(TimerTextFormatter.formatToOnlySeconds(
-        stopwatchWaiting.elapsedMilliseconds, 30));
+        stopwatchWaiting.elapsedMilliseconds, totalTimer));
 
     Timer timer = Timer.periodic(Duration(milliseconds: 500), (timer) {
       if (this.mounted) {
         if (stopwatchWaiting.isRunning) {
           second = double.parse(TimerTextFormatter.formatToOnlySeconds(
-              stopwatchWaiting.elapsedMilliseconds, 30));
+              stopwatchWaiting.elapsedMilliseconds, totalTimer));
           setState(() {
-            print("Line1: $second");
-            print("Line2: ${30-second}");
             _key.currentState.updateData(<CircularStackEntry>[
               new CircularStackEntry(
                   <CircularSegmentEntry>[
                     new CircularSegmentEntry(second, Colors.green[400]),
-                    new CircularSegmentEntry(30-second, Colors.grey)
+                    new CircularSegmentEntry(totalTimer-second, Colors.grey)
                   ]
               )
             ]);
             if (waiting) {
-              if (second < 0) {
+              print("Second: $second");
+              print("TotalTimer: $totalTimer");
+              if (second <= 0) {
                 setState(() {
                   stopwatchWaiting.stop();
                   stopwatchWaiting.reset();
                   waiting = false;
+                  stopwatch.start();
+                  stopwatchSeconder.start();
+                  totalTimer = 30;
+                  second = 30;
                 });
               }
             }
@@ -447,7 +453,6 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
                                     });
                                   } else {
                                     setState(() {
-                                      print("ta vindo, mas ta sendo mau");
                                       showRegressiveTimer();
                                     });
                                   }
@@ -500,8 +505,66 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
                   Center(
                     child: Text(
                       TimerTextFormatter.formatToOnlySeconds(
-                        stopwatchWaiting.elapsedMilliseconds, 30),
+                        stopwatchWaiting.elapsedMilliseconds, totalTimer),
                       style: TextStyle(fontSize: 80,color: Colors.white),),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Container(
+                      margin: EdgeInsets.all(30),
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.add_circle,
+                          color: Colors.green[400],
+                          size: 50,
+                        ),
+                        onPressed: (){
+                          setState(() {
+                            if(totalTimer < 50){
+                              totalTimer += 10;
+                            }else{
+                              totalTimer = 59;
+                              TrainingRun.scaffoldKey.currentState.showSnackBar(snackBar);
+                            }
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: Container(
+                      margin: EdgeInsets.all(30),
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.pause_circle_filled,
+                          color: Colors.red[900],
+                          size: 50,
+                        ),
+                        onPressed: (){
+                          setState(() {
+                            stopwatchWaiting.stop();
+                            stopwatchWaiting.reset();
+                            waiting = false;
+                            stopwatch.start();
+                            stopwatchSeconder.start();
+                            totalTimer = 30;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 50),
+                    alignment: Alignment.topCenter,
+                    child: Text(
+                      "É hora de descansar!\nAproveite para beber água...",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
                   )
                 ],
               )),

@@ -5,6 +5,7 @@ class TrainingRun extends StatefulWidget {
   final String _title;
   bool visibility;
   final List exercisesOfModule;
+  static final scaffoldKey = GlobalKey<ScaffoldState>();
   TrainingRun(this._title,this.visibility,this.exercisesOfModule);
 
   @override
@@ -53,6 +54,7 @@ class _TrainingRunState extends State<TrainingRun> {
         return WillPopScope(
           onWillPop: _requestPop,
           child: Scaffold(
+              key: TrainingRun.scaffoldKey,
               backgroundColor: Colors.grey[200],
               body: Stack(children: <Widget>[
                 Row(
