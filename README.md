@@ -53,6 +53,6 @@ $ flutter run -d deviceID
 - [ ] Put on Play Store
 - [ ] Integration with Firebase
 - [ ] Save data into SQFLite persistence
-- [ ] Better UI
+- [ ] Improve UI
 - [ ] Share training
 - [ ] Group training
