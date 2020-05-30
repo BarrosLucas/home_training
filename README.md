@@ -41,3 +41,12 @@ $ flutter run -d deviceID
 
 ### Edit Profile
 <img src="./assets/gifs/profile.gif" alt="App execution" width="30%">
+
+
+## To Do
+- [X] Save the own training 
+- [X] Share done training
+- [X] Share done challenge
+- [ ] Integration with Firebase
+- [ ] Save data into SQFLite persistence
+- [ ] Better UI
