@@ -1,4 +1,5 @@
 # hometraining
+##### Version 0.1.2
 
 A new Flutter application to training at home.
 
@@ -47,6 +48,9 @@ $ flutter run -d deviceID
 - [X] Save the own training 
 - [X] Share done training
 - [X] Share done challenge
+- [X] Use Material/Cupertino design
+- [X] Show Alerts Dialogs when necessary
+- [ ] Put on Play Store
 - [ ] Integration with Firebase
 - [ ] Save data into SQFLite persistence
 - [ ] Better UI
