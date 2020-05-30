@@ -1,16 +1,43 @@
 # hometraining
 
-A new Flutter application.
+A new Flutter application to training at home.
 
-## Getting Started
+## Install Dependencies:
+To install the project flutter dependencies run:<br>
+```
+$ flutter pub upgrade
+```
 
-This project is a starting point for a Flutter application.
+## Run Code:
+### 1. Verify devices
+Check if your device is connected in your PC:<br>
+```
+$ flutter devices
+```
+Your device should appear, for example:<br>
+<img src="./assets/images/devices.png" alt="Connected devices">
 
-A few resources to get you started if this is your first Flutter project:
+### 2. Run App
+Browse to root directory of project and run the follow code:
+```
+$ flutter run
+```
+If you have more than one device connected in your PC, run with the following code, using the Device ID that can be seen in code above.
+```
+$ flutter run -d deviceID
+```
+## App Execution:
+### Run Training
+<img src="./assets/gifs/videoFastTraining.gif" alt="App execution" width="30%"/>
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### Complete Challenge
+<img src="./assets/gifs/challenge.gif" alt="App execution" width="30%">
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Run Exercise
+<img src="./assets/gifs/fastExercise.gif" alt="App execution" width="30%">
+
+### Add New Training
+<img src="./assets/gifs/newTraining.gif" alt="App execution" width="30%">
+
+### Edit Profile
+<img src="./assets/gifs/profile.gif" alt="App execution" width="30%">
