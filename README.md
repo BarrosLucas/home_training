@@ -50,3 +50,5 @@ $ flutter run -d deviceID
 - [ ] Integration with Firebase
 - [ ] Save data into SQFLite persistence
 - [ ] Better UI
+- [ ] Share training
+- [ ] Group training
