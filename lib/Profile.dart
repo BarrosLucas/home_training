@@ -130,7 +130,7 @@ class _ProfileState extends State<Profile> {
                       Container(
                         padding: EdgeInsets.only(top: 15, bottom: 5),
                         child: Text(
-                          (calories==null)? "0":"${calories.toStringAsPrecision(2)}",
+                          (calories==null)? "0":"${calories.toStringAsFixed(2)}",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 35,

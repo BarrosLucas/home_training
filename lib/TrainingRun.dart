@@ -17,8 +17,7 @@ class _TrainingRunState extends State<TrainingRun> {
   final String _title;
 
   final List exercisesOfModule;
-  _TrainingRunState(this._title,this._visibility,this.exercisesOfModule){
-  }
+  _TrainingRunState(this._title,this._visibility,this.exercisesOfModule);
 
   int _selectedIndex = 0;
 

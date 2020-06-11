@@ -117,7 +117,7 @@ class _TrainingRunSecondPageState extends State<TrainingRunSecondPage> {
                     Container(
                       padding: EdgeInsets.only(top: 15, bottom: 5),
                       child: Text(
-                        '${calor.toStringAsPrecision(2)}',
+                        '${calor.toStringAsFixed(2)}',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 35,

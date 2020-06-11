@@ -48,6 +48,21 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
   int series = 0;
   var key = GlobalKey();
   Map<String, dynamic> _profile;
+  Timer _timer;
+
+
+  List<CircularStackEntry> circularStackEntry = <CircularStackEntry>[
+    new CircularStackEntry(<CircularSegmentEntry>[
+      new CircularSegmentEntry(30, Colors.green[400]),
+      new CircularSegmentEntry(0, Colors.grey)
+    ])
+  ];
+  final List<CircularStackEntry> initialCircularStackEntry = <CircularStackEntry>[
+    new CircularStackEntry(<CircularSegmentEntry>[
+      new CircularSegmentEntry(30, Colors.green[400]),
+      new CircularSegmentEntry(0, Colors.grey)
+    ])
+  ];
 
   void completeProfile() async {
     _profile = json.decode(await AccessFile.readData())['profile'];
@@ -73,6 +88,7 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
   }
 
   void next() {
+
     int timerSecond = stopwatchSeconder.elapsedMilliseconds;
 
     if (stopwatchSeconder.isRunning) {
@@ -274,20 +290,23 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
     double second = double.parse(TimerTextFormatter.formatToOnlySeconds(
         stopwatchWaiting.elapsedMilliseconds, totalTimer));
 
-    Timer timer = Timer.periodic(Duration(milliseconds: 500), (timer) {
-      if (this.mounted) {
+    _timer = Timer.periodic(Duration(milliseconds: 500), (timer) {
+      print("uai: ${timer.toString()}");
+      if (this._key.currentState.mounted) {
         if (stopwatchWaiting.isRunning) {
+          print("Vindo...");
           second = double.parse(TimerTextFormatter.formatToOnlySeconds(
               stopwatchWaiting.elapsedMilliseconds, totalTimer));
+          circularStackEntry = <CircularStackEntry>[
+            new CircularStackEntry(
+                <CircularSegmentEntry>[
+                  new CircularSegmentEntry(second, Colors.green[400]),
+                  new CircularSegmentEntry(totalTimer-second, Colors.grey)
+                ]
+            )
+          ];
           setState(() {
-            _key.currentState.updateData(<CircularStackEntry>[
-              new CircularStackEntry(
-                  <CircularSegmentEntry>[
-                    new CircularSegmentEntry(second, Colors.green[400]),
-                    new CircularSegmentEntry(totalTimer-second, Colors.grey)
-                  ]
-              )
-            ]);
+            _key.currentState.updateData(circularStackEntry);
             if (waiting) {
               print("Second: $second");
               print("TotalTimer: $totalTimer");
@@ -295,6 +314,7 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
                 setState(() {
                   stopwatchWaiting.stop();
                   stopwatchWaiting.reset();
+                  _timer.cancel();
                   waiting = false;
                   stopwatch.start();
                   stopwatchSeconder.start();
@@ -492,12 +512,7 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
                   Center(
                     child: AnimatedCircularChart(
                       size: const Size(300, 300),
-                      initialChartData: <CircularStackEntry>[
-                        new CircularStackEntry(<CircularSegmentEntry>[
-                          new CircularSegmentEntry(30, Colors.green[400]),
-                          new CircularSegmentEntry(0, Colors.grey)
-                        ])
-                      ],
+                      initialChartData: initialCircularStackEntry,
                       key: _key,
                       chartType: CircularChartType.Radial,
                     ),
@@ -546,6 +561,7 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
                             stopwatchWaiting.stop();
                             stopwatchWaiting.reset();
                             waiting = false;
+                            _timer.cancel();
                             stopwatch.start();
                             stopwatchSeconder.start();
                             totalTimer = 30;
