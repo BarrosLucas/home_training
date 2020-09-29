@@ -44,6 +44,8 @@ class _TrainingRunFirstPageState extends State<TrainingRunFirstPage> {
 
   _TrainingRunFirstPageState(this._title, this.exercisesOfModule);
 
+
+
   int second = 0;
   int series = 0;
   var key = GlobalKey();
